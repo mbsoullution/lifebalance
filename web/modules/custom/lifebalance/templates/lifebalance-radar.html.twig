@@ -1,0 +1,53 @@
+<svg class="lifebalance-radar" viewBox="0 0 200 200" role="img" aria-labelledby="lifebalance-radar-title">
+  <title id="lifebalance-radar-title">{{ 'Колесо балансу'|t }}</title>
+  <desc>{{ 'Оцінки секторів від 0 до 10. Неоцінений сектор не зафарбовано. Назви сфер підписані по контуру. Поруч є таблиця значень.'|t }}</desc>
+  <defs>
+    {% for label in geometry.labels|default([]) %}
+      <path id="lb-radar-label-{{ loop.index0 }}" d="{{ label.path }}"></path>
+    {% endfor %}
+  </defs>
+  {% for wedge in geometry.wedges|default([]) %}
+    {% if wedge.id %}
+      <a class="lifebalance-radar__sector" href="#lifebalance-sector-{{ wedge.id }}" aria-label="{{ wedge.label }}">
+        <path class="lifebalance-radar__hit" d="{{ wedge.hit }}" fill="{{ wedge.color }}" fill-opacity="0" stroke="none"></path>
+        <g class="lifebalance-radar__grow">
+          <path class="lifebalance-radar__echo" d="{{ wedge.hit }}" fill="{{ wedge.color }}" fill-opacity="0" stroke="none"></path>
+          {% if wedge.score %}
+            <path class="lifebalance-radar__score" d="{{ wedge.score }}" fill="{{ wedge.color }}" fill-opacity="1" stroke="none"></path>
+          {% endif %}
+        </g>
+      </a>
+    {% elseif wedge.score %}
+      <path d="{{ wedge.score }}" fill="{{ wedge.color }}" fill-opacity="1" stroke="none"></path>
+    {% endif %}
+  {% endfor %}
+  <g class="lifebalance-radar__guides">
+  {% for ring in geometry.rings %}
+    <circle cx="100" cy="100" r="{{ ring }}" fill="none" stroke="#c5ccd4" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+  {% endfor %}
+  {% for axis in geometry.axes %}
+    <line x1="100" y1="100" x2="{{ axis.x }}" y2="{{ axis.y }}" stroke="#c5ccd4" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+  {% endfor %}
+  {% if geometry.overlay %}
+    {% for series in geometry.overlay %}
+      {% if series.dashed and series.points %}
+        <polygon points="{{ series.points }}" fill="none" stroke="#c5ccd4" stroke-dasharray="2 3" stroke-width="1" vector-effect="non-scaling-stroke"></polygon>
+      {% endif %}
+      {% for marker in series.markers %}
+        {% if marker.shape == 'square' %}
+          <rect x="{{ marker.x }}" y="{{ marker.y }}" width="5" height="5" fill="{{ series.stroke }}"></rect>
+        {% else %}
+          <circle cx="{{ marker.x }}" cy="{{ marker.y }}" r="2.5" fill="{{ series.stroke }}"></circle>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+  </g>
+  <g class="lifebalance-radar__labels">
+  {% for label in geometry.labels|default([]) %}
+    <text class="lifebalance-radar__label" fill="#243040" font-size="4.2" text-anchor="middle">
+      <textPath href="#lb-radar-label-{{ loop.index0 }}" startOffset="50%">{{ label.text }}</textPath>
+    </text>
+  {% endfor %}
+  </g>
+</svg>

@@ -1,0 +1,28 @@
+lifebalance_plans.plan:
+  title: 'План'
+  description: 'Власні цілі і кроки.'
+  route_name: lifebalance_plans.plan
+  menu_name: account
+  weight: -5
+
+lifebalance_plans.plan_main:
+  title: 'План'
+  description: 'Власні цілі і кроки.'
+  route_name: lifebalance_plans.plan
+  menu_name: main
+  parent: lifebalance.wheel_main
+  weight: 10
+
+lifebalance_plans.focus:
+  title: 'Фокус'
+  description: 'Підказки для саморефлексії за збереженими відповідями.'
+  route_name: lifebalance_plans.focus
+  menu_name: account
+  weight: -4
+
+lifebalance_plans.recommendations:
+  title: 'Рекомендації'
+  description: 'Бібліотека рекомендацій.'
+  route_name: view.lifebalance_recommendations.page_1
+  parent: system.admin_config
+  weight: 13

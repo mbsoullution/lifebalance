@@ -1,0 +1,11 @@
+entity.lifebalance_criterion.edit_form:
+  route_name: entity.lifebalance_criterion.edit_form
+  base_route: entity.lifebalance_criterion.edit_form
+  title: 'Редагувати'
+  weight: 0
+
+entity.lifebalance_criterion.revisions:
+  route_name: entity.lifebalance_criterion.revisions
+  base_route: entity.lifebalance_criterion.edit_form
+  title: 'Ревізії'
+  weight: 10

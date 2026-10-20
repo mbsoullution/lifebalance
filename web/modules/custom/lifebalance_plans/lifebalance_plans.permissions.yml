@@ -1,0 +1,24 @@
+administer lifebalance plans:
+  title: 'Адміністрування планів'
+  description: 'Не видається жодній ролі і не відкриває чужі плани.'
+  restrict access: true
+
+administer lifebalance goals:
+  title: 'Адміністрування цілей'
+  description: 'Не видається жодній ролі і не відкриває чужі цілі.'
+  restrict access: true
+
+administer lifebalance recommendations:
+  title: 'Адміністрування рекомендацій'
+  description: 'Не видається жодній ролі. Редактори працюють через окремі права чернетки і публікації.'
+  restrict access: true
+
+edit lifebalance recommendations:
+  title: 'Редагування рекомендацій'
+  description: 'Чернетки і подання на перевірку. Без даних користувачів.'
+  restrict access: true
+
+publish lifebalance recommendations:
+  title: 'Публікація рекомендацій'
+  description: 'Опублікувати або архівувати рекомендацію. Без даних користувачів.'
+  restrict access: true

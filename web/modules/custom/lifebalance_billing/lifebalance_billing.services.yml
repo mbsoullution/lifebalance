@@ -1,0 +1,57 @@
+services:
+  Drupal\lifebalance_billing\Repository\OrderRepository:
+    autowire: true
+  Drupal\lifebalance_billing\Service\EventLog:
+    autowire: true
+  Drupal\lifebalance_billing\Service\FakeGateway:
+    autowire: true
+  monobank.http_client:
+    class: GuzzleHttp\Client
+    arguments:
+      - { timeout: 15, http_errors: false }
+  Drupal\lifebalance_billing\Service\MonobankGatewayFactory:
+    arguments:
+      $httpClient: '@monobank.http_client'
+      $state: '@state'
+  Drupal\lifebalance_billing\Service\MonobankGateway:
+    factory: ['@Drupal\lifebalance_billing\Service\MonobankGatewayFactory', 'create']
+  Drupal\lifebalance_billing\Service\PaymentGatewayInterface:
+    factory: ['Drupal\lifebalance_billing\Service\PaymentGatewayFactory', 'select']
+    arguments:
+      - '@Drupal\lifebalance_billing\Service\FakeGateway'
+      - '@Drupal\lifebalance_billing\Service\MonobankGateway'
+  Drupal\lifebalance_billing\Service\PaymentProcessor:
+    autowire: true
+    arguments:
+      $lock: '@lock'
+  Drupal\lifebalance_billing\Service\PromoReservations:
+    autowire: true
+  Drupal\lifebalance_billing\Service\OrderManager:
+    autowire: true
+  Drupal\lifebalance_billing\Service\Reconciler:
+    autowire: true
+  Drupal\lifebalance_billing\Service\BillingNotifier:
+    autowire: true
+  Drupal\lifebalance_billing\Service\BillingStats:
+    autowire: true
+  Drupal\lifebalance_billing\Service\OrderActions:
+    autowire: true
+  Drupal\lifebalance_billing\Service\OrderAdminList:
+    autowire: true
+  Drupal\lifebalance_billing\Service\OrderTable:
+    autowire: true
+  Drupal\lifebalance_billing\EventSubscriber\PrivateCacheSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+  Drupal\lifebalance_billing\EventSubscriber\AnonymousLoginRedirectSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+  Drupal\lifebalance_billing\EventSubscriber\PaymentPageCspSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+  logger.channel.lifebalance_billing:
+    parent: logger.channel_base
+    arguments: ['lifebalance_billing']

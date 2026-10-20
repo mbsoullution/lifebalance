@@ -1,0 +1,19 @@
+uuid: 7343d285-622c-405f-8739-c60cdd62d333
+langcode: en
+status: false
+dependencies: {  }
+id: dev
+label: Dev
+description: 'Database log and devel for local development.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/dev
+module:
+  dblog: 0
+  devel: 0
+  views_ui: 0
+theme: {  }
+complete_list: {  }
+partial_list: {  }

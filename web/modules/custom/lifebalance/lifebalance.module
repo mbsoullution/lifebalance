@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for LifeBalance.
+ */
+
+declare(strict_types=1);

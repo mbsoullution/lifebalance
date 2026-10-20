@@ -1,0 +1,113 @@
+entity.lifebalance_recommendation.add_form:
+  path: '/admin/lifebalance/recommendations/add'
+  defaults:
+    _entity_form: 'lifebalance_recommendation.default'
+    _title: 'Додати рекомендацію'
+  requirements:
+    _entity_create_access: 'lifebalance_recommendation'
+  options:
+    _admin_route: TRUE
+
+entity.lifebalance_recommendation.canonical:
+  path: '/admin/lifebalance/recommendations/{lifebalance_recommendation}/edit'
+  defaults:
+    _entity_form: 'lifebalance_recommendation.default'
+    _title: 'Редагувати рекомендацію'
+  requirements:
+    _entity_access: 'lifebalance_recommendation.update'
+    lifebalance_recommendation: \d+
+  options:
+    _admin_route: TRUE
+    parameters:
+      lifebalance_recommendation:
+        type: entity:lifebalance_recommendation
+
+entity.lifebalance_recommendation.edit_form:
+  path: '/admin/lifebalance/recommendations/{lifebalance_recommendation}/edit'
+  defaults:
+    _entity_form: 'lifebalance_recommendation.default'
+    _title: 'Редагувати рекомендацію'
+  requirements:
+    _entity_access: 'lifebalance_recommendation.update'
+    lifebalance_recommendation: \d+
+  options:
+    _admin_route: TRUE
+    parameters:
+      lifebalance_recommendation:
+        type: entity:lifebalance_recommendation
+
+lifebalance_plans.plan:
+  path: '/plan'
+  defaults:
+    _controller: '\Drupal\lifebalance_plans\Controller\PlanController::active'
+    _title: 'План'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance_plans.plan_30:
+  path: '/plan/30'
+  defaults:
+    _controller: '\Drupal\lifebalance_plans\Controller\PlanController::days30'
+    _title: '30 днів'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance_plans.plan_90:
+  path: '/plan/90'
+  defaults:
+    _controller: '\Drupal\lifebalance_plans\Controller\PlanController::days90'
+    _title: '90 днів'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance_plans.plan_closed:
+  path: '/plan/done'
+  defaults:
+    _controller: '\Drupal\lifebalance_plans\Controller\PlanController::closed'
+    _title: 'Виконані/скасовані'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance_plans.plan_add:
+  path: '/plan/add'
+  defaults:
+    _form: '\Drupal\lifebalance_plans\Form\OwnGoalForm'
+    _title: 'Власна ціль'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\lifebalance_plans\Form\OwnGoalForm::access'
+
+lifebalance_plans.print:
+  path: '/plan/print'
+  defaults:
+    _controller: '\Drupal\lifebalance_plans\Controller\PrintController::page'
+    _title: 'Друк'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance_plans.goal:
+  path: '/plan/{uuid}'
+  defaults:
+    _form: '\Drupal\lifebalance_plans\Form\GoalForm'
+    _title: 'Ціль'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    uuid: '[0-9a-fA-F-]+'
+
+lifebalance_plans.focus:
+  path: '/plan/focus'
+  defaults:
+    _form: '\Drupal\lifebalance_plans\Form\FocusForm'
+    _title: 'Фокус'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance_plans.settings:
+  path: '/admin/lifebalance/recommendations/settings'
+  defaults:
+    _form: '\Drupal\lifebalance_plans\Form\SupportBlockForm'
+    _title: 'Блок підтримки'
+  requirements:
+    _permission: 'publish lifebalance recommendations'
+  options:
+    _admin_route: TRUE

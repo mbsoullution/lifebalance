@@ -1,0 +1,35 @@
+.lifebalance-faq details {
+  border-bottom: 1px solid #d0d5dd;
+}
+
+.lifebalance-faq summary {
+  cursor: pointer;
+  padding: 0.85rem 0;
+  font-weight: 700;
+  list-style: none;
+}
+
+.lifebalance-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.lifebalance-faq summary::before {
+  content: "";
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.6rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  vertical-align: 0.15rem;
+}
+
+.lifebalance-faq details[open] summary::before {
+  transform: rotate(45deg);
+  vertical-align: 0.25rem;
+}
+
+.lifebalance-faq details p:last-child {
+  margin-bottom: 0.85rem;
+}

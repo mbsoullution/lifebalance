@@ -1,0 +1,90 @@
+lifebalance_billing.checkout:
+  path: '/premium/checkout/{plan}'
+  defaults:
+    _form: '\Drupal\lifebalance_billing\Form\CheckoutForm'
+    _title: 'Оплата'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    plan: '[a-z0-9_]+'
+
+lifebalance_billing.return:
+  path: '/premium/return/{uuid}'
+  defaults:
+    _controller: '\Drupal\lifebalance_billing\Controller\ReturnController::page'
+    _title: 'Оплата'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    uuid: '[0-9a-fA-F-]+'
+
+lifebalance_billing.return_status:
+  path: '/premium/return/{uuid}/status'
+  defaults:
+    _controller: '\Drupal\lifebalance_billing\Controller\ReturnController::status'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    uuid: '[0-9a-fA-F-]+'
+
+lifebalance_billing.webhook:
+  path: '/billing/webhook/{provider}'
+  defaults:
+    _controller: '\Drupal\lifebalance_billing\Controller\WebhookController::receive'
+  requirements:
+    # The controller checks the signature. A form token is impossible here.
+    _access: 'TRUE'
+    provider: '[a-z]+'
+  methods: [POST]
+  options:
+    no_cache: TRUE
+
+lifebalance_billing.promo:
+  path: '/admin/lifebalance/promo'
+  defaults:
+    _form: '\Drupal\lifebalance_billing\Form\PromoSettingsForm'
+    _title: 'Акція'
+  requirements:
+    _permission: 'administer lifebalance orders'
+  options:
+    _admin_route: TRUE
+
+lifebalance_billing.orders:
+  path: '/admin/lifebalance/orders'
+  defaults:
+    _controller: '\Drupal\lifebalance_billing\Controller\OrdersController::list'
+    _title: 'Замовлення'
+  requirements:
+    _permission: 'view lifebalance orders'
+  options:
+    _admin_route: TRUE
+
+lifebalance_billing.order_refund:
+  path: '/admin/lifebalance/orders/{uuid}/refund'
+  defaults:
+    _form: '\Drupal\lifebalance_billing\Form\RefundForm'
+    _title: 'Повернути'
+  requirements:
+    _permission: 'refund lifebalance orders'
+    uuid: '[0-9a-fA-F-]+'
+  options:
+    _admin_route: TRUE
+
+lifebalance_billing.order_chargeback:
+  path: '/admin/lifebalance/orders/{uuid}/chargeback'
+  defaults:
+    _form: '\Drupal\lifebalance_billing\Form\ChargebackForm'
+    _title: 'Спір'
+  requirements:
+    _permission: 'refund lifebalance orders'
+    uuid: '[0-9a-fA-F-]+'
+  options:
+    _admin_route: TRUE
+
+lifebalance_billing.order_partial:
+  path: '/admin/lifebalance/orders/{uuid}/partial'
+  defaults:
+    _form: '\Drupal\lifebalance_billing\Form\PartialAccessForm'
+    _title: 'Скасувати доступ'
+  requirements:
+    _permission: 'refund lifebalance orders'
+    uuid: '[0-9a-fA-F-]+'
+  options:
+    _admin_route: TRUE

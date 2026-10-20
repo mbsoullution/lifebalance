@@ -1,0 +1,54 @@
+# LifeBalance — робочий каталог рекомендацій.
+# Формат: docs/content/recommendations.example.yml
+# Імпорт: drush lifebalance:import-recommendations
+# Новий ключ стає чернеткою. Зміна назви, тексту або кроків створює ревізію.
+# Статус файл не змінює. Ці три записи — приклади формату, не затверджений зміст.
+catalog_version: 1
+langcode: uk
+recommendations:
+  - key: health.sleep.evening_wind_down
+    sector: health
+    trigger_criteria: [health.f03]
+    trigger_answers: [no, partial]
+    title: "Спокійна година перед сном"
+    body: "Можна спробувати протягом тижня приділяти останню годину перед сном спокійним заняттям і помітити, чи змінюється відчуття відпочинку зранку."
+    steps:
+      - "Обрати орієнтовний час, коли починається «спокійна година»"
+      - "Відкласти робочі повідомлення на цей час"
+      - "Наприкінці тижня записати, що змінилося"
+    type: habit
+    effort: small
+    safety: health
+    tier: premium
+    weight: 1
+
+  - key: finances.overview.monthly_snapshot
+    sector: finances
+    trigger_criteria: [finances.f02]
+    trigger_answers: [no, partial]
+    title: "Один погляд на свої гроші за місяць"
+    body: "Можна виділити 30 хвилин і просто подивитися, на що пішли гроші минулого місяця, без оцінок і висновків. Мета — побачити картину."
+    steps:
+      - "Вибрати зручний вечір і поставити нагадування"
+      - "Розділити витрати на 4–6 великих груп"
+      - "Записати одне спостереження, яке здивувало"
+    type: action
+    effort: small
+    safety: none
+    tier: free_preview
+    weight: 1
+
+  - key: life_brightness.small_joys.list
+    sector: life_brightness
+    trigger_criteria: [life_brightness.f01, life_brightness.p06]
+    trigger_answers: [no, partial]
+    title: "Список маленьких радощів"
+    body: "Можна скласти перелік із 10 дрібних речей, які приносять задоволення і займають до 15 хвилин, і щотижня обирати з нього хоча б одну."
+    steps:
+      - "Записати 10 ідей, навіть дуже простих"
+      - "Обрати одну на цей тиждень і запланувати"
+    type: reflection
+    effort: small
+    safety: none
+    tier: premium
+    weight: 1

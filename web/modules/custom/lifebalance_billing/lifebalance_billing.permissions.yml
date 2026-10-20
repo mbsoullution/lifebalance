@@ -1,0 +1,19 @@
+view lifebalance orders:
+  title: 'Перегляд замовлень'
+  description: 'Список замовлень: план, сума, статус. Без оцінок, нотаток і даних картки.'
+  restrict access: true
+
+refund lifebalance orders:
+  title: 'Повернення замовлень'
+  description: 'Повне повернення і позначка спору. Ручне надання доступу сюди не входить.'
+  restrict access: true
+
+view lifebalance stats:
+  title: 'Статистика оплат'
+  description: 'Виручка з оплачених замовлень. Ручні надання не враховуються.'
+  restrict access: true
+
+administer lifebalance orders:
+  title: 'Адміністрування замовлень'
+  description: 'Не видається жодній ролі. Чуже замовлення це право не відкриває.'
+  restrict access: true

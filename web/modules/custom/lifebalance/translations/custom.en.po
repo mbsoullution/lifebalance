@@ -1,0 +1,1990 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Ключ може містити лише малі латинські літери, цифри, крапку, дефіс і підкреслення."
+msgstr "A key may contain only lowercase Latin letters, digits, a dot, a hyphen, and an underscore."
+
+msgid "Назва має містити від 1 до 80 символів."
+msgstr "The name must be 1 to 80 characters."
+
+msgid "Додайте текст рекомендації."
+msgstr "Add the recommendation text."
+
+msgid "Додайте від одного до пʼяти кроків."
+msgstr "Add one to five steps."
+
+msgid "Оберіть відповідь «Ні», «Частково» або обидві."
+msgstr "Choose the answer “No”, “Partly”, or both."
+
+msgid "Опублікувати або архівувати може лише людина з правом публікації."
+msgstr "Only a person with publishing permission can publish or archive."
+
+msgid "Оберіть існуючу сферу."
+msgstr "Choose an existing area."
+
+msgid "Вкажіть хоча б один критерій."
+msgstr "Specify at least one criterion."
+
+msgid "Критерій @key не існує."
+msgstr "Criterion @key does not exist."
+
+msgid "Критерій @key належить іншій сфері."
+msgstr "Criterion @key belongs to another area."
+
+msgid "Сфера"
+msgstr "Area"
+
+msgid "Назва"
+msgstr "Name"
+
+msgid "Опис"
+msgstr "Description"
+
+msgid "Кроки"
+msgstr "Steps"
+
+msgid "Від одного до пʼяти коротких кроків."
+msgstr "One to five short steps."
+
+msgid "Крок @number"
+msgstr "Step @number"
+
+msgid "Термін"
+msgstr "Due date"
+
+msgid "Можна лишити порожнім."
+msgstr "You can leave this empty."
+
+msgid "Додати ціль"
+msgstr "Add a goal"
+
+msgid "Ціль додано до плану."
+msgstr "The goal was added to the plan."
+
+msgid "Нові цілі доступні з розширеним доступом."
+msgstr "New goals are available with extended access."
+
+msgid "Активних цілей уже @limit. Завершіть або скасуйте одну, щоб додати нову."
+msgstr "There are already @limit active goals. Finish or cancel one to add another."
+
+msgid "Ціль не збережено. Перевірте назву, опис і кроки."
+msgstr "The goal was not saved. Check the name, description, and steps."
+
+msgid "Щоб побачити підказки, спочатку дайте відповіді в опитувальнику."
+msgstr "Answer the questionnaire first to see prompts."
+
+msgid "Перейти до опитувальника"
+msgstr "Go to the questionnaire"
+
+msgid "Підказки для саморефлексії на основі ваших відповідей."
+msgstr "Prompts for self-reflection based on your answers."
+
+msgid "Сфери"
+msgstr "Areas"
+
+msgid "Оберіть одну або дві сфери."
+msgstr "Choose one or two areas."
+
+msgid "Найнижча оцінка в останньому зрізі."
+msgstr "The lowest score in the latest snapshot."
+
+msgid "Показати підказки"
+msgstr "Show prompts"
+
+msgid "Оберіть від однієї до трьох підказок."
+msgstr "Choose one to three prompts."
+
+msgid "План на 30 днів розпочато."
+msgstr "The 30-day plan has started."
+
+msgid "У розширеному доступі — персональний план і кроки."
+msgstr "Extended access includes a personal plan and steps."
+
+msgid "Для цієї сфери поки немає готових рекомендацій. Ви можете додати власну ціль."
+msgstr "This area has no ready recommendations yet. You can add your own goal."
+
+msgid "Додати власну ціль"
+msgstr "Add your own goal"
+
+msgid "Почати план на 30 днів"
+msgstr "Start the 30-day plan"
+
+msgid "Це не медична порада. Якщо симптоми турбують, зверніться до лікаря."
+msgstr "This is not medical advice. If symptoms worry you, contact a doctor."
+
+msgid "Включити в план на 30 днів"
+msgstr "Include in the 30-day plan"
+
+msgid "Додати до плану"
+msgstr "Add to the plan"
+
+msgid "Новий план доступний з розширеним доступом."
+msgstr "A new plan is available with extended access."
+
+msgid "План на 30 днів уже триває."
+msgstr "A 30-day plan is already in progress."
+
+msgid "Активних цілей уже @limit. Завершіть або скасуйте одну, щоб почати план."
+msgstr "There are already @limit active goals. Finish or cancel one to start a plan."
+
+msgid "План зараз не можна почати."
+msgstr "The plan cannot be started right now."
+
+msgid "Ця підказка вже є серед активних цілей."
+msgstr "This prompt is already among the active goals."
+
+msgid "Для цієї відповіді поради не додаються."
+msgstr "No advice is added for this answer."
+
+msgid "Цю підказку зараз не можна додати."
+msgstr "This prompt cannot be added right now."
+
+msgid "Підтримка"
+msgstr "Support"
+
+msgid "Блок підтримки"
+msgstr "Support block"
+
+msgid "Текст для чутливих критеріїв. Його побачить людина замість порад. Сюди можна додати контакти перевірених організацій."
+msgstr "Text for sensitive criteria. A person sees it instead of advice. You can add contacts of verified organizations here."
+
+msgid "Ліміт активних цілей"
+msgstr "Active goal limit"
+
+msgid "Скільки цілей зі статусом «Заплановано» або «У процесі» може бути одночасно. Від 1 до 10."
+msgstr "How many goals with the status “Planned” or “In progress” can exist at once. From 1 to 10."
+
+msgid "Чутливі критерії"
+msgstr "Sensitive criteria"
+
+msgid "Ключі критеріїв, по одному на рядок. Якщо відповідь «Ні», поради для цього критерію не показуються."
+msgstr "Criterion keys, one per line. If the answer is “No”, advice for that criterion is not shown."
+
+msgid "Ліміт активних цілей має бути від 1 до 10."
+msgstr "The active goal limit must be from 1 to 10."
+
+msgid "Ключ критерію має складатися з малих латинських літер, цифр, крапки, дефіса або підкреслення."
+msgstr "A criterion key must consist of lowercase Latin letters, digits, a dot, a hyphen, or an underscore."
+
+msgid "Налаштування збережено."
+msgstr "Settings saved."
+
+msgid "Статус"
+msgstr "Status"
+
+msgid "Оновити ціль"
+msgstr "Update goal"
+
+msgid "Ціль не оновлено."
+msgstr "The goal was not updated."
+
+msgid "Кроки не оновлено."
+msgstr "The steps were not updated."
+
+msgid "Ціль оновлено."
+msgstr "The goal was updated."
+
+msgid "Ключ не змінюється. Рекомендацію можна архівувати, видалити її неможливо."
+msgstr "The key does not change. A recommendation can be archived, not deleted."
+
+msgid "Наприклад, health.sleep.evening_wind_down."
+msgstr "For example, health.sleep.evening_wind_down."
+
+msgid "Ключ не змінюється."
+msgstr "The key does not change."
+
+msgid "Рекомендація з таким ключем уже існує."
+msgstr "A recommendation with this key already exists."
+
+msgid "Зберегти"
+msgstr "Save"
+
+msgid "Рекомендацію збережено."
+msgstr "The recommendation was saved."
+
+msgid "Пройти нову самооцінку"
+msgstr "Take a new self-assessment"
+
+msgid "Плану на 30 днів ще немає."
+msgstr "There is no 30-day plan yet."
+
+msgid "План на 30 днів до @date включно. Залишилось днів: @days."
+msgstr "The 30-day plan runs through @date. Days left: @days."
+
+msgid "Завершити достроково"
+msgstr "Finish early"
+
+msgid "Архів планів"
+msgstr "Plan archive"
+
+msgid "@status, до @date"
+msgstr "@status, until @date"
+
+msgid "План завершено достроково. Цілі залишаються."
+msgstr "The plan was finished early. The goals remain."
+
+msgid "План не завершено."
+msgstr "The plan was not finished."
+
+msgid "Версія для друку"
+msgstr "Print version"
+
+msgid "У цьому переліку цілей ще немає."
+msgstr "This list has no goals yet."
+
+msgid "Підказки для саморефлексії"
+msgstr "Prompts for self-reflection"
+
+msgid "Активні"
+msgstr "Active"
+
+msgid "30 днів"
+msgstr "30 days"
+
+msgid "90 днів"
+msgstr "90 days"
+
+msgid "Виконані/скасовані"
+msgstr "Done/cancelled"
+
+msgid "Минуло @days днів від цілі у сфері «@sector». Переоцінити сферу?"
+msgstr "@days days have passed since the goal in “@sector”. Reassess the area?"
+
+msgid "Переоцінити сферу «@sector»?"
+msgstr "Reassess the area “@sector”?"
+
+msgid "@sector · @status · до @due"
+msgstr "@sector · @status · until @due"
+
+msgid "Друк / Зберегти як PDF"
+msgstr "Print / Save as PDF"
+
+msgid "Без скриптів відкрийте друк у браузері й оберіть «Зберегти як PDF»."
+msgstr "Without scripts, open print in the browser and choose “Save as PDF”."
+
+msgid "Зрізу ще немає."
+msgstr "There is no snapshot yet."
+
+msgid "Активні цілі"
+msgstr "Active goals"
+
+msgid "Активних цілей ще немає."
+msgstr "There are no active goals yet."
+
+msgid "План на 30 днів"
+msgstr "30-day plan"
+
+msgid "У цьому плані цілей ще немає."
+msgstr "This plan has no goals yet."
+
+msgid "Середнє: @average"
+msgstr "Average: @average"
+
+msgid "Сектор"
+msgstr "Sector"
+
+msgid "Оцінка"
+msgstr "Score"
+
+msgid "Орієнтир"
+msgstr "Guide"
+
+msgid "Виконано: @text"
+msgstr "Done: @text"
+
+msgid "Ще ні: @text"
+msgstr "Not yet: @text"
+
+msgid "Усі"
+msgstr "All"
+
+msgid "План"
+msgstr "Plan"
+
+msgid "Від"
+msgstr "From"
+
+msgid "До"
+msgstr "To"
+
+msgid "Показати"
+msgstr "Show"
+
+msgid "Акція увімкнена"
+msgstr "Promotion enabled"
+
+msgid "Ліміт місць"
+msgstr "Place limit"
+
+msgid "Початок"
+msgstr "Start"
+
+msgid "Кінець"
+msgstr "End"
+
+msgid "Оплачено місць"
+msgstr "Places paid"
+
+msgid "Зарезервовано зараз"
+msgstr "Reserved now"
+
+msgid "Кінець раніше за початок."
+msgstr "The end is earlier than the start."
+
+msgid "Акцію збережено."
+msgstr "The promotion was saved."
+
+msgid "Позначка спору завершує доступ із цієї оплати. Зрізи і цілі залишаються."
+msgstr "A dispute mark ends access from this payment. Snapshots and goals remain."
+
+msgid "Це замовлення не можна позначити спором."
+msgstr "This order cannot be marked as a dispute."
+
+msgid "Позначити спір"
+msgstr "Mark dispute"
+
+msgid "Спір не позначено."
+msgstr "The dispute was not marked."
+
+msgid "Спір позначено, доступ завершено."
+msgstr "The dispute was marked and access ended."
+
+msgid "Повне повернення @price грн за «@plan». Часткове повернення тут не оформлюється."
+msgstr "Full refund of @price UAH for “@plan”. A partial refund is not processed here."
+
+msgid "Це замовлення не можна повернути звідси."
+msgstr "This order cannot be refunded from here."
+
+msgid "Повернути"
+msgstr "Refund"
+
+msgid "Повернення не прийнято."
+msgstr "The refund was not accepted."
+
+msgid "Оплату повернено."
+msgstr "The payment was refunded."
+
+msgid "Повернення надіслано. Статус оновиться після підтвердження."
+msgstr "The refund was sent. The status will update after confirmation."
+
+msgid "@price грн за @days днів"
+msgstr "@price UAH for @days days"
+
+msgid "Наступні 30 днів коштують @price грн."
+msgstr "The next 30 days cost @price UAH."
+
+msgid "Акційні місця закінчились. Ціна 149 грн за 30 днів"
+msgstr "Promotional places are used up. The price is 149 UAH for 30 days"
+
+msgid "Підтверджую оплату 149 грн за 30 днів"
+msgstr "I confirm payment of 149 UAH for 30 days"
+
+msgid "Підтвердьте оплату 149 грн за 30 днів."
+msgstr "Confirm payment of 149 UAH for 30 days."
+
+msgid "Доступ до @date включно."
+msgstr "Access through @date."
+
+msgid "Оплата почнеться @date, після поточного доступу."
+msgstr "Payment starts on @date, after the current access."
+
+msgid "Автопродовження немає."
+msgstr "There is no auto-renewal."
+
+msgid "Збережені зрізи, відповіді, цілі й плани лишаються."
+msgstr "Saved snapshots, answers, goals, and plans remain."
+
+msgid "Нові розширені дії будуть недоступні."
+msgstr "New extended actions will be unavailable."
+
+msgid "Умови повернення"
+msgstr "Refund terms"
+
+msgid "Безстроковий доступ уже є, тож нова оплата не потрібна."
+msgstr "Unlimited access already exists, so a new payment is not needed."
+
+msgid "Забагато спроб оплати. Спробуйте пізніше."
+msgstr "Too many payment attempts. Try again later."
+
+msgid "Перейти до оплати"
+msgstr "Go to payment"
+
+msgid "Частину оплати повернено. Доступ можна завершити вручну. Зрізи і цілі залишаються."
+msgstr "Part of the payment was refunded. Access can be ended manually. Snapshots and goals remain."
+
+msgid "Для цього замовлення рішення вже не потрібне."
+msgstr "A decision is no longer needed for this order."
+
+msgid "Причина"
+msgstr "Reason"
+
+msgid "Скасувати доступ"
+msgstr "End access"
+
+msgid "Вкажіть причину."
+msgstr "Enter a reason."
+
+msgid "Доступ не завершено."
+msgstr "Access was not ended."
+
+msgid "Доступ із цієї оплати завершено."
+msgstr "Access from this payment has ended."
+
+msgid "Оплату зараховано."
+msgstr "The payment was recorded."
+
+msgid "Оплата обробляється, ми надішлемо лист."
+msgstr "The payment is being processed. We will send an email."
+
+msgid "Оплату не завершено."
+msgstr "The payment was not completed."
+
+msgid "Частину оплати повернено."
+msgstr "Part of the payment was refunded."
+
+msgid "Перевіряємо оплату… Якщо підтвердження затримується, лист надійде після обробки."
+msgstr "We are checking the payment… If confirmation is delayed, an email will arrive after processing."
+
+msgid "Орієнтир перераховується на сервері."
+msgstr "The guide is recalculated on the server."
+
+msgid "Версія каталогу записується на сервері."
+msgstr "The catalog version is recorded on the server."
+
+msgid "Кожен активний сектор має оцінку."
+msgstr "Every active sector has a score."
+
+msgid "Оцінка сектору повторюється."
+msgstr "The sector score is repeated."
+
+msgid "Оцінка вказує на невідомий або вимкнений сектор."
+msgstr "The score points to an unknown or disabled sector."
+
+msgid "Відповідь на критерій повторюється."
+msgstr "The criterion answer is repeated."
+
+msgid "Відповідь приймається лише для опублікованого критерію з поточною ревізією."
+msgstr "An answer is accepted only for a published criterion with the current revision."
+
+msgid "Відповідь стосується сектору, якого немає серед активних."
+msgstr "The answer refers to a sector that is not among the active ones."
+
+msgid "Відповідь на розширений критерій потребує доступу до розширеного оцінювання."
+msgstr "An answer to an extended criterion requires access to extended assessment."
+
+msgid "Нотатка може містити не більше 1000 символів."
+msgstr "A note can contain no more than 1000 characters."
+
+msgid "Нотатка"
+msgstr "Note"
+
+msgid "Зберегти нотатку"
+msgstr "Save note"
+
+msgid "Нотатка може містити до 1000 символів."
+msgstr "A note can contain up to 1000 characters."
+
+msgid "Нотатку не збережено."
+msgstr "The note was not saved."
+
+msgid "Нотатку збережено."
+msgstr "The note was saved."
+
+msgid "Будь-яка"
+msgstr "Any"
+
+msgid "Хто, UID"
+msgstr "Who, UID"
+
+msgid "Кому, UID"
+msgstr "To whom, UID"
+
+msgid "Що"
+msgstr "What"
+
+msgid "Знайти"
+msgstr "Find"
+
+msgid "Видалити акаунт і всі збережені зрізи?"
+msgstr "Delete the account and all saved snapshots?"
+
+msgid "Видалити акаунт"
+msgstr "Delete account"
+
+msgid "Цей акаунт не можна видалити."
+msgstr "This account cannot be deleted."
+
+msgid "Акаунт видалено."
+msgstr "The account was deleted."
+
+msgid "Зрізи, відповіді, нотатки, чернетка і прив'язані способи входу буде видалено. Це незворотно."
+msgstr "Snapshots, answers, notes, the draft, and linked sign-in methods will be deleted. This cannot be undone."
+
+msgid "Реєстрація від"
+msgstr "Registered from"
+
+msgid "Реєстрація до"
+msgstr "Registered to"
+
+msgid "Ім'я, UID або адреса"
+msgstr "Name, UID, or address"
+
+msgid "Спробувати Premium 7 днів"
+msgstr "Try Premium for 7 days"
+
+msgid "0 — зовсім не так, як хочу. 10 — саме так, як хочу."
+msgstr "0 — not at all how I want. 10 — exactly how I want."
+
+msgid "Орієнтир — частка тверджень, з якими ви погодились (частково = половина), переведена в шкалу 0–10."
+msgstr "The guide is the share of statements you agreed with (partly = half), converted to a 0–10 scale."
+
+msgid "Деякі відповіді скинуто, бо формулювання критерію змінилось."
+msgstr "Some answers were reset because the criterion wording changed."
+
+msgid "Сьогодні вже є збережений зріз."
+msgstr "A snapshot is already saved for today."
+
+msgid "Оцінки"
+msgstr "Scores"
+
+msgid "Зберегти чернетку"
+msgstr "Save draft"
+
+msgid "Зберегти зріз"
+msgstr "Save snapshot"
+
+msgid "На сьогодні вже збережено максимальну кількість зрізів."
+msgstr "The maximum number of snapshots has already been saved for today."
+
+msgid "Щоб зберегти зріз, потрібна оцінка кожного сектора."
+msgstr "A score for every sector is required to save a snapshot."
+
+msgid "Чернетку збережено."
+msgstr "The draft was saved."
+
+msgid "Для цього сектора ще немає орієнтира."
+msgstr "This sector has no guide yet."
+
+msgid "Чернетку не збережено."
+msgstr "The draft was not saved."
+
+msgid "Орієнтир перенесено в оцінку."
+msgstr "The guide was copied into the score."
+
+msgid "Зріз не збережено."
+msgstr "The snapshot was not saved."
+
+msgid "Зріз збережено."
+msgstr "The snapshot was saved."
+
+msgid "Замало відповідей для орієнтиру"
+msgstr "Not enough answers for a guide"
+
+msgid "Орієнтир: @score"
+msgstr "Guide: @score"
+
+msgid "Ваша оцінка відрізняється від орієнтиру — це нормально, орієнтир лише підказка."
+msgstr "Your score differs from the guide — that is fine, the guide is only a hint."
+
+msgid "Взяти орієнтир (@score)"
+msgstr "Use the guide (@score)"
+
+msgid "Допомогти з оцінкою"
+msgstr "Help with the score"
+
+msgid "Не оцінено"
+msgstr "Not scored"
+
+msgid "не оцінено"
+msgstr "not scored"
+
+msgid "@value з 10"
+msgstr "@value out of 10"
+
+msgid "Картка не потрібна. Списань немає."
+msgstr "No card is required. There are no charges."
+
+msgid "Ознайомлення триває 7 днів від підтвердження."
+msgstr "The trial lasts 7 days from confirmation."
+
+msgid "Нові розширені відповіді й новий план будуть недоступні."
+msgstr "New extended answers and a new plan will be unavailable."
+
+msgid "Підтверджую старт ознайомлення"
+msgstr "I confirm the start of the trial"
+
+msgid "Підтвердьте старт ознайомлення."
+msgstr "Confirm the start of the trial."
+
+msgid "Ознайомлення на 7 днів розпочато."
+msgstr "The 7-day trial has started."
+
+msgid "Спочатку збережіть зріз."
+msgstr "Save a snapshot first."
+
+msgid "Ознайомлення вже використано."
+msgstr "The trial has already been used."
+
+msgid "Ознайомлення зараз вимкнено."
+msgstr "The trial is turned off right now."
+
+msgid "Рівень"
+msgstr "Level"
+
+msgid "Фільтрувати"
+msgstr "Filter"
+
+msgid "Скинути"
+msgstr "Reset"
+
+msgid "Завантажити CSV"
+msgstr "Download CSV"
+
+msgid "Зріз A"
+msgstr "Snapshot A"
+
+msgid "Зріз B"
+msgstr "Snapshot B"
+
+msgid "Порівняти"
+msgstr "Compare"
+
+msgid "Ідентифікатор не змінюється. Сектор можна лише вимкнути."
+msgstr "The identifier does not change. A sector can only be turned off."
+
+msgid "Ідентифікатор"
+msgstr "Identifier"
+
+msgid "Підказка"
+msgstr "Hint"
+
+msgid "Підпис для 0"
+msgstr "Caption for 0"
+
+msgid "Підпис для 10"
+msgstr "Caption for 10"
+
+msgid "Порядок"
+msgstr "Order"
+
+msgid "Колір"
+msgstr "Color"
+
+msgid "Увімкнено"
+msgstr "Enabled"
+
+msgid "Колір має бути у форматі #RRGGBB."
+msgstr "The color must be in #RRGGBB format."
+
+msgid "Порядок має бути числом."
+msgstr "The order must be a number."
+
+msgid "Сектори збережено."
+msgstr "Sectors saved."
+
+msgid "Ознайомлювальний доступ уже надавали. Повторне надання можливе."
+msgstr "Trial access was already granted. Granting it again is possible."
+
+msgid "Тривалість"
+msgstr "Duration"
+
+msgid "7 днів"
+msgstr "7 days"
+
+msgid "365 днів"
+msgstr "365 days"
+
+msgid "До дати"
+msgstr "Until a date"
+
+msgid "Безстроково"
+msgstr "Unlimited"
+
+msgid "Дата завершення"
+msgstr "End date"
+
+msgid "Джерело"
+msgstr "Source"
+
+msgid "Надання"
+msgstr "Grant"
+
+msgid "Ознайомлення"
+msgstr "Trial"
+
+msgid "Повідомити"
+msgstr "Notify"
+
+msgid "Надати"
+msgstr "Grant access"
+
+msgid "Дата має бути пізніше за сьогодні."
+msgstr "The date must be later than today."
+
+msgid "Доступ не надано. Перевірте дату і причину."
+msgstr "Access was not granted. Check the date and the reason."
+
+msgid "Доступ надано."
+msgstr "Access was granted."
+
+msgid "Не надсилати сервісні нагадування"
+msgstr "Do not send service reminders"
+
+msgid "Зберегти нагадування"
+msgstr "Save reminders"
+
+msgid "Завантажте копію своїх зрізів, чернетки й нотаток."
+msgstr "Download a copy of your snapshots, draft, and notes."
+
+msgid "Завантажити JSON"
+msgstr "Download JSON"
+
+msgid "Запитання"
+msgstr "Questions"
+
+msgid "Конфіденційність"
+msgstr "Privacy"
+
+msgid "Розширене оцінювання: недоступне"
+msgstr "Extended assessment: unavailable"
+
+msgid "Доступ безстроково"
+msgstr "Access unlimited"
+
+msgid "Доступ до @date включно"
+msgstr "Access through @date"
+
+msgid "Джерела: @sources"
+msgstr "Sources: @sources"
+
+msgid "Оплата"
+msgstr "Payment"
+
+msgid "Промо"
+msgstr "Promo"
+
+msgid "Прив'яжіть або відв'яжіть Google і Facebook. Останній спосіб входу лишається."
+msgstr "Link or unlink Google and Facebook. The last sign-in method stays."
+
+msgid "Провайдери ще не прив'язані."
+msgstr "No providers are linked yet."
+
+msgid "Прив'язати Google"
+msgstr "Link Google"
+
+msgid "Прив'язати Facebook"
+msgstr "Link Facebook"
+
+msgid "Це останній спосіб входу. Відв'язати його не можна."
+msgstr "This is the last sign-in method. It cannot be unlinked."
+
+msgid "Відв'язати @provider"
+msgstr "Unlink @provider"
+
+msgid "Спосіб входу відв'язано."
+msgstr "The sign-in method was unlinked."
+
+msgid "Продовжити на"
+msgstr "Extend to"
+
+msgid "Нове завершення"
+msgstr "New end"
+
+msgid "Зараз"
+msgstr "Now"
+
+msgid "Не раніше ніж зараз і раніше за поточне завершення."
+msgstr "Not earlier than now and earlier than the current end."
+
+msgid "Скасування зупиняє цей запис. Інші записи не змінюються."
+msgstr "Cancellation stops this record. Other records do not change."
+
+msgid "Продовжити"
+msgstr "Extend"
+
+msgid "Скоротити"
+msgstr "Shorten"
+
+msgid "Скасувати"
+msgstr "Cancel"
+
+msgid "Дата має бути не раніше ніж зараз."
+msgstr "The date must be no earlier than now."
+
+msgid "Зміну не збережено. Перевірте дату і причину."
+msgstr "The change was not saved. Check the date and the reason."
+
+msgid "Зміну збережено."
+msgstr "The change was saved."
+
+msgid "Ключ не змінюється. Критерій можна архівувати, видалити його неможливо."
+msgstr "The key does not change. A criterion can be archived, not deleted."
+
+msgid "Наприклад, health.f01."
+msgstr "For example, health.f01."
+
+msgid "Критерій з таким ключем уже існує."
+msgstr "A criterion with this key already exists."
+
+msgid "Архівувати"
+msgstr "Archive"
+
+msgid "Критерій збережено."
+msgstr "The criterion was saved."
+
+msgid "Оцінювання"
+msgstr "Assessment"
+
+msgid "Орієнтовно дві хвилини."
+msgstr "About two minutes."
+
+msgid "Орієнтовно одна хвилина."
+msgstr "About one minute."
+
+msgid "Розширене оцінювання"
+msgstr "Extended assessment"
+
+msgid "Детальніше"
+msgstr "Details"
+
+msgid "Назад до колеса"
+msgstr "Back to the wheel"
+
+msgid "Наступний сектор"
+msgstr "Next sector"
+
+msgid "Зберегти відповіді"
+msgstr "Save answers"
+
+msgid "Відповіді не збережено."
+msgstr "The answers were not saved."
+
+msgid "Оцінка має бути від 0 до 10."
+msgstr "The score must be from 0 to 10."
+
+msgid "Відповідь очищено."
+msgstr "The answer was cleared."
+
+msgid "Відповіді збережено."
+msgstr "The answers were saved."
+
+msgid "Так"
+msgstr "Yes"
+
+msgid "Частково"
+msgstr "Partly"
+
+msgid "Ні"
+msgstr "No"
+
+msgid "Не стосується"
+msgstr "Does not apply"
+
+msgid "Очистити"
+msgstr "Clear"
+
+msgid "Так: @yes, Частково: @partial, Ні: @no, Не стосується: @na"
+msgstr "Yes: @yes, Partly: @partial, No: @no, Does not apply: @na"
+
+msgid "Після цього з’явиться колесо з восьми сфер."
+msgstr "After this, a wheel of eight areas appears."
+
+msgid "Час створення зберігається один раз."
+msgstr "The creation time is stored once."
+
+msgid "Створити моє колесо"
+msgstr "Create my wheel"
+
+msgid "Колесо створено."
+msgstr "The wheel was created."
+
+msgid "Увімкнути розширене оцінювання"
+msgstr "Enable extended assessment"
+
+msgid "Дозволити ознайомлення на 7 днів"
+msgstr "Allow a 7-day trial"
+
+msgid "Після першого зрізу. За замовчуванням вимкнено."
+msgstr "After the first snapshot. Turned off by default."
+
+msgid "Видалити цей зріз?"
+msgstr "Delete this snapshot?"
+
+msgid "Видалити"
+msgstr "Delete"
+
+msgid "Зріз видалено."
+msgstr "The snapshot was deleted."
+
+msgid "Архівувати критерій @key?"
+msgstr "Archive criterion @key?"
+
+msgid "Критерій зникне з опитувальника. Формулювання і ревізії залишаються. Статус можна повернути у формі редагування."
+msgstr "The criterion disappears from the questionnaire. The wording and revisions remain. The status can be restored in the edit form."
+
+msgid "Критерій уже в архіві."
+msgstr "The criterion is already archived."
+
+msgid "Критерій архівовано."
+msgstr "The criterion was archived."
+
+msgid "Період"
+msgstr "Period"
+
+msgid "Увесь час"
+msgstr "All time"
+
+msgid "Каталог @version"
+msgstr "Catalog @version"
+
+msgid "Редагувати"
+msgstr "Edit"
+
+msgid "Ревізії"
+msgstr "Revisions"
+
+msgid "Критерій не видаляється. Його можна архівувати."
+msgstr "A criterion is not deleted. It can be archived."
+
+msgid "Додати критерій"
+msgstr "Add criterion"
+
+msgid "Ключ"
+msgstr "Key"
+
+msgid "Формулювання"
+msgstr "Wording"
+
+msgid "Дії"
+msgstr "Actions"
+
+msgid "Немає критеріїв за цими фільтрами."
+msgstr "No criteria match these filters."
+
+msgid "Колесо балансу показує життя цілком, а не одну сферу окремо."
+msgstr "The balance wheel shows life as a whole, not one area at a time."
+
+msgid "Воно символізує рівновагу: вісім секторів — це вісім сфер життя."
+msgstr "It stands for balance: eight sectors are eight areas of life."
+
+msgid "Кругла форма одразу показує, де сфера випирає, а де просідає."
+msgstr "The round shape shows at once where an area sticks out and where it sags."
+
+msgid "Що далі сектор від центру, то ближче ця сфера до життя, якого ви хочете."
+msgstr "The farther a sector is from the center, the closer that area is to the life you want."
+
+msgid "0 — зовсім не так, як хочу. 10 — саме так, як хочу."
+msgstr "0 means not at all how I want. 10 means exactly how I want."
+
+msgid "Так видно, де вже є опора і куди варто звернути увагу."
+msgstr "You can see where you already have support and where to pay attention."
+
+msgid "Одна сильна сфера не замінює слабку."
+msgstr "One strong area does not make up for a weak one."
+
+msgid "Оцінку ставите ви. Орієнтир лише підказує і не замінює ваш бал."
+msgstr "You set the score. The guide only suggests and does not replace your score."
+
+msgid "Твердження допомагають зупинитися й подумати перед оцінкою."
+msgstr "The statements help you pause and think before you score."
+
+msgid "Зріз зберігає дату. Бали в ньому не змінюються, тож пізніше видно зрушення."
+msgstr "A snapshot keeps the date. Scores in it stay put, so later you can see what shifted."
+
+msgid "Оцінки, відповіді й нотатки бачите лише ви."
+msgstr "Only you can see your scores, answers, and notes."
+
+msgid "Колесо поруч — ілюстрація, а не чиясь самооцінка."
+msgstr "The wheel beside this text is an illustration, not someone’s self-assessment."
+
+msgid "Приклад колеса"
+msgstr "Sample wheel"
+
+msgid "До колеса"
+msgstr "To the wheel"
+
+msgid "Створити власне колесо"
+msgstr "Create your own wheel"
+
+msgid "Оферта"
+msgstr "Offer"
+
+msgid "Повернення"
+msgstr "Refunds"
+
+msgid "Увійти через Google"
+msgstr "Sign in with Google"
+
+msgid "Увійти через Facebook"
+msgstr "Sign in with Facebook"
+
+msgid "Увійти з паролем"
+msgstr "Sign in with a password"
+
+msgid "Пароль"
+msgstr "Password"
+
+msgid "Увійти"
+msgstr "Sign in"
+
+msgid "Вхід"
+msgstr "Sign-in"
+
+msgid "Колесо зводить вісім сфер на одну фігуру."
+msgstr "The wheel brings eight areas into one figure."
+
+msgid "Кожна вісь — це сфера."
+msgstr "Each axis is an area."
+
+msgid "Що далі від центру, то вища оцінка."
+msgstr "The farther from the center, the higher the score."
+
+msgid "Незафарбована сфера ще не оцінена."
+msgstr "An unfilled area is not scored yet."
+
+msgid "Остаточну оцінку ставите ви. Орієнтир лише підказує."
+msgstr "You set the final score. The guide only suggests."
+
+msgid "Зріз зберігає дату. Оцінки в ньому не змінюються."
+msgstr "A snapshot stores the date. Scores in it do not change."
+
+msgid "Малюнок нижче є прикладом, а не чиєюсь самооцінкою."
+msgstr "The drawing below is an example, not someone’s self-assessment."
+
+msgid "Приклад оцінок від 0 до 10"
+msgstr "Sample scores from 0 to 10"
+
+msgid "Приклад"
+msgstr "Sample"
+
+msgid "Ім'я або пошта"
+msgstr "Name or email"
+
+msgid "Коли"
+msgstr "When"
+
+msgid "Хто"
+msgstr "Who"
+
+msgid "Кому"
+msgstr "To whom"
+
+msgid "Чому"
+msgstr "Why"
+
+msgid "Було"
+msgstr "Was"
+
+msgid "Стало"
+msgstr "Became"
+
+msgid "Записів журналу немає."
+msgstr "There are no log records."
+
+msgid "Система"
+msgstr "System"
+
+msgid "Обліковий запис видалено"
+msgstr "Account deleted"
+
+msgid "Зрізів ще немає."
+msgstr "There are no snapshots yet."
+
+msgid "Видалити зріз"
+msgstr "Delete snapshot"
+
+msgid "Порівняння"
+msgstr "Comparison"
+
+msgid "Динаміка"
+msgstr "Trend"
+
+msgid "Середнє: @average · @mode · @catalog"
+msgstr "Average: @average · @mode · @catalog"
+
+msgid "Формулювання цієї ревізії недоступне."
+msgstr "The wording of this revision is unavailable."
+
+msgid "Розширене твердження"
+msgstr "Extended statement"
+
+msgid "Увійти наявним способом"
+msgstr "Sign in with the existing method"
+
+msgid "Увійдіть наявним способом і прив'яжіть його в налаштуваннях."
+msgstr "Sign in with the existing method and link it in settings."
+
+msgid "Короткі відповіді про колесо, зрізи, доступ і дані."
+msgstr "Short answers about the wheel, snapshots, access, and data."
+
+msgid "Запитання | LifeBalance"
+msgstr "Questions | LifeBalance"
+
+msgid "Відповіді про колесо, зрізи, доступ і дані."
+msgstr "Answers about the wheel, snapshots, access, and data."
+
+msgid "Що це за сайт?"
+msgstr "What is this site?"
+
+msgid "LifeBalance зберігає датований зріз."
+msgstr "LifeBalance stores a dated snapshot."
+
+msgid "У зрізі вісім сфер життя."
+msgstr "A snapshot has eight areas of life."
+
+msgid "Це самооцінка, а не діагностика."
+msgstr "This is a self-assessment, not a diagnosis."
+
+msgid "Вона не замінює консультацію фахівця."
+msgstr "It does not replace a consultation with a specialist."
+
+msgid "Як почати?"
+msgstr "How do I start?"
+
+msgid "Увійдіть через Google, Facebook або пароль."
+msgstr "Sign in with Google, Facebook, or a password."
+
+msgid "Далі натисніть «Створити моє колесо»."
+msgstr "Then press “Create my wheel”."
+
+msgid "Повторне натискання не створює друге колесо."
+msgstr "Pressing it again does not create a second wheel."
+
+msgid "Які є сфери?"
+msgstr "Which areas are there?"
+
+msgid "Забезпеченість, Самовдосконалення."
+msgstr "Finances, Self-development."
+
+msgid "Яскравість життя, Духовність."
+msgstr "Brightness of life, Spirituality."
+
+msgid "Хто ставить оцінку?"
+msgstr "Who sets the score?"
+
+msgid "Остаточну оцінку від 0 до 10 ставите ви."
+msgstr "You set the final score from 0 to 10."
+
+msgid "Орієнтир лише підказує."
+msgstr "The guide only suggests."
+
+msgid "Він переноситься кнопкою «Взяти орієнтир»."
+msgstr "It is copied with the “Use the guide” button."
+
+msgid "Що означає «Не оцінено»?"
+msgstr "What does “Not scored” mean?"
+
+msgid "0 є повноцінною оцінкою."
+msgstr "0 is a full score."
+
+msgid "«Не оцінено» означає, що оцінки ще немає."
+msgstr "“Not scored” means there is no score yet."
+
+msgid "Із цією позначкою зріз не зберігається."
+msgstr "A snapshot is not saved with this mark."
+
+msgid "Які є відповіді на твердження?"
+msgstr "What answers can a statement have?"
+
+msgid "Так, Частково, Ні."
+msgstr "Yes, Partly, No."
+
+msgid "Порожня відповідь не входить в орієнтир."
+msgstr "An empty answer is not part of the guide."
+
+msgid "Відповідь «Ні» не є завданням."
+msgstr "A “No” answer is not a task."
+
+msgid "Чим чернетка відрізняється від зрізу?"
+msgstr "How is a draft different from a snapshot?"
+
+msgid "Чернетка зберігає незавершену роботу."
+msgstr "A draft stores unfinished work."
+
+msgid "Зріз фіксує дату, оцінки й відповіді."
+msgstr "A snapshot records the date, scores, and answers."
+
+msgid "Оцінки й відповіді зрізу змінити не можна."
+msgstr "Scores and answers in a snapshot cannot be changed."
+
+msgid "Нотатку можна змінити. Зріз можна видалити."
+msgstr "A note can be changed. A snapshot can be deleted."
+
+msgid "Що доступно без оплати?"
+msgstr "What is available without payment?"
+
+msgid "На кожну сферу є 10 базових тверджень."
+msgstr "Each area has 10 basic statements."
+
+msgid "Разом їх 80."
+msgstr "Together there are 80."
+
+msgid "Ще 10 на сферу відкриває доступ Premium."
+msgstr "Premium access opens 10 more per area."
+
+msgid "Історія, порівняння і динаміка доступні завжди."
+msgstr "History, comparison, and trend are always available."
+
+msgid "Що дає Premium?"
+msgstr "What does Premium give?"
+
+msgid "Розширені твердження, рекомендації, цілі."
+msgstr "Extended statements, recommendations, and goals."
+
+msgid "Також є один план на 30 днів."
+msgstr "There is also one 30-day plan."
+
+msgid "Після завершення доступу свої дані лишаються."
+msgstr "After access ends, your data remains."
+
+msgid "Нові розширені дії без доступу закриті."
+msgstr "New extended actions are closed without access."
+
+msgid "Як працює ознайомлення?"
+msgstr "How does the trial work?"
+
+msgid "Кнопка «Спробувати Premium 7 днів» з’являється після зрізу."
+msgstr "The “Try Premium for 7 days” button appears after a snapshot."
+
+msgid "Потрібно, щоб ознайомлення було увімкнене і ще не використане."
+msgstr "The trial must be enabled and not used yet."
+
+msgid "Картка не потрібна. Списань немає. Один раз на акаунт."
+msgstr "No card is required. There are no charges. Once per account."
+
+msgid "Старт треба підтвердити на окремій сторінці."
+msgstr "The start must be confirmed on a separate page."
+
+msgid "Як влаштована оплата?"
+msgstr "How does payment work?"
+
+msgid "Коли оплату увімкнено, є плани на 30 і 365 днів."
+msgstr "When payment is enabled, there are 30-day and 365-day plans."
+
+msgid "Перед оплатою видно ціну, строк і дату завершення."
+msgstr "Before payment you see the price, the term, and the end date."
+
+msgid "Номер картки на цей сайт не передається."
+msgstr "The card number is not sent to this site."
+
+msgid "Доступ відкривається після підтвердження платежу."
+msgstr "Access opens after the payment is confirmed."
+
+msgid "Нова оплата під час чинного доступу стартує після його кінця."
+msgstr "A new payment during current access starts after that access ends."
+
+msgid "Що таке рекомендація, ціль і план?"
+msgstr "What is a recommendation, a goal, and a plan?"
+
+msgid "Твердження оцінює стан. Рекомендація є порадою."
+msgstr "A statement assesses a state. A recommendation is advice."
+
+msgid "Ціль є вашим завданням. Її виконання не змінює оцінку."
+msgstr "A goal is your task. Completing it does not change the score."
+
+msgid "Можна обрати одну або дві сфери фокусу."
+msgstr "You can choose one or two focus areas."
+
+msgid "Одночасно триває лише один план на 30 днів."
+msgstr "Only one 30-day plan runs at a time."
+
+msgid "Вкладка «90 днів» показує цілі зі строком, а не окремий план."
+msgstr "The “90 days” tab shows goals with a due date, not a separate plan."
+
+msgid "Друк відкриває сторінку для друку в браузері."
+msgstr "Print opens a page for printing in the browser."
+
+msgid "Хто бачить мої оцінки?"
+msgstr "Who can see my scores?"
+
+msgid "Оцінки, відповіді й нотатки бачите лише ви."
+msgstr "Only you can see scores, answers, and notes."
+
+msgid "Адміністратор сайту не бачить їх в інтерфейсі."
+msgstr "The site administrator does not see them in the interface."
+
+msgid "Як завантажити дані або видалити акаунт?"
+msgstr "How do I download data or delete the account?"
+
+msgid "На сторінці «Мої дані» є JSON і CSV."
+msgstr "The “My data” page has JSON and CSV."
+
+msgid "Видалення прибирає зрізи, відповіді, нотатки й чернетку."
+msgstr "Deletion removes snapshots, answers, notes, and the draft."
+
+msgid "Також зникають цілі, плани і прив’язка входу."
+msgstr "Goals, plans, and the sign-in link also disappear."
+
+msgid "Замовлення для обліку лишається без зв’язку з акаунтом."
+msgstr "The order remains for accounting, without a link to the account."
+
+msgid "Чому інший вхід не відкрив цей акаунт?"
+msgstr "Why did another sign-in not open this account?"
+
+msgid "Однаковий email не з’єднує акаунти сам."
+msgstr "The same email does not connect accounts by itself."
+
+msgid "Увійдіть наявним способом і прив’яжіть другий у «Мої дані»."
+msgstr "Sign in with the existing method and link the second one in “My data”."
+
+msgid "Останній спосіб входу відв’язати не можна."
+msgstr "The last sign-in method cannot be unlinked."
+
+msgid "Як вимкнути нагадування?"
+msgstr "How do I turn off reminders?"
+
+msgid "На «Мої дані» є позначка про сервісні нагадування."
+msgstr "“My data” has a setting for service reminders."
+
+msgid "Лист про початок ознайомлення надсилається і з нею."
+msgstr "The email about the start of the trial is still sent with it."
+
+msgid "Де умови і повернення?"
+msgstr "Where are the terms and refunds?"
+
+msgid "Поруч є конфіденційність, оферта і повернення."
+msgstr "Privacy, the offer, and refunds are nearby."
+
+msgid "Оферта і політика повернення ще є заготовками власника."
+msgstr "The offer and the refund policy are still drafts for the owner."
+
+msgid "Здоров'я, Стосунки, Оточення, Покликання."
+msgstr "Health, Relationships, Environment, Purpose."
+
+msgid "Порівняння базового і розширеного оцінювання. Доступ поки за запрошенням."
+msgstr "A comparison of basic and extended assessment. Access is by invitation for now."
+
+msgid "Доступ поки за запрошенням. Його відкриває людина, яка супроводжує сайт."
+msgstr "Access is by invitation for now. It is opened by the person who looks after the site."
+
+msgid "Базове оцінювання входить до кожного облікового запису. Розширене додає поглиблені твердження."
+msgstr "Basic assessment is included in every account. Extended assessment adds deeper statements."
+
+msgid "Базове"
+msgstr "Basic"
+
+msgid "10 тверджень у кожній із восьми сфер."
+msgstr "10 statements in each of the eight areas."
+
+msgid "Орієнтир за цими твердженнями."
+msgstr "A guide from these statements."
+
+msgid "Колесо, історія, порівняння і динаміка."
+msgstr "Wheel, history, comparison, and trend."
+
+msgid "Розширене"
+msgstr "Extended"
+
+msgid "Ще 10 поглиблених тверджень у кожній сфері."
+msgstr "10 more in-depth statements in each area."
+
+msgid "Орієнтир враховує всі 20 тверджень сфери."
+msgstr "The guide uses all 20 statements of the area."
+
+msgid "Збережені відповіді лишаються в історії після завершення доступу."
+msgstr "Saved answers remain in history after access ends."
+
+msgid "Самооцінка не є діагностикою."
+msgstr "A self-assessment is not a diagnosis."
+
+msgid "Розширене оцінювання | LifeBalance"
+msgstr "Extended assessment | LifeBalance"
+
+msgid "Для динаміки потрібно щонайменше два зрізи."
+msgstr "A trend needs at least two snapshots."
+
+msgid "До історії"
+msgstr "To history"
+
+msgid "У цьому періоді менше двох оцінок цього сектора."
+msgstr "This period has fewer than two scores for this sector."
+
+msgid "Дата"
+msgstr "Date"
+
+msgid "Поточна"
+msgstr "Current"
+
+msgid "Ключ @key не змінюється. Ревізії не видаляються."
+msgstr "Key @key does not change. Revisions are not deleted."
+
+msgid "До списку"
+msgstr "To the list"
+
+msgid "Ревізія"
+msgstr "Revision"
+
+msgid "Час"
+msgstr "Time"
+
+msgid "Пояснення"
+msgstr "Explanation"
+
+msgid "Стан"
+msgstr "State"
+
+msgid "Ревізій немає."
+msgstr "There are no revisions."
+
+msgid "Статистика"
+msgstr "Statistics"
+
+msgid "Без колеса"
+msgstr "Without a wheel"
+
+msgid "З колесом"
+msgstr "With a wheel"
+
+msgid "Закінчується за 7 днів"
+msgstr "Ends within 7 days"
+
+msgid "Завершився"
+msgstr "Ended"
+
+msgid "Журнал доступу"
+msgstr "Access log"
+
+msgid "Нікого не знайдено."
+msgstr "No one was found."
+
+msgid "Реєстрація"
+msgstr "Registration"
+
+msgid "Останній вхід"
+msgstr "Last sign-in"
+
+msgid "Зрізів"
+msgstr "Snapshots"
+
+msgid "Останній зріз"
+msgstr "Latest snapshot"
+
+msgid "Початок доступу"
+msgstr "Access start"
+
+msgid "Завершення доступу"
+msgstr "Access end"
+
+msgid "Електронна адреса"
+msgstr "Email address"
+
+msgid "Акаунти: @count"
+msgstr "Accounts: @count"
+
+msgid "Колесо створено: @count (@percent)"
+msgstr "Wheel created: @count (@percent)"
+
+msgid "Є зріз: @count (@percent)"
+msgstr "Has a snapshot: @count (@percent)"
+
+msgid "Зрізів за період: @count"
+msgstr "Snapshots in the period: @count"
+
+msgid "Активний Premium: @count"
+msgstr "Active Premium: @count"
+
+msgid "Надання: @count"
+msgstr "Grants: @count"
+
+msgid "Ознайомлення: @count"
+msgstr "Trials: @count"
+
+msgid "Оплата: @count"
+msgstr "Payments: @count"
+
+msgid "Закінчується за 7 днів: @count"
+msgstr "Ends within 7 days: @count"
+
+msgid "Завершився: @count"
+msgstr "Ended: @count"
+
+msgid "Користувачі з цілями: @count"
+msgstr "Users with goals: @count"
+
+msgid "Виконані цілі: @count"
+msgstr "Completed goals: @count"
+
+msgid "Зареєстровані: @count"
+msgstr "Registered: @count"
+
+msgid "Створили колесо: @count"
+msgstr "Created a wheel: @count"
+
+msgid "Перший зріз: @count"
+msgstr "First snapshot: @count"
+
+msgid "Активували ознайомлення: @count"
+msgstr "Started a trial: @count"
+
+msgid "Повернулися через 30 днів: @count"
+msgstr "Returned after 30 days: @count"
+
+msgid "Завершення"
+msgstr "End"
+
+msgid "Доступ"
+msgstr "Access"
+
+msgid "Записів доступу немає."
+msgstr "There are no access records."
+
+msgid "Історія"
+msgstr "History"
+
+msgid "Скасовано"
+msgstr "Cancelled"
+
+msgid "Діє"
+msgstr "Active"
+
+msgid "Очікує"
+msgstr "Waiting"
+
+msgid "Статус: @status"
+msgstr "Status: @status"
+
+msgid "Статус: @status. Джерела: @sources"
+msgstr "Status: @status. Sources: @sources"
+
+msgid "Ім'я"
+msgstr "Name"
+
+msgid "Як зберігається самооцінка і як видалити акаунт."
+msgstr "How a self-assessment is stored and how to delete an account."
+
+msgid "Конфіденційність | LifeBalance"
+msgstr "Privacy | LifeBalance"
+
+msgid "Самооцінка в LifeBalance не є діагностикою і не замінює консультацію фахівця."
+msgstr "A self-assessment in LifeBalance is not a diagnosis and does not replace a consultation with a specialist."
+
+msgid "Твердження каталогу не проходили психометричної валідації."
+msgstr "Catalog statements have not had psychometric validation."
+
+msgid "TODO для власника сайту: вкажіть юридичну особу, контактну адресу і юрисдикцію."
+msgstr "TODO for the site owner: specify the legal entity, contact address, and jurisdiction."
+
+msgid "Якщо ви просите Facebook видалити дані, видаліть акаунт на сторінці «Мої дані». TODO для власника: додайте в застосунок Meta посилання на цю сторінку як інструкцію видалення даних і, якщо Meta цього вимагає, окрему адресу callback."
+msgstr "If you ask Facebook to delete data, delete the account on the “My data” page. TODO for the owner: add a link to this page in the Meta app as the data-deletion instructions and, if Meta requires it, a separate callback address."
+
+msgid "Технічний доступ до бази має адміністратор сервера. Резервні копії теж містять ці дані. Адміністратор сайту не бачить зрізи в інтерфейсі."
+msgstr "The server administrator has technical access to the database. Backups also contain this data. The site administrator does not see snapshots in the interface."
+
+msgid "TODO для власника: опишіть, як довго зберігаються резервні копії і коли особисті дані з них видаляються."
+msgstr "TODO for the owner: describe how long backups are kept and when personal data is removed from them."
+
+msgid "Оплата приймається на сторінці платіжного сервісу monobank. Номер картки на цей сайт не передається."
+msgstr "Payment is accepted on the monobank payment-service page. The card number is not sent to this site."
+
+msgid "Після оплати зберігаються план, сума, валюта, статус, дати і номер рахунку провайдера. Оцінки і нотатки в замовлення не записуються."
+msgstr "After payment, the plan, amount, currency, status, dates, and the provider invoice number are stored. Scores and notes are not written into the order."
+
+msgid "TODO для власника: вкажіть, як довго зберігаються замовлення."
+msgstr "TODO for the owner: specify how long orders are kept."
+
+msgid "Щоб видалити акаунт, увійдіть і відкрийте сторінку «Мої дані». Підтвердження видаляє зрізи, відповіді, нотатки, чернетку і прив'язку Google або Facebook."
+msgstr "To delete the account, sign in and open the “My data” page. Confirmation deletes snapshots, answers, notes, the draft, and the Google or Facebook link."
+
+msgid "Якщо акаунт видалено, замовлення лишається для обліку, а зв'язок з акаунтом зникає."
+msgstr "If the account is deleted, the order remains for accounting and the link to the account disappears."
+
+msgid "Для порівняння потрібно щонайменше два зрізи."
+msgstr "A comparison needs at least two snapshots."
+
+msgid "A — суцільна лінія і квадратні позначки. B — пунктир і круглі позначки."
+msgstr "A is a solid line and square marks. B is a dashed line and circle marks."
+
+msgid "Відповіді, що змінились"
+msgstr "Answers that changed"
+
+msgid "@side · @date · @mode · @catalog · Середнє: @average"
+msgstr "@side · @date · @mode · @catalog · Average: @average"
+
+msgid "Орієнтир A"
+msgstr "Guide A"
+
+msgid "Орієнтир B"
+msgstr "Guide B"
+
+msgid "Орієнтири цих зрізів пораховані в різних режимах або за різними версіями формули, тому їх не зіставлено."
+msgstr "The guides of these snapshots were calculated in different modes or with different formula versions, so they are not compared."
+
+msgid "Твердження"
+msgstr "Statement"
+
+msgid "Заготовка публічної оферти. Реквізити продавця ще не додані."
+msgstr "Draft public offer. The seller details have not been added yet."
+
+msgid "Оферта | LifeBalance"
+msgstr "Offer | LifeBalance"
+
+msgid "Це заготовка публічної оферти. Вона ще не є договором."
+msgstr "This is a draft public offer. It is not a contract yet."
+
+msgid "TODO для власника: вкажіть назву продавця, податковий код, адресу, контакт і додайте текст оферти."
+msgstr "TODO for the owner: specify the seller name, tax code, address, and contact, and add the offer text."
+
+msgid "Оплата відкриває розширене оцінювання на строк обраного плану. Ціна фіксується в замовленні на момент переходу до оплати."
+msgstr "Payment opens extended assessment for the term of the chosen plan. The price is fixed in the order when you go to payment."
+
+msgid "Оплата йде на сторінку платіжного сервісу. Цей сайт не отримує номер картки."
+msgstr "Payment goes to the payment-service page. This site does not receive the card number."
+
+msgid "Доступ після оплати відкривається після підтвердження платежу, не після повернення з платіжної сторінки."
+msgstr "Access after payment opens after the payment is confirmed, not after returning from the payment page."
+
+msgid "Заготовка політики повернення. Строк і реквізити ще не додані."
+msgstr "Draft refund policy. The term and details have not been added yet."
+
+msgid "Повернення | LifeBalance"
+msgstr "Refunds | LifeBalance"
+
+msgid "Це заготовка політики повернення. Строки й реквізити має додати власник сайту."
+msgstr "This is a draft refund policy. The site owner must add the terms and details."
+
+msgid "TODO для власника: додайте строк звернення, спосіб звернення і реквізити для повернення."
+msgstr "TODO for the owner: add the request period, the way to request a refund, and the refund details."
+
+msgid "Повне повернення підтвердженої оплати завершує доступ із цього платежу. Зрізи, відповіді, нотатки і цілі залишаються."
+msgstr "A full refund of a confirmed payment ends access from that payment. Snapshots, answers, notes, and goals remain."
+
+msgid "Часткове повернення саме не завершує доступ. Рішення про доступ ухвалюється окремо."
+msgstr "A partial refund does not end access by itself. The access decision is made separately."
+
+msgid "Повернення оформлюється у продавця. Номер картки на цьому сайті не вводиться."
+msgstr "A refund is arranged with the seller. The card number is not entered on this site."
+
+msgid "Провайдер не передав email. Без email відновлення пароля недоступне."
+msgstr "The provider did not send an email. Password recovery is unavailable without an email."
+
+msgid "Динаміка оцінок"
+msgstr "Score trend"
+
+msgid "Вісь часу пропорційна датам. Вісь оцінок від 0 до 10. Поруч є таблиця."
+msgstr "The time axis follows the dates. The score axis runs from 0 to 10. A table is beside it."
+
+msgid "Колесо балансу"
+msgstr "Balance wheel"
+
+msgid "Оцінки секторів від 0 до 10. Неоцінений сектор не зафарбовано. Поруч є таблиця значень."
+msgstr "Sector scores from 0 to 10. An unscored sector is not filled. A table of values is beside it."
+
+msgid "© @year LifeBalance."
+msgstr "© @year LifeBalance."
+msgid "Власні цілі і кроки."
+msgstr "Your own goals and steps."
+
+msgid "Фокус"
+msgstr "Focus"
+
+msgid "Підказки для саморефлексії за збереженими відповідями."
+msgstr "Prompts for self-reflection from saved answers."
+
+msgid "Рекомендації"
+msgstr "Recommendations"
+
+msgid "Бібліотека рекомендацій."
+msgstr "Recommendation library."
+
+msgid "Додати"
+msgstr "Add"
+
+msgid "Додати рекомендацію"
+msgstr "Add recommendation"
+
+msgid "Редагувати рекомендацію"
+msgstr "Edit recommendation"
+
+msgid "Власна ціль"
+msgstr "Your own goal"
+
+msgid "Друк"
+msgstr "Print"
+
+msgid "Ціль"
+msgstr "Goal"
+
+msgid "Акція"
+msgstr "Promotion"
+
+msgid "Вмикання акції 99 грн, ліміт і лічильники."
+msgstr "Turning on the 99 UAH promotion, the limit, and the counters."
+
+msgid "Замовлення"
+msgstr "Orders"
+
+msgid "Оплати, повернення і спори. Без оцінок і нотаток."
+msgstr "Payments, refunds, and disputes. Without scores and notes."
+
+msgid "Спір"
+msgstr "Dispute"
+
+msgid "Цей email уже використовується"
+msgstr "This email is already in use"
+
+msgid "Мої дані"
+msgstr "My data"
+
+msgid "Експорт JSON"
+msgstr "Export JSON"
+
+msgid "Експорт CSV"
+msgstr "Export CSV"
+
+msgid "Колесо"
+msgstr "Wheel"
+
+msgid "Сектори"
+msgstr "Sectors"
+
+msgid "Налаштування"
+msgstr "Settings"
+
+msgid "Користувачі"
+msgstr "Users"
+
+msgid "Надати доступ"
+msgstr "Grant access"
+
+msgid "Критерії"
+msgstr "Criteria"
+
+msgid "Редагувати критерій"
+msgstr "Edit criterion"
+
+msgid "Архівувати критерій"
+msgstr "Archive criterion"
+
+msgid "Ревізії критерію"
+msgstr "Criterion revisions"
+
+msgid "Головна"
+msgstr "Home"
+
+msgid "Приклад колеса і вхід."
+msgstr "A sample wheel and sign-in."
+
+msgid "Відповіді про колесо, зрізи і доступ."
+msgstr "Answers about the wheel, snapshots, and access."
+
+msgid "Оцінки сфер життя."
+msgstr "Scores for the areas of life."
+
+msgid "Збережені зрізи."
+msgstr "Saved snapshots."
+
+msgid "Експорт, способи входу і видалення акаунта."
+msgstr "Export, sign-in methods, and account deletion."
+
+msgid "Вхід з паролем."
+msgstr "Sign in with a password."
+
+msgid "Як зберігаються самооцінка і акаунт."
+msgstr "How the self-assessment and the account are stored."
+
+msgid "Публічна оферта."
+msgstr "Public offer."
+
+msgid "Політика повернення."
+msgstr "Refund policy."
+
+msgid "Два збережені зрізи поруч."
+msgstr "Two saved snapshots side by side."
+
+msgid "Як змінювалась оцінка сектора."
+msgstr "How the sector score changed."
+
+msgid "Назви, підказки, порядок, колір і статус секторів."
+msgstr "Names, hints, order, color, and status of sectors."
+
+msgid "Каталог тверджень для самооцінки."
+msgstr "Catalog of self-assessment statements."
+
+msgid "Увімкнення розширеного оцінювання."
+msgstr "Turning extended assessment on."
+
+msgid "Стан колеса без оцінок і нотаток."
+msgstr "Wheel status without scores and notes."
+
+msgid "Скільки людей почали колесо і зберегли зріз."
+msgstr "How many people started a wheel and saved a snapshot."
+
+msgid "Що таке колесо балансу"
+msgstr "What a balance wheel is"
+
+msgid "Колесо балансу — простий інструмент самоспостереження. Ви оцінюєте кожну сферу життя від 0 до 10: наскільки вона зараз така, як вам хочеться. З оцінок складається колесо. З нього одразу видно, які сфери наповнені, а яким бракує уваги."
+msgstr "A balance wheel is a simple tool for noticing your own life. You score each area from 0 to 10: how close it is right now to what you want. The scores form a wheel. You can see at once which areas are full and which need attention."
+
+msgid "Одне колесо — це знімок одного дня. Справжня цінність з'являється, коли таких знімків кілька: тоді видно, що змінюється, що стоїть на місці і куди варто спрямувати сили."
+msgstr "One wheel is a snapshot of one day. The real value appears when there are several snapshots: then you can see what is changing, what is standing still, and where to put your effort."
+
+msgid "Вісім сфер"
+msgstr "Eight areas"
+
+msgid "Здоров'я."
+msgstr "Health."
+
+msgid "Самопочуття, енергія, сон, рух, відновлення."
+msgstr "How you feel, energy, sleep, movement, and recovery."
+
+msgid "Стосунки."
+msgstr "Relationships."
+
+msgid "Близькі люди, довіра, відвертість, особисті кордони."
+msgstr "Close people, trust, openness, and personal boundaries."
+
+msgid "Оточення."
+msgstr "Environment."
+
+msgid "Ширше коло спілкування і середовище, в якому ви живете."
+msgstr "A wider circle and the setting you live in."
+
+msgid "Покликання."
+msgstr "Purpose."
+
+msgid "Робота, справа, самореалізація."
+msgstr "Work, your pursuit, and self-realization."
+
+msgid "Забезпеченість."
+msgstr "Finances."
+
+msgid "Доходи, витрати, фінансова стійкість, умови життя."
+msgstr "Income, spending, financial steadiness, and living conditions."
+
+msgid "Самовдосконалення."
+msgstr "Self-development."
+
+msgid "Навчання, навички, робота над собою."
+msgstr "Learning, skills, and work on yourself."
+
+msgid "Яскравість життя."
+msgstr "Brightness of life."
+
+msgid "Відпочинок, хобі, враження, радість."
+msgstr "Rest, hobbies, experiences, and joy."
+
+msgid "Духовність."
+msgstr "Spirituality."
+
+msgid "Цінності, сенси, світогляд, творчість."
+msgstr "Values, meaning, outlook, and creativity."
+
+msgid "Як це працює"
+msgstr "How it works"
+
+msgid "Увійдіть через Google або Facebook. Пароль вигадувати не потрібно."
+msgstr "Sign in with Google or Facebook. You do not need to invent a password."
+
+msgid "Оцініть сфери. Якщо складно одразу назвати число, дайте відповідь на 10 простих тверджень у кожній сфері, і система підкаже орієнтир."
+msgstr "Score the areas. If a number is hard to name at once, answer 10 simple statements in each area, and the system suggests a guide."
+
+msgid "Поставте власну оцінку. Остаточне слово завжди за вами. Орієнтир лише допомагає подумати."
+msgstr "Set your own score. The final word is always yours. The guide only helps you think."
+
+msgid "Збережіть зріз і повертайтеся. Через тиждень, місяць чи пів року ви побачите свою динаміку: графіки по кожній сфері і порівняння двох дат."
+msgstr "Save a snapshot and come back. After a week, a month, or half a year you will see your own change: charts for each area and a comparison of two dates."
+
+msgid "Чому варто вести колесо саме тут"
+msgstr "Why keep the wheel here"
+
+msgid "Історія, а не одноразовий тест."
+msgstr "A history, not a one-time test."
+
+msgid "Колесо на папері чи в онлайн-тесті показує лише «сьогодні». Тут кожен зріз зберігається з датою, тож ви бачите, як змінюється кожна сфера, і можете порівнювати себе з собою в будь-який момент."
+msgstr "A wheel on paper or in an online test shows only today. Here every snapshot is kept with its date, so you see how each area changes and can compare yourself with yourself at any moment."
+
+msgid "Орієнтири замість гадання."
+msgstr "Guides instead of guessing."
+
+msgid "Поставити «6 з 10» без опори складно, а наступного разу ця шістка означатиме вже щось інше. Прості твердження в кожній сфері допомагають оцінювати послідовно. Ви бачите, на чому ґрунтується оцінка."
+msgstr "A “6 out of 10” is hard to place without a foothold, and next time that six may mean something else. Simple statements in each area help you score consistently. You can see what the score rests on."
+
+msgid "Ваша оцінка — ваша."
+msgstr "Your score is yours."
+
+msgid "Система не вирішує за вас і не ставить «правильних» балів. Вона підказує, а рішення приймаєте ви."
+msgstr "The system does not decide for you and does not assign “correct” scores. It suggests, and you decide."
+
+msgid "Чесна історія."
+msgstr "An honest history."
+
+msgid "Збережений зріз не змінюється заднім числом. Навіть якщо ми колись оновимо формулювання тверджень, ви побачите саме ті, на які відповідали тоді. Помилковий зріз можна видалити."
+msgstr "A saved snapshot does not change after the fact. Even if the wording of statements is updated later, you still see the ones you answered then. A mistaken snapshot can be deleted."
+
+msgid "Приватно за замовчуванням."
+msgstr "Private by default."
+
+msgid "Ваші оцінки, відповіді й нотатки бачите лише ви. Немає рейтингів, публічних профілів і порівнянь з іншими людьми. Членство в спільноті чи платний доступ нікому не відкривають ваших результатів."
+msgstr "Only you can see your scores, answers, and notes. There are no rankings, public profiles, or comparisons with other people. Membership in a community or paid access does not show your results to anyone."
+
+msgid "Ваші дані під вашим контролем."
+msgstr "Your data stays in your control."
+
+msgid "Усі свої результати можна завантажити одним файлом або повністю видалити акаунт разом з даними."
+msgstr "You can download all of your results in one file, or delete the account together with the data."
+
+msgid "Зручно з телефона."
+msgstr "Comfortable on a phone."
+
+msgid "Оцінювання займає кілька хвилин і працює на телефоні, планшеті й комп'ютері. Інтерфейс українською, ним можна користуватися з клавіатури."
+msgstr "Scoring takes a few minutes and works on a phone, a tablet, and a computer. You can use the interface from a keyboard."
+
+msgid "Без тиску."
+msgstr "No pressure."
+
+msgid "Ми не лякаємо висновками і не обіцяємо змінити життя за тиждень. Це інструмент, який допомагає краще бачити себе і чесно відстежувати зміни."
+msgstr "We do not scare you with verdicts, and we do not promise to change your life in a week. This is a tool that helps you see yourself more clearly and track changes honestly."
+
+msgid "Безкоштовно і назавжди"
+msgstr "Free, and it stays free"
+
+msgid "Власне колесо з 8 сферами"
+msgstr "Your own wheel with 8 areas"
+
+msgid "80 базових тверджень-орієнтирів"
+msgstr "80 basic statements that guide the score"
+
+msgid "Необмежена кількість зрізів та історія"
+msgstr "Unlimited snapshots and history"
+
+msgid "Графіки динаміки і порівняння двох дат"
+msgstr "Charts over time and a comparison of two dates"
+
+msgid "Розширений доступ (поки що за запрошенням): ще 80 поглиблених тверджень, підказки для саморефлексії за вашими відповідями, особисті цілі з чеклістами і план на 30 днів."
+msgstr "Extended access (by invitation for now): 80 more in-depth statements, prompts for self-reflection based on your answers, personal goals with checklists, and a 30-day plan."
+
+msgid "Чесно про межі"
+msgstr "Honest about the limits"
+
+msgid "Колесо балансу — авторський інструмент самоспостереження, а не психологічний тест, медична діагностика чи фінансова консультація. Оцінки суб'єктивні, і саме в цьому їхня цінність: вони показують, як ви самі сприймаєте своє життя. Якщо щось серйозно турбує, зверніться до фахівця."
+msgstr "A balance wheel is an original tool for self-observation, not a psychological test, a medical diagnosis, or financial advice. Scores are subjective, and that is their value: they show how you yourself see your life. If something seriously worries you, contact a professional."
+
+msgid "Мова"
+msgstr "Language"
+
+msgid "Обрати"
+msgstr "Choose"
+
+msgid "Ідентифікатор Google Analytics"
+msgstr "Google Analytics ID"
+
+msgid "Ідентифікатор потоку GA4, наприклад G-ABC123XYZ. Порожнє поле вимикає лічильник. Рахуються лише публічні сторінки."
+msgstr "GA4 stream ID, for example G-ABC123XYZ. An empty field turns the counter off. Only public pages are counted."
+
+msgid "Ідентифікатор має виглядати як G-XXXXXXXX."
+msgstr "The ID should look like G-XXXXXXXX."
+
+msgid "Відвідування публічних сторінок може рахувати Google Analytics, якщо власник увімкнув лічильник. Оцінки, відповіді, нотатки й адреси особистих сторінок туди не передаються."
+msgstr "Visits to public pages may be counted by Google Analytics when the owner turns the counter on. Scores, answers, notes, and addresses of personal pages are not sent there."
+
+msgid "Оцінити"
+msgstr "Assess"
+
+msgid "Переоцінити"
+msgstr "Reassess"
+
+msgid "Зберегти результат"
+msgstr "Save the result"

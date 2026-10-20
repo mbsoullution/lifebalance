@@ -1,0 +1,27 @@
+uuid: 204a9a99-19f3-4282-ba76-c04b22b6151a
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - lifebalance_theme
+_core:
+  default_config_hash: Sn0PhnbnGucKkHIV39X6udvxRY5wkgOP3iynuKmOTIo
+id: lifebalance_theme_main_menu
+theme: lifebalance_theme
+region: navbar_left
+weight: -5
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: true
+visibility: {  }

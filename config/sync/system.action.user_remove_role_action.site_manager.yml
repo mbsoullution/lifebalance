@@ -1,0 +1,14 @@
+uuid: 2fa8f0e4-9007-4912-ac72-2d7530c39929
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.site_manager
+  module:
+    - user
+id: user_remove_role_action.site_manager
+label: 'Remove the Менеджер сайту role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: site_manager

@@ -1,0 +1,18 @@
+uuid: 11111111-1111-4111-8111-111111111203
+langcode: en
+status: true
+dependencies:
+  module:
+    - lifebalance_plans
+  enforced:
+    module:
+      - lifebalance_plans
+_core:
+  default_config_hash: MP9lzRrLR77wiM58NGTgg_Jr1BPA51goG9TejgVLpWE
+id: content_editor
+label: 'Редактор змісту'
+weight: 5
+is_admin: false
+permissions:
+  - 'edit lifebalance recommendations'
+  - 'publish lifebalance recommendations'

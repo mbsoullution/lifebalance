@@ -1,0 +1,13 @@
+lifebalance_billing.promo:
+  title: 'Акція'
+  description: 'Вмикання акції 99 грн, ліміт і лічильники.'
+  route_name: lifebalance_billing.promo
+  parent: system.admin_config
+  weight: 17
+
+lifebalance_billing.orders:
+  title: 'Замовлення'
+  description: 'Оплати, повернення і спори. Без оцінок і нотаток.'
+  route_name: lifebalance_billing.orders
+  parent: system.admin_config
+  weight: 16

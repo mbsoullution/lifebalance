@@ -1,0 +1,377 @@
+lifebalance.sitemap:
+  path: '/sitemap.xml'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\SitemapController::build'
+  requirements:
+    _access: 'TRUE'
+
+lifebalance.landing:
+  path: '/welcome'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\LandingController::page'
+    _title: 'Колесо балансу'
+  requirements:
+    # Public landing. Signed-in people see a link to the wheel.
+    _access: 'TRUE'
+
+lifebalance.social_email_conflict:
+  path: '/login/email-match'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\SocialEmailConflictController::page'
+    _title: 'Цей email уже використовується'
+  requirements:
+    # Shown to an anonymous visitor after a provider email matches an account.
+    _access: 'TRUE'
+
+lifebalance.trial:
+  path: '/account/trial'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\TrialConfirmForm'
+    _title: 'Ознайомлення'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.history:
+  path: '/history'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\HistoryController::list'
+    _title: 'Історія'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.compare:
+  path: '/history/compare'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\CompareController::page'
+    _title: 'Порівняння'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.trend:
+  path: '/history/trend'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\TrendController::page'
+    _title: 'Динаміка'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.snapshot:
+  path: '/history/{uuid}'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\HistoryController::view'
+    _title_callback: '\Drupal\lifebalance\Controller\HistoryController::title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    uuid: '[0-9a-fA-F-]+'
+
+lifebalance.snapshot_delete:
+  path: '/history/{uuid}/delete'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\SnapshotDeleteForm'
+    _title: 'Видалити зріз'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    uuid: '[0-9a-fA-F-]+'
+
+lifebalance.account_data:
+  path: '/account/data'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\AccountDataForm'
+    _title: 'Мої дані'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.export_json:
+  path: '/account/data/export/json'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\ExportController::json'
+    _title: 'Експорт JSON'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.export_csv:
+  path: '/account/data/export/csv'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\ExportController::csv'
+    _title: 'Експорт CSV'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.account_delete:
+  path: '/account/data/delete'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\AccountDeleteForm'
+    _title: 'Видалити акаунт'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.faq:
+  path: '/faq'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\FaqController::page'
+    _title: 'Запитання'
+  requirements:
+    # Public FAQ. It contains no personal data.
+    _access: 'TRUE'
+
+lifebalance.privacy:
+  path: '/privacy'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\PrivacyController::page'
+    _title: 'Конфіденційність'
+  requirements:
+    # Public privacy notice. It contains no personal data.
+    _access: 'TRUE'
+
+lifebalance.terms:
+  path: '/terms'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\PolicyController::terms'
+    _title: 'Оферта'
+  requirements:
+    # Public offer stub. It contains no personal data.
+    _access: 'TRUE'
+
+lifebalance.refunds:
+  path: '/refunds'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\PolicyController::refunds'
+    _title: 'Повернення'
+  requirements:
+    # Public refund stub. It contains no personal data.
+    _access: 'TRUE'
+
+lifebalance.wheel:
+  path: '/wheel'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\WheelPageController::wheel'
+    _title: 'Колесо балансу'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+lifebalance.questionnaire:
+  path: '/wheel/{sector}'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\WheelPageController::questionnaire'
+    _title_callback: '\Drupal\lifebalance\Form\SectorQuestionnaireForm::title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    sector: '[a-z0-9_]+'
+
+lifebalance.premium:
+  path: '/premium'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\PremiumController::page'
+    _title: 'Розширене оцінювання'
+  requirements:
+    # Public comparison. The controller answers 404 while premium is off.
+    _access: 'TRUE'
+
+lifebalance.draft:
+  path: '/api/draft'
+  defaults:
+    _controller: 'Drupal\lifebalance\Controller\DraftController:save'
+  methods: [POST]
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _csrf_request_header_token: 'TRUE'
+
+lifebalance.sectors:
+  path: '/admin/lifebalance/sectors'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\SectorSettingsForm'
+    _title: 'Сектори'
+  requirements:
+    _permission: 'administer lifebalance sectors'
+  options:
+    _admin_route: TRUE
+
+lifebalance.settings:
+  path: '/admin/lifebalance/settings'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\SettingsForm'
+    _title: 'Налаштування'
+  requirements:
+    _permission: 'administer lifebalance settings'
+  options:
+    _admin_route: TRUE
+
+lifebalance.admin_users:
+  path: '/admin/lifebalance/users'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\AdminUserController::list'
+    _title: 'Користувачі'
+  requirements:
+    _permission: 'view lifebalance user metadata'
+  options:
+    _admin_route: TRUE
+
+lifebalance.admin_user:
+  path: '/admin/lifebalance/users/{user}'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\AdminUserController::card'
+    _title_callback: '\Drupal\lifebalance\Controller\AdminUserController::title'
+  requirements:
+    _permission: 'view lifebalance user metadata'
+  options:
+    _admin_route: TRUE
+    parameters:
+      user:
+        type: entity:user
+
+lifebalance.admin_user_grant:
+  path: '/admin/lifebalance/users/{user}/grant'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\EntitlementGrantForm'
+    _title: 'Надати доступ'
+  requirements:
+    _custom_access: '\Drupal\lifebalance\Access\EntitlementOperationAccess::grant'
+  options:
+    _admin_route: TRUE
+    parameters:
+      user:
+        type: entity:user
+
+lifebalance.admin_entitlement_extend:
+  path: '/admin/lifebalance/users/{user}/entitlement/{entitlement}/extend'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\EntitlementOperationForm'
+    _title: 'Продовжити'
+    operation: extend
+  requirements:
+    _custom_access: '\Drupal\lifebalance\Access\EntitlementOperationAccess::extend'
+  options:
+    _admin_route: TRUE
+    parameters:
+      user:
+        type: entity:user
+      entitlement:
+        type: entity:lifebalance_entitlement
+
+lifebalance.admin_entitlement_shorten:
+  path: '/admin/lifebalance/users/{user}/entitlement/{entitlement}/shorten'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\EntitlementOperationForm'
+    _title: 'Скоротити'
+    operation: shorten
+  requirements:
+    _custom_access: '\Drupal\lifebalance\Access\EntitlementOperationAccess::shorten'
+  options:
+    _admin_route: TRUE
+    parameters:
+      user:
+        type: entity:user
+      entitlement:
+        type: entity:lifebalance_entitlement
+
+lifebalance.admin_entitlement_revoke:
+  path: '/admin/lifebalance/users/{user}/entitlement/{entitlement}/revoke'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\EntitlementOperationForm'
+    _title: 'Скасувати'
+    operation: revoke
+  requirements:
+    _custom_access: '\Drupal\lifebalance\Access\EntitlementOperationAccess::revoke'
+  options:
+    _admin_route: TRUE
+    parameters:
+      user:
+        type: entity:user
+      entitlement:
+        type: entity:lifebalance_entitlement
+
+lifebalance.admin_entitlement_log:
+  path: '/admin/lifebalance/entitlement-log'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\EntitlementLogController::page'
+    _title: 'Журнал доступу'
+  requirements:
+    _permission: 'view lifebalance entitlement log'
+  options:
+    _admin_route: TRUE
+
+lifebalance.admin_stats:
+  path: '/admin/lifebalance/stats'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\AdminUserController::statistics'
+    _title: 'Статистика'
+  requirements:
+    _custom_access: '\Drupal\lifebalance\Access\StatsAccess::access'
+  options:
+    _admin_route: TRUE
+
+entity.lifebalance_criterion.collection:
+  path: '/admin/lifebalance/criteria'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\CriterionListController::list'
+    _title: 'Критерії'
+  requirements:
+    _permission: 'administer lifebalance criteria'
+  options:
+    _admin_route: TRUE
+
+entity.lifebalance_criterion.add_form:
+  path: '/admin/lifebalance/criteria/add'
+  defaults:
+    _entity_form: 'lifebalance_criterion.default'
+    _title: 'Додати критерій'
+  requirements:
+    _entity_create_access: 'lifebalance_criterion'
+  options:
+    _admin_route: TRUE
+
+entity.lifebalance_criterion.canonical:
+  path: '/admin/lifebalance/criteria/{lifebalance_criterion}/edit'
+  defaults:
+    _entity_form: 'lifebalance_criterion.default'
+    _title: 'Редагувати критерій'
+  requirements:
+    _entity_access: 'lifebalance_criterion.update'
+    lifebalance_criterion: \d+
+  options:
+    _admin_route: TRUE
+    parameters:
+      lifebalance_criterion:
+        type: entity:lifebalance_criterion
+
+entity.lifebalance_criterion.edit_form:
+  path: '/admin/lifebalance/criteria/{lifebalance_criterion}/edit'
+  defaults:
+    _entity_form: 'lifebalance_criterion.default'
+    _title: 'Редагувати критерій'
+  requirements:
+    _entity_access: 'lifebalance_criterion.update'
+    lifebalance_criterion: \d+
+  options:
+    _admin_route: TRUE
+    parameters:
+      lifebalance_criterion:
+        type: entity:lifebalance_criterion
+
+entity.lifebalance_criterion.archive:
+  path: '/admin/lifebalance/criteria/{lifebalance_criterion}/archive'
+  defaults:
+    _form: '\Drupal\lifebalance\Form\CriterionArchiveForm'
+    _title: 'Архівувати критерій'
+  requirements:
+    _entity_access: 'lifebalance_criterion.update'
+    lifebalance_criterion: \d+
+  options:
+    _admin_route: TRUE
+    parameters:
+      lifebalance_criterion:
+        type: entity:lifebalance_criterion
+
+entity.lifebalance_criterion.revisions:
+  path: '/admin/lifebalance/criteria/{lifebalance_criterion}/revisions'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\CriterionRevisionController::list'
+    _title: 'Ревізії критерію'
+  requirements:
+    _entity_access: 'lifebalance_criterion.update'
+    lifebalance_criterion: \d+
+  options:
+    _admin_route: TRUE
+    parameters:
+      lifebalance_criterion:
+        type: entity:lifebalance_criterion

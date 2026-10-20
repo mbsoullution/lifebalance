@@ -1,0 +1,6 @@
+lifebalance_plans.recommendation_add:
+  title: 'Додати'
+  route_name: entity.lifebalance_recommendation.add_form
+  appears_on:
+    - view.lifebalance_recommendations.page_1
+  weight: 0

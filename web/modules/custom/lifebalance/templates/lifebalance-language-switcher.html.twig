@@ -1,0 +1,9 @@
+<form class="lifebalance-lang" method="get" action="{{ action }}">
+  <label class="visually-hidden" for="lifebalance-lang">{{ 'Мова'|t }}</label>
+  <select id="lifebalance-lang" class="lifebalance-lang__select" name="language" autocomplete="off">
+    {% for option in options %}
+      <option value="{{ option.code }}" data-url="{{ option.url }}"{% if option.selected %} selected{% endif %}>{{ option.label }}</option>
+    {% endfor %}
+  </select>
+  <button class="lifebalance-lang__go" type="submit">{{ 'Обрати'|t }}</button>
+</form>

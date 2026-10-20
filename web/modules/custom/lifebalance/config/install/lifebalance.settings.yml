@@ -1,0 +1,10 @@
+premium_enabled: false
+trial_enabled: false
+ga_measurement_id: ''
+formula_version: v1
+feature_sets:
+  premium:
+    - premium_criteria
+    - recommendations
+    - goals
+    - plan_30

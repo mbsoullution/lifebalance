@@ -1,0 +1,215 @@
+{
+  "formula_version": "v1",
+  "minimum": {
+    "free": 5,
+    "premium": 10
+  },
+  "cases": [
+    {
+      "name": "all_yes",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true}
+      ],
+      "guide": 100,
+      "answered": 5
+    },
+    {
+      "name": "mixed",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true}
+      ],
+      "guide": 70,
+      "answered": 5
+    },
+    {
+      "name": "na_excluded",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "na", "in_formula": true}
+      ],
+      "guide": 100,
+      "answered": 5
+    },
+    {
+      "name": "below_minimum",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true}
+      ],
+      "guide": null,
+      "answered": 4
+    },
+    {
+      "name": "all_na",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "na", "in_formula": true},
+        {"tier": "free", "answer": "na", "in_formula": true},
+        {"tier": "free", "answer": "na", "in_formula": true},
+        {"tier": "free", "answer": "na", "in_formula": true},
+        {"tier": "free", "answer": "na", "in_formula": true}
+      ],
+      "guide": null,
+      "answered": 0
+    },
+    {
+      "name": "all_no",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "no", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true}
+      ],
+      "guide": 0,
+      "answered": 5
+    },
+    {
+      "name": "five_partial",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "partial", "in_formula": true}
+      ],
+      "guide": 50,
+      "answered": 5
+    },
+    {
+      "name": "rounding_half_up",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "partial", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": true}
+      ],
+      "guide": 30,
+      "answered": 8
+    },
+    {
+      "name": "premium_counts_twenty",
+      "mode": "premium",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "yes", "in_formula": true}
+      ],
+      "guide": 100,
+      "answered": 20
+    },
+    {
+      "name": "premium_below_minimum",
+      "mode": "premium",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true}
+      ],
+      "guide": null,
+      "answered": 9
+    },
+    {
+      "name": "free_ignores_premium_tier",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true}
+      ],
+      "guide": 100,
+      "answered": 5
+    },
+    {
+      "name": "premium_combines_tiers",
+      "mode": "premium",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true},
+        {"tier": "premium", "answer": "no", "in_formula": true}
+      ],
+      "guide": 50,
+      "answered": 10
+    },
+    {
+      "name": "in_formula_excluded",
+      "mode": "free",
+      "answers": [
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "yes", "in_formula": true},
+        {"tier": "free", "answer": "no", "in_formula": false},
+        {"tier": "free", "answer": "no", "in_formula": false},
+        {"tier": "free", "answer": "no", "in_formula": false},
+        {"tier": "free", "answer": "no", "in_formula": false},
+        {"tier": "free", "answer": "no", "in_formula": false}
+      ],
+      "guide": 100,
+      "answered": 5
+    }
+  ]
+}

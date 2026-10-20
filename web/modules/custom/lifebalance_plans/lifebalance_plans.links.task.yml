@@ -1,0 +1,19 @@
+lifebalance_plans.plan:
+  title: 'Активні'
+  route_name: lifebalance_plans.plan
+  base_route: lifebalance_plans.plan
+
+lifebalance_plans.plan_30:
+  title: '30 днів'
+  route_name: lifebalance_plans.plan_30
+  base_route: lifebalance_plans.plan
+
+lifebalance_plans.plan_90:
+  title: '90 днів'
+  route_name: lifebalance_plans.plan_90
+  base_route: lifebalance_plans.plan
+
+lifebalance_plans.plan_closed:
+  title: 'Виконані/скасовані'
+  route_name: lifebalance_plans.plan_closed
+  base_route: lifebalance_plans.plan

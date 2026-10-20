@@ -1,0 +1,37 @@
+_core:
+  default_config_hash: 4GIX5Esnc_umpXUBj4IIocRX7Mt5fPhm4AgXfE3E56E
+module:
+  block: 0
+  config_split: 0
+  dynamic_page_cache: 0
+  field: 0
+  file: 0
+  filter: 0
+  language: 0
+  lifebalance: 0
+  lifebalance_billing: 0
+  lifebalance_plans: 0
+  locale: 0
+  metatag: 0
+  mysql: 0
+  node: 0
+  options: 0
+  page_cache: 0
+  path_alias: 0
+  seckit: 0
+  social_api: 0
+  social_auth: 0
+  social_auth_facebook: 0
+  social_auth_google: 0
+  system: 0
+  text: 0
+  token: 0
+  update: 0
+  user: 0
+  views: 0
+  minimal: 1000
+theme:
+  stark: 0
+  radix: 0
+  lifebalance_theme: 0
+profile: minimal

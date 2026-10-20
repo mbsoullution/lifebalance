@@ -1,0 +1,20 @@
+uuid: a7c3e1d4-6b28-4f0a-9c55-1e8d4b2a7f60
+langcode: uk
+status: true
+dependencies:
+  module:
+    - lifebalance
+  theme:
+    - lifebalance_theme
+id: lifebalance_theme_languageswitcher
+theme: lifebalance_theme
+region: navbar_right
+weight: 10
+provider: null
+plugin: lifebalance_language_switcher
+settings:
+  id: lifebalance_language_switcher
+  label: 'Language switcher'
+  label_display: '0'
+  provider: lifebalance
+visibility: {  }

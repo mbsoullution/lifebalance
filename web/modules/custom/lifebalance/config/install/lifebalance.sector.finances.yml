@@ -1,0 +1,14 @@
+uuid: 11111111-1111-4111-8111-111111111105
+langcode: uk
+status: true
+dependencies:
+  enforced:
+    module:
+      - lifebalance
+id: finances
+label: 'Забезпеченість'
+description: 'Доходи, витрати, умови життя.'
+weight: 40
+color: '#F0C000'
+scale_low: ''
+scale_high: ''

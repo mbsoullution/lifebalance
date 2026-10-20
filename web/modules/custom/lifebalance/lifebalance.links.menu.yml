@@ -1,0 +1,152 @@
+lifebalance.front:
+  title: 'Головна'
+  description: 'Приклад колеса і вхід.'
+  route_name: '<front>'
+  menu_name: main
+  weight: -50
+
+lifebalance.wheel_main:
+  title: 'Колесо'
+  description: 'Оцінки сфер життя.'
+  route_name: lifebalance.wheel
+  menu_name: main
+  weight: -40
+  expanded: true
+
+lifebalance.wheel_guest:
+  title: 'Колесо'
+  description: 'Оцінки сфер життя.'
+  route_name: user.login
+  menu_name: main
+  weight: -40
+  options:
+    query:
+      destination: /wheel
+
+lifebalance.faq_main:
+  title: 'Запитання'
+  description: 'Відповіді про колесо, зрізи і доступ.'
+  route_name: lifebalance.faq
+  menu_name: main
+  weight: -30
+
+lifebalance.history_main:
+  title: 'Історія'
+  description: 'Збережені зрізи.'
+  route_name: lifebalance.history
+  menu_name: main
+  parent: lifebalance.wheel_main
+  weight: 0
+
+lifebalance.account_main:
+  title: 'Мої дані'
+  description: 'Експорт, способи входу і видалення акаунта.'
+  route_name: lifebalance.account_data
+  menu_name: main
+  parent: lifebalance.wheel_main
+  weight: 20
+
+lifebalance.front_footer:
+  title: 'Головна'
+  description: 'Приклад колеса і вхід.'
+  route_name: '<front>'
+  menu_name: footer
+  weight: -50
+
+lifebalance.faq_footer:
+  title: 'Запитання'
+  description: 'Відповіді про колесо, зрізи і доступ.'
+  route_name: lifebalance.faq
+  menu_name: footer
+  weight: -40
+
+lifebalance.privacy_footer:
+  title: 'Конфіденційність'
+  description: 'Як зберігаються самооцінка і акаунт.'
+  route_name: lifebalance.privacy
+  menu_name: footer
+  weight: -30
+
+lifebalance.terms_footer:
+  title: 'Оферта'
+  description: 'Публічна оферта.'
+  route_name: lifebalance.terms
+  menu_name: footer
+  weight: -20
+
+lifebalance.refunds_footer:
+  title: 'Повернення'
+  description: 'Політика повернення.'
+  route_name: lifebalance.refunds
+  menu_name: footer
+  weight: -10
+
+lifebalance.compare:
+  title: 'Порівняння'
+  description: 'Два збережені зрізи поруч.'
+  route_name: lifebalance.compare
+  menu_name: account
+  weight: -7
+
+lifebalance.trend:
+  title: 'Динаміка'
+  description: 'Як змінювалась оцінка сектора.'
+  route_name: lifebalance.trend
+  menu_name: account
+  weight: -6
+
+lifebalance.history:
+  title: 'Історія'
+  description: 'Збережені зрізи.'
+  route_name: lifebalance.history
+  menu_name: account
+  weight: -8
+
+lifebalance.account_data:
+  title: 'Мої дані'
+  description: 'Експорт, способи входу і видалення акаунта.'
+  route_name: lifebalance.account_data
+  menu_name: account
+  weight: -9
+
+lifebalance.wheel:
+  title: 'Колесо'
+  description: 'Оцінки сфер життя.'
+  route_name: lifebalance.wheel
+  menu_name: account
+  weight: -10
+
+lifebalance.sectors:
+  title: 'Сектори'
+  description: 'Назви, підказки, порядок, колір і статус секторів.'
+  route_name: lifebalance.sectors
+  parent: system.admin_config
+  weight: 10
+
+lifebalance.criteria:
+  title: 'Критерії'
+  description: 'Каталог тверджень для самооцінки.'
+  route_name: entity.lifebalance_criterion.collection
+  parent: system.admin_config
+  weight: 11
+
+lifebalance.settings:
+  title: 'Налаштування'
+  description: 'Увімкнення розширеного оцінювання.'
+  route_name: lifebalance.settings
+  parent: system.admin_config
+  weight: 12
+
+lifebalance.admin_users:
+  title: 'Користувачі'
+  description: 'Стан колеса без оцінок і нотаток.'
+  route_name: lifebalance.admin_users
+  parent: system.admin_config
+  weight: 14
+
+lifebalance.admin_stats:
+  title: 'Статистика'
+  description: 'Скільки людей почали колесо і зберегли зріз.'
+  route_name: lifebalance.admin_stats
+  parent: system.admin_config
+  weight: 15

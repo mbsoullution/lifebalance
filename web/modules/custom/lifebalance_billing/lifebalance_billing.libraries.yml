@@ -1,0 +1,5 @@
+return:
+  js:
+    js/return.js: {}
+  dependencies:
+    - core/drupalSettings

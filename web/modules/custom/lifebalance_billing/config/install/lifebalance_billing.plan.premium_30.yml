@@ -1,0 +1,13 @@
+uuid: 22222222-2222-4222-8222-222222222201
+langcode: uk
+status: true
+dependencies:
+  enforced:
+    module:
+      - lifebalance_billing
+id: premium_30
+label: '30 днів'
+duration_days: 30
+price_minor: 14900
+currency: UAH
+weight: 0

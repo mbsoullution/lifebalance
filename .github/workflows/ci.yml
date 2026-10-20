@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality:
+    name: phpcs, phpstan, phpunit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+          extensions: mbstring, xml, curl, zip, gd, intl
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress
+
+      - name: phpcs
+        run: vendor/bin/phpcs
+
+      - name: phpstan
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+
+      - name: phpunit
+        run: vendor/bin/phpunit -c phpunit.xml

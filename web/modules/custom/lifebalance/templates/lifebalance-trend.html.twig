@@ -1,0 +1,14 @@
+<svg class="lifebalance-trend-chart" viewBox="0 0 {{ geometry.width }} {{ geometry.height }}" role="img" aria-labelledby="lifebalance-trend-title">
+  <title id="lifebalance-trend-title">{{ 'Динаміка оцінок'|t }}</title>
+  <desc>{{ 'Вісь часу пропорційна датам. Вісь оцінок від 0 до 10. Поруч є таблиця.'|t }}</desc>
+  <text x="4" y="{{ geometry.axis_top }}">10</text>
+  <text x="4" y="{{ geometry.axis_bottom }}">0</text>
+  {% if geometry.line %}
+    <polyline points="{{ geometry.line }}" fill="none" stroke="#1F4E79" stroke-width="1.5"></polyline>
+  {% endif %}
+  {% for dot in geometry.dots %}
+    <circle cx="{{ dot.x }}" cy="{{ dot.y }}" r="3" fill="#1F4E79">
+      <title>{{ dot.label }}</title>
+    </circle>
+  {% endfor %}
+</svg>

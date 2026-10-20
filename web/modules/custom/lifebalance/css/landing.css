@@ -1,0 +1,95 @@
+.lifebalance-landing h2 {
+  margin: 2.25rem 0 0.75rem;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.lifebalance-landing h2:first-child {
+  margin-top: 0;
+}
+
+.lifebalance-landing h3 {
+  margin: 1.35rem 0 0.35rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.lifebalance-landing p {
+  margin: 0 0 0.85rem;
+  line-height: 1.6;
+}
+
+.lifebalance-landing ul,
+.lifebalance-landing ol {
+  margin: 0 0 0.85rem;
+  padding-left: 1.25rem;
+}
+
+.lifebalance-landing li {
+  margin: 0 0 0.45rem;
+  line-height: 1.55;
+}
+
+.lifebalance-landing__areas {
+  list-style: none;
+  padding-left: 0;
+}
+
+.lifebalance-landing__wheel {
+  margin: 0.5rem auto 0.25rem;
+}
+
+.lifebalance-landing__wheel .lifebalance-radar {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lifebalance-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.75rem 0 0;
+}
+
+.lifebalance-create {
+  display: inline-block;
+  margin: 0;
+  padding: 0.9rem 1.6rem;
+  background: #1f7a4d;
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
+main:has(.lifebalance-create) {
+  padding-bottom: 0.75rem;
+}
+
+.page:has(.lifebalance-create) .page__footer {
+  margin-top: 0.75rem;
+}
+
+.lifebalance-create:hover,
+.lifebalance-create:focus {
+  color: #fff;
+}
+
+.lifebalance-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+  margin: 0.75rem 0 0;
+}
+
+.lifebalance-links a {
+  padding: 0.65rem 0.15rem;
+}
+
+.lifebalance-login {
+  max-width: 24rem;
+  margin: 0.75rem auto 0;
+}

@@ -1,0 +1,814 @@
+# LifeBalance — каталог критеріїв самооцінювання, версія каталогу 1
+# Джерело: Concept v0.4, розділ 11.3. Імпортується командою drush lifebalance:import-criteria (ідемпотентно за key).
+# Зміна тексту існуючого key створює НОВУ ревізію критерію; історичні відповіді посилаються на стару.
+# original: — авторське формулювання, якщо текст змінено з гендерних причин (див. AUDIT, розділ 9.4).
+catalog_version: 1
+langcode: uk
+criteria:
+  - key: health.f01
+    sector: health
+    tier: free
+    weight: 1
+    text: "Маю достатньо енергії для повсякденних справ"
+  - key: health.f02
+    sector: health
+    tier: free
+    weight: 2
+    text: "Загалом мене влаштовує мій фізичний стан"
+    original: "Загалом задоволений фізичним станом"
+  - key: health.f03
+    sector: health
+    tier: free
+    weight: 3
+    text: "Мій сон дозволяє добре відновлюватися"
+  - key: health.f04
+    sector: health
+    tier: free
+    weight: 4
+    text: "Регулярно займаюся фізичною активністю"
+  - key: health.f05
+    sector: health
+    tier: free
+    weight: 5
+    text: "Харчуюся відповідно до потреб організму"
+  - key: health.f06
+    sector: health
+    tier: free
+    weight: 6
+    text: "Маю достатньо часу на відпочинок"
+  - key: health.f07
+    sector: health
+    tier: free
+    weight: 7
+    text: "Вмію розпізнавати перевтому"
+  - key: health.f08
+    sector: health
+    tier: free
+    weight: 8
+    text: "Уважно ставлюся до фізичних симптомів"
+  - key: health.f09
+    sector: health
+    tier: free
+    weight: 9
+    text: "За потреби звертаюся по медичну допомогу"
+  - key: health.f10
+    sector: health
+    tier: free
+    weight: 10
+    text: "Мій стан здоров’я не заважає більшості важливих планів"
+  - key: health.p01
+    sector: health
+    tier: premium
+    weight: 1
+    text: "Знаю, які звички найбільше впливають на моє самопочуття"
+  - key: health.p02
+    sector: health
+    tier: premium
+    weight: 2
+    text: "Можу помічати ранні ознаки стресу та реагувати на них"
+  - key: health.p03
+    sector: health
+    tier: premium
+    weight: 3
+    text: "Моє робоче середовище не створює постійного фізичного дискомфорту"
+  - key: health.p04
+    sector: health
+    tier: premium
+    weight: 4
+    text: "Знаходжу баланс між навантаженням і відновленням"
+  - key: health.p05
+    sector: health
+    tier: premium
+    weight: 5
+    text: "Маю доступ до необхідної медичної допомоги"
+  - key: health.p06
+    sector: health
+    tier: premium
+    weight: 6
+    text: "Мені вдається підтримувати корисні звички без надмірного самопримусу"
+  - key: health.p07
+    sector: health
+    tier: premium
+    weight: 7
+    text: "Відстежую, як сон впливає на енергію і настрій"
+  - key: health.p08
+    sector: health
+    tier: premium
+    weight: 8
+    text: "Можу адаптувати рухову активність до своїх можливостей"
+  - key: health.p09
+    sector: health
+    tier: premium
+    weight: 9
+    text: "Маю здорові способи справлятися зі щоденною напругою"
+  - key: health.p10
+    sector: health
+    tier: premium
+    weight: 10
+    text: "Відчуваю, що мої щоденні рішення підтримують довгострокове здоров’я"
+  - key: relationships.f01
+    sector: relationships
+    tier: free
+    weight: 1
+    text: "Маю близьких людей, яким довіряю"
+  - key: relationships.f02
+    sector: relationships
+    tier: free
+    weight: 2
+    text: "Можу відкрито висловлювати почуття"
+  - key: relationships.f03
+    sector: relationships
+    tier: free
+    weight: 3
+    text: "Відчуваю підтримку близьких"
+  - key: relationships.f04
+    sector: relationships
+    tier: free
+    weight: 4
+    text: "Умію слухати співрозмовника"
+  - key: relationships.f05
+    sector: relationships
+    tier: free
+    weight: 5
+    text: "Мої особисті кордони поважають"
+  - key: relationships.f06
+    sector: relationships
+    tier: free
+    weight: 6
+    text: "Я поважаю кордони інших"
+  - key: relationships.f07
+    sector: relationships
+    tier: free
+    weight: 7
+    text: "Умію вирішувати конфлікти без приниження"
+  - key: relationships.f08
+    sector: relationships
+    tier: free
+    weight: 8
+    text: "Можу звернутися по допомогу"
+  - key: relationships.f09
+    sector: relationships
+    tier: free
+    weight: 9
+    text: "Приділяю час важливим для мене стосункам"
+  - key: relationships.f10
+    sector: relationships
+    tier: free
+    weight: 10
+    text: "Загалом мене влаштовує якість моїх близьких стосунків"
+    original: "Загалом задоволений якістю близьких стосунків"
+  - key: relationships.p01
+    sector: relationships
+    tier: premium
+    weight: 1
+    text: "Можу говорити про складні теми без уникання чи агресії"
+  - key: relationships.p02
+    sector: relationships
+    tier: premium
+    weight: 2
+    text: "Вмію просити вибачення та виправляти власні помилки"
+  - key: relationships.p03
+    sector: relationships
+    tier: premium
+    weight: 3
+    text: "Відчуваю взаємність у значущих стосунках"
+  - key: relationships.p04
+    sector: relationships
+    tier: premium
+    weight: 4
+    text: "Можу казати «ні» без надмірного почуття провини"
+  - key: relationships.p05
+    sector: relationships
+    tier: premium
+    weight: 5
+    text: "Не втрачаю власні інтереси заради схвалення близьких"
+  - key: relationships.p06
+    sector: relationships
+    tier: premium
+    weight: 6
+    text: "Можу приймати відмінність поглядів без спроб контролювати іншого"
+  - key: relationships.p07
+    sector: relationships
+    tier: premium
+    weight: 7
+    text: "Помічаю і висловлюю вдячність близьким"
+  - key: relationships.p08
+    sector: relationships
+    tier: premium
+    weight: 8
+    text: "Маю достатньо особистого простору в стосунках"
+  - key: relationships.p09
+    sector: relationships
+    tier: premium
+    weight: 9
+    text: "Можу обговорювати очікування, а не покладатися на здогадки"
+  - key: relationships.p10
+    sector: relationships
+    tier: premium
+    weight: 10
+    text: "Відчуваю емоційну безпеку у важливих для мене стосунках"
+  - key: environment.f01
+    sector: environment
+    tier: free
+    weight: 1
+    text: "Моє найближче оточення переважно підтримує мене"
+  - key: environment.f02
+    sector: environment
+    tier: free
+    weight: 2
+    text: "Маю людей зі схожими інтересами"
+  - key: environment.f03
+    sector: environment
+    tier: free
+    weight: 3
+    text: "Почуваюся безпечно у своєму середовищі"
+  - key: environment.f04
+    sector: environment
+    tier: free
+    weight: 4
+    text: "Можу обирати, з ким проводити час"
+  - key: environment.f05
+    sector: environment
+    tier: free
+    weight: 5
+    text: "Моє повсякденне середовище комфортне"
+  - key: environment.f06
+    sector: environment
+    tier: free
+    weight: 6
+    text: "Відчуваю повагу від людей навколо"
+  - key: environment.f07
+    sector: environment
+    tier: free
+    weight: 7
+    text: "Маю можливість знайомитися з новими людьми"
+  - key: environment.f08
+    sector: environment
+    tier: free
+    weight: 8
+    text: "Можу дистанціюватися від небажаних контактів"
+  - key: environment.f09
+    sector: environment
+    tier: free
+    weight: 9
+    text: "Відчуваю належність до хоча б однієї спільноти"
+  - key: environment.f10
+    sector: environment
+    tier: free
+    weight: 10
+    text: "Соціальне оточення загалом позитивно впливає на мене"
+  - key: environment.p01
+    sector: environment
+    tier: premium
+    weight: 1
+    text: "У моєму оточенні є люди, які надихають на розвиток"
+  - key: environment.p02
+    sector: environment
+    tier: premium
+    weight: 2
+    text: "Я підтримую соціальні контакти, що відповідають моїм цінностям"
+  - key: environment.p03
+    sector: environment
+    tier: premium
+    weight: 3
+    text: "Можу спокійно залишатися собою в більшості важливих середовищ"
+  - key: environment.p04
+    sector: environment
+    tier: premium
+    weight: 4
+    text: "Маю доступ до місць або спільнот, де мене приймають"
+    original: "Маю доступ до місць або спільнот, де почуваюся прийнятим"
+  - key: environment.p05
+    sector: environment
+    tier: premium
+    weight: 5
+    text: "Вмію розпізнавати токсичні динаміки без поспішних ярликів"
+  - key: environment.p06
+    sector: environment
+    tier: premium
+    weight: 6
+    text: "Маю принаймні один простір для спільної діяльності з іншими"
+  - key: environment.p07
+    sector: environment
+    tier: premium
+    weight: 7
+    text: "Знаю, де шукати підтримку поза близьким колом"
+  - key: environment.p08
+    sector: environment
+    tier: premium
+    weight: 8
+    text: "Можу впливати на комфорт власного побутового середовища"
+  - key: environment.p09
+    sector: environment
+    tier: premium
+    weight: 9
+    text: "Загалом мене влаштовує баланс часу наодинці та з іншими"
+    original: "Загалом задоволений балансом часу наодинці та з іншими"
+  - key: environment.p10
+    sector: environment
+    tier: premium
+    weight: 10
+    text: "Моє оточення дає мені відчуття можливостей, а не безвиході"
+  - key: purpose.f01
+    sector: purpose
+    tier: free
+    weight: 1
+    text: "Розумію, чим хочу займатися професійно"
+  - key: purpose.f02
+    sector: purpose
+    tier: free
+    weight: 2
+    text: "Моя діяльність має для мене сенс"
+  - key: purpose.f03
+    sector: purpose
+    tier: free
+    weight: 3
+    text: "Використовую свої сильні сторони"
+  - key: purpose.f04
+    sector: purpose
+    tier: free
+    weight: 4
+    text: "Бачу можливості професійного розвитку"
+  - key: purpose.f05
+    sector: purpose
+    tier: free
+    weight: 5
+    text: "Маю прийнятне робоче навантаження"
+  - key: purpose.f06
+    sector: purpose
+    tier: free
+    weight: 6
+    text: "Відчуваю задоволення від результатів праці"
+  - key: purpose.f07
+    sector: purpose
+    tier: free
+    weight: 7
+    text: "Моя робота узгоджується з цінностями"
+  - key: purpose.f08
+    sector: purpose
+    tier: free
+    weight: 8
+    text: "Маю певну свободу прийняття рішень"
+  - key: purpose.f09
+    sector: purpose
+    tier: free
+    weight: 9
+    text: "Розумію наступні кроки своєї кар’єри"
+  - key: purpose.f10
+    sector: purpose
+    tier: free
+    weight: 10
+    text: "Мене влаштовує поточний напрям моєї самореалізації"
+    original: "Задоволений поточним напрямом самореалізації"
+  - key: purpose.p01
+    sector: purpose
+    tier: premium
+    weight: 1
+    text: "Можу сформулювати власні професійні цінності"
+  - key: purpose.p02
+    sector: purpose
+    tier: premium
+    weight: 2
+    text: "Маю відчуття, що моя діяльність приносить користь"
+  - key: purpose.p03
+    sector: purpose
+    tier: premium
+    weight: 3
+    text: "Розумію, які навички знадобляться для наступного кроку"
+  - key: purpose.p04
+    sector: purpose
+    tier: premium
+    weight: 4
+    text: "Маю можливість отримувати якісний зворотний зв’язок"
+  - key: purpose.p05
+    sector: purpose
+    tier: premium
+    weight: 5
+    text: "Мій професійний розвиток не руйнує інші важливі сфери життя"
+  - key: purpose.p06
+    sector: purpose
+    tier: premium
+    weight: 6
+    text: "Можу впливати на спосіб виконання своєї роботи"
+  - key: purpose.p07
+    sector: purpose
+    tier: premium
+    weight: 7
+    text: "Знаходжу можливості для творчості чи ініціативи"
+  - key: purpose.p08
+    sector: purpose
+    tier: premium
+    weight: 8
+    text: "Маю реалістичний план на випадок зміни діяльності"
+  - key: purpose.p09
+    sector: purpose
+    tier: premium
+    weight: 9
+    text: "Відчуваю відповідність між моїми здібностями й завданнями"
+  - key: purpose.p10
+    sector: purpose
+    tier: premium
+    weight: 10
+    text: "Можу відзначати власні досягнення, а не лише недоліки"
+  - key: finances.f01
+    sector: finances
+    tier: free
+    weight: 1
+    text: "Мої базові потреби фінансово забезпечені"
+  - key: finances.f02
+    sector: finances
+    tier: free
+    weight: 2
+    text: "Розумію свої щомісячні доходи та витрати"
+  - key: finances.f03
+    sector: finances
+    tier: free
+    weight: 3
+    text: "Маю реалістичний фінансовий план"
+  - key: finances.f04
+    sector: finances
+    tier: free
+    weight: 4
+    text: "Можу виконувати поточні зобов’язання"
+  - key: finances.f05
+    sector: finances
+    tier: free
+    weight: 5
+    text: "Маю можливість поступово формувати резерв"
+  - key: finances.f06
+    sector: finances
+    tier: free
+    weight: 6
+    text: "Мої житлові умови достатньо комфортні"
+  - key: finances.f07
+    sector: finances
+    tier: free
+    weight: 7
+    text: "Можу дозволити собі важливі для мене витрати"
+  - key: finances.f08
+    sector: finances
+    tier: free
+    weight: 8
+    text: "Розумію свої фінансові пріоритети"
+  - key: finances.f09
+    sector: finances
+    tier: free
+    weight: 9
+    text: "Маю план на випадок фінансових труднощів"
+  - key: finances.f10
+    sector: finances
+    tier: free
+    weight: 10
+    text: "Загалом відчуваю прийнятний рівень матеріальної стабільності"
+  - key: finances.p01
+    sector: finances
+    tier: premium
+    weight: 1
+    text: "Маю уявлення про повну вартість своїх регулярних зобов’язань"
+  - key: finances.p02
+    sector: finances
+    tier: premium
+    weight: 2
+    text: "Можу відрізняти необхідні витрати від імпульсивних"
+  - key: finances.p03
+    sector: finances
+    tier: premium
+    weight: 3
+    text: "Розумію свої фінансові ризики"
+  - key: finances.p04
+    sector: finances
+    tier: premium
+    weight: 4
+    text: "Маю доступ до важливої фінансової інформації та документів"
+  - key: finances.p05
+    sector: finances
+    tier: premium
+    weight: 5
+    text: "Мої боргові зобов’язання враховані в реалістичному плані"
+  - key: finances.p06
+    sector: finances
+    tier: premium
+    weight: 6
+    text: "Можу фінансово планувати принаймні найближчі кілька місяців"
+  - key: finances.p07
+    sector: finances
+    tier: premium
+    weight: 7
+    text: "Розглядаю резервні джерела доходу або підвищення кваліфікації"
+  - key: finances.p08
+    sector: finances
+    tier: premium
+    weight: 8
+    text: "Маю зрозумілі пріоритети щодо великих покупок"
+  - key: finances.p09
+    sector: finances
+    tier: premium
+    weight: 9
+    text: "Можу говорити про фінансові потреби без надмірного сорому"
+  - key: finances.p10
+    sector: finances
+    tier: premium
+    weight: 10
+    text: "Відчуваю поступовий рух до більшої фінансової стійкості"
+  - key: self_development.f01
+    sector: self_development
+    tier: free
+    weight: 1
+    text: "Регулярно вивчаю щось нове"
+  - key: self_development.f02
+    sector: self_development
+    tier: free
+    weight: 2
+    text: "Маю особисті цілі розвитку"
+  - key: self_development.f03
+    sector: self_development
+    tier: free
+    weight: 3
+    text: "Розумію свої сильні сторони"
+  - key: self_development.f04
+    sector: self_development
+    tier: free
+    weight: 4
+    text: "Усвідомлюю власні обмеження"
+  - key: self_development.f05
+    sector: self_development
+    tier: free
+    weight: 5
+    text: "Можу приймати конструктивний зворотний зв’язок"
+  - key: self_development.f06
+    sector: self_development
+    tier: free
+    weight: 6
+    text: "Помічаю свої помилки та роблю висновки"
+  - key: self_development.f07
+    sector: self_development
+    tier: free
+    weight: 7
+    text: "Практикую нові навички"
+  - key: self_development.f08
+    sector: self_development
+    tier: free
+    weight: 8
+    text: "Можу переглядати власні переконання"
+  - key: self_development.f09
+    sector: self_development
+    tier: free
+    weight: 9
+    text: "Відстежую особистий прогрес"
+  - key: self_development.f10
+    sector: self_development
+    tier: free
+    weight: 10
+    text: "Мене влаштовує напрям мого розвитку"
+    original: "Задоволений напрямом власного розвитку"
+  - key: self_development.p01
+    sector: self_development
+    tier: premium
+    weight: 1
+    text: "Можу перетворювати абстрактні наміри на конкретні кроки"
+  - key: self_development.p02
+    sector: self_development
+    tier: premium
+    weight: 2
+    text: "Залишаю час для практики, а не лише для читання й планування"
+  - key: self_development.p03
+    sector: self_development
+    tier: premium
+    weight: 3
+    text: "Вмію визначати, чого мені зараз не потрібно вчитися"
+  - key: self_development.p04
+    sector: self_development
+    tier: premium
+    weight: 4
+    text: "Не оцінюю себе виключно за продуктивністю"
+  - key: self_development.p05
+    sector: self_development
+    tier: premium
+    weight: 5
+    text: "Можу помічати поступові позитивні зміни"
+  - key: self_development.p06
+    sector: self_development
+    tier: premium
+    weight: 6
+    text: "Регулярно перевіряю актуальність своїх цілей"
+  - key: self_development.p07
+    sector: self_development
+    tier: premium
+    weight: 7
+    text: "Вмію адаптувати план після невдач"
+  - key: self_development.p08
+    sector: self_development
+    tier: premium
+    weight: 8
+    text: "Підтримую цікавість до нових поглядів та досвіду"
+  - key: self_development.p09
+    sector: self_development
+    tier: premium
+    weight: 9
+    text: "Можу відрізняти власні бажання від нав’язаних очікувань"
+  - key: self_development.p10
+    sector: self_development
+    tier: premium
+    weight: 10
+    text: "Мій темп розвитку загалом є для мене стійким"
+  - key: life_brightness.f01
+    sector: life_brightness
+    tier: free
+    weight: 1
+    text: "Маю заняття, які приносять радість"
+  - key: life_brightness.f02
+    sector: life_brightness
+    tier: free
+    weight: 2
+    text: "Регулярно знаходжу час для відпочинку"
+  - key: life_brightness.f03
+    sector: life_brightness
+    tier: free
+    weight: 3
+    text: "Отримую нові приємні враження"
+  - key: life_brightness.f04
+    sector: life_brightness
+    tier: free
+    weight: 4
+    text: "Маю цікаві захоплення"
+  - key: life_brightness.f05
+    sector: life_brightness
+    tier: free
+    weight: 5
+    text: "Дозволяю собі спонтанність"
+  - key: life_brightness.f06
+    sector: life_brightness
+    tier: free
+    weight: 6
+    text: "У моєму житті є місце для творчості або гри"
+  - key: life_brightness.f07
+    sector: life_brightness
+    tier: free
+    weight: 7
+    text: "Маю можливість змінювати обстановку"
+  - key: life_brightness.f08
+    sector: life_brightness
+    tier: free
+    weight: 8
+    text: "Знаходжу час для приємного дозвілля"
+  - key: life_brightness.f09
+    sector: life_brightness
+    tier: free
+    weight: 9
+    text: "Відчуваю інтерес до майбутніх подій"
+  - key: life_brightness.f10
+    sector: life_brightness
+    tier: free
+    weight: 10
+    text: "Загалом мене влаштовує різноманітність мого життя"
+    original: "Загалом задоволений різноманітністю життя"
+  - key: life_brightness.p01
+    sector: life_brightness
+    tier: premium
+    weight: 1
+    text: "Маю події, яких щиро очікую"
+  - key: life_brightness.p02
+    sector: life_brightness
+    tier: premium
+    weight: 2
+    text: "Дозволяю собі відпочивати без обов’язкової користі"
+  - key: life_brightness.p03
+    sector: life_brightness
+    tier: premium
+    weight: 3
+    text: "Можу знаходити цікаве навіть у звичних місцях"
+  - key: life_brightness.p04
+    sector: life_brightness
+    tier: premium
+    weight: 4
+    text: "Маю можливість іноді пробувати нові заняття"
+  - key: life_brightness.p05
+    sector: life_brightness
+    tier: premium
+    weight: 5
+    text: "Регулярно буваю в середовищі, яке мене надихає"
+  - key: life_brightness.p06
+    sector: life_brightness
+    tier: premium
+    weight: 6
+    text: "Можу відзначати маленькі приємні моменти"
+  - key: life_brightness.p07
+    sector: life_brightness
+    tier: premium
+    weight: 7
+    text: "Не відкладаю всі радощі на невизначене майбутнє"
+  - key: life_brightness.p08
+    sector: life_brightness
+    tier: premium
+    weight: 8
+    text: "Мій відпочинок відповідає моїм реальним потребам"
+  - key: life_brightness.p09
+    sector: life_brightness
+    tier: premium
+    weight: 9
+    text: "Маю баланс між стабільністю та новизною"
+  - key: life_brightness.p10
+    sector: life_brightness
+    tier: premium
+    weight: 10
+    text: "Відчуваю, що в моєму житті є місце для захоплення і відкриттів"
+  - key: spirituality.f01
+    sector: spirituality
+    tier: free
+    weight: 1
+    text: "Розумію важливі для себе цінності"
+  - key: spirituality.f02
+    sector: spirituality
+    tier: free
+    weight: 2
+    text: "Відчуваю сенс у власному житті"
+  - key: spirituality.f03
+    sector: spirituality
+    tier: free
+    weight: 3
+    text: "Маю час для внутрішніх роздумів"
+  - key: spirituality.f04
+    sector: spirituality
+    tier: free
+    weight: 4
+    text: "Можу діяти відповідно до власних переконань"
+  - key: spirituality.f05
+    sector: spirituality
+    tier: free
+    weight: 5
+    text: "Практикую вдячність або усвідомленість, якщо це мені близько"
+  - key: spirituality.f06
+    sector: spirituality
+    tier: free
+    weight: 6
+    text: "Відчуваю зв’язок із чимось важливішим за повсякденні справи"
+  - key: spirituality.f07
+    sector: spirituality
+    tier: free
+    weight: 7
+    text: "Можу переосмислювати складний життєвий досвід"
+  - key: spirituality.f08
+    sector: spirituality
+    tier: free
+    weight: 8
+    text: "Відчуваю внутрішню цілісність"
+  - key: spirituality.f09
+    sector: spirituality
+    tier: free
+    weight: 9
+    text: "Поважаю світоглядні погляди інших"
+  - key: spirituality.f10
+    sector: spirituality
+    tier: free
+    weight: 10
+    text: "Маю простір для власних духовних або філософських практик"
+  - key: spirituality.p01
+    sector: spirituality
+    tier: premium
+    weight: 1
+    text: "Можу пояснити, що надає моєму життю глибшого сенсу"
+  - key: spirituality.p02
+    sector: spirituality
+    tier: premium
+    weight: 2
+    text: "Маю способи відновлювати внутрішній спокій"
+  - key: spirituality.p03
+    sector: spirituality
+    tier: premium
+    weight: 3
+    text: "Можу співіснувати з невизначеністю без вимоги мати всі відповіді"
+  - key: spirituality.p04
+    sector: spirituality
+    tier: premium
+    weight: 4
+    text: "Мої щоденні вчинки переважно узгоджені з моїми цінностями"
+  - key: spirituality.p05
+    sector: spirituality
+    tier: premium
+    weight: 5
+    text: "Знаходжу час для мистецтва, природи чи споглядання, якщо це мені близько"
+  - key: spirituality.p06
+    sector: spirituality
+    tier: premium
+    weight: 6
+    text: "Можу ставитися до себе зі співчуттям у складні моменти"
+  - key: spirituality.p07
+    sector: spirituality
+    tier: premium
+    weight: 7
+    text: "Вмію усвідомлювати суперечності у власних переконаннях"
+  - key: spirituality.p08
+    sector: spirituality
+    tier: premium
+    weight: 8
+    text: "Маю особисті практики осмислення важливих подій"
+  - key: spirituality.p09
+    sector: spirituality
+    tier: premium
+    weight: 9
+    text: "Поважаю свободу інших обирати власний світогляд"
+  - key: spirituality.p10
+    sector: spirituality
+    tier: premium
+    weight: 10
+    text: "Відчуваю внутрішню опору незалежно від зовнішнього схвалення"

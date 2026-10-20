@@ -1,0 +1,20 @@
+uuid: c19688a5-17ee-49c6-910a-e84c8d636654
+langcode: en
+status: true
+dependencies:
+  theme:
+    - lifebalance_theme
+_core:
+  default_config_hash: o45esh8NhixcfPEfpMnV4NvCknIwVxy2dNTm9TLo9Lo
+id: lifebalance_theme_local_actions
+theme: lifebalance_theme
+region: header
+weight: -4
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

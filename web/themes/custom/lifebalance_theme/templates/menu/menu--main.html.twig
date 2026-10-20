@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Main menu. A parent with children opens a list and stays a link.
+ */
+#}
+{{ _self.links(items, attributes) }}
+
+{% macro links(items, attributes) %}
+  {% if items %}
+    {% if attributes %}
+      <ul{{ attributes.addClass('navbar-nav') }}>
+    {% else %}
+      <ul class="lifebalance-menu__sub">
+    {% endif %}
+    {% for item in items %}
+      {% set item_classes = ['nav-item'] %}
+      {% if item.below %}
+        {% set item_classes = item_classes|merge(['lifebalance-menu__branch']) %}
+      {% endif %}
+      {% if item.in_active_trail %}
+        {% set item_classes = item_classes|merge(['active']) %}
+      {% endif %}
+      {% set link_classes = attributes ? ['nav-link'] : ['lifebalance-menu__sublink'] %}
+      {% if item.in_active_trail %}
+        {% set link_classes = link_classes|merge(['active']) %}
+      {% endif %}
+      <li{{ item.attributes.addClass(item_classes) }}>
+        {{ link(item.title, item.url, { 'class': link_classes }) }}
+        {% if item.below %}
+          {{ _self.links(item.below, false) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

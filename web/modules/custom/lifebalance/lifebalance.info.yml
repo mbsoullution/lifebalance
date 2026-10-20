@@ -1,0 +1,11 @@
+name: LifeBalance
+type: module
+description: 'Life balance assessments: sectors, criteria, and snapshots.'
+package: LifeBalance
+core_version_requirement: ^11
+dependencies:
+  - drupal:language
+  - drupal:locale
+  - drupal:metatag
+  - drupal:options
+  - drupal:user

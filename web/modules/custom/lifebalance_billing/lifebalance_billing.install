@@ -1,0 +1,269 @@
+<?php
+
+/**
+ * @file
+ * Schema for the append-only billing event log.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\lifebalance_billing\Entity\PaymentOrder;
+
+/**
+ * Creates the finance role on sites that already had billing.
+ */
+function lifebalance_billing_update_10001(): void {
+  if (\Drupal::config('user.role.finance_manager')->get('id') !== NULL) {
+    return;
+  }
+  $path = \Drupal::service('extension.list.module')->getPath('lifebalance_billing');
+  $raw = file_get_contents($path . '/config/install/user.role.finance_manager.yml');
+  if (!is_string($raw)) {
+    return;
+  }
+  $data = Yaml::decode($raw);
+  if (!is_array($data)) {
+    return;
+  }
+  \Drupal::configFactory()->getEditable('user.role.finance_manager')->setData($data)->save(TRUE);
+}
+
+/**
+ * Stores the catalog price and an empty promo id on existing orders.
+ */
+function lifebalance_billing_update_10002(): void {
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  $entity_type_id = 'lifebalance_payment_order';
+  $entity_type = \Drupal::entityTypeManager()->getDefinition($entity_type_id);
+  $fields = PaymentOrder::baseFieldDefinitions($entity_type);
+  if ($manager->getFieldStorageDefinition('list_price_minor', $entity_type_id) === NULL) {
+    $list_price = $fields['list_price_minor'] ?? NULL;
+    if (!$list_price instanceof BaseFieldDefinition) {
+      throw new \RuntimeException('Order list price storage is missing.');
+    }
+    $list_price->setInitialValue(0);
+    $manager->installFieldStorageDefinition(
+      'list_price_minor',
+      $entity_type_id,
+      'lifebalance_billing',
+      $list_price,
+    );
+    \Drupal::database()->update($entity_type_id)
+      ->expression('list_price_minor', 'amount_minor')
+      ->execute();
+  }
+  if ($manager->getFieldStorageDefinition('promo_id', $entity_type_id) === NULL) {
+    $promo = $fields['promo_id'] ?? NULL;
+    if (!$promo instanceof BaseFieldDefinition) {
+      throw new \RuntimeException('Order promo storage is missing.');
+    }
+    $promo->setInitialValue('');
+    $manager->installFieldStorageDefinition(
+      'promo_id',
+      $entity_type_id,
+      'lifebalance_billing',
+      $promo,
+    );
+  }
+}
+
+/**
+ * Creates the inactive launch99 row on a new install.
+ */
+function lifebalance_billing_install(): void {
+  lifebalance_billing_seed_promo();
+}
+
+/**
+ * Adds the promo tables and the inactive launch99 row.
+ */
+function lifebalance_billing_update_10003(): void {
+  $schema = lifebalance_billing_schema();
+  $database = \Drupal::database();
+  foreach (['lifebalance_billing_promo', 'lifebalance_billing_promo_use'] as $table) {
+    if ($database->schema()->tableExists($table) || !isset($schema[$table]) || !is_array($schema[$table])) {
+      continue;
+    }
+    $database->schema()->createTable($table, $schema[$table]);
+  }
+  lifebalance_billing_seed_promo();
+}
+
+/**
+ * Inserts launch99 when the row is missing. The switch stays off.
+ */
+function lifebalance_billing_seed_promo(): void {
+  $database = \Drupal::database();
+  if (!$database->schema()->tableExists('lifebalance_billing_promo')) {
+    return;
+  }
+  $existing = $database->select('lifebalance_billing_promo', 'p')
+    ->condition('id', 'launch99')
+    ->countQuery()
+    ->execute()
+    ?->fetchField();
+  if (is_numeric($existing) && (int) $existing > 0) {
+    return;
+  }
+  $database->insert('lifebalance_billing_promo')
+    ->fields([
+      'id' => 'launch99',
+      'active' => 0,
+      'slot_limit' => 100,
+      'paid_count' => 0,
+      'starts' => 0,
+      'ends' => 0,
+      'price_minor' => 9900,
+    ])
+    ->execute();
+}
+
+/**
+ * Append-only payment events. The raw payload is not a column.
+ *
+ * @return array<string, mixed>
+ *   Schema arrays keyed by table name.
+ */
+function lifebalance_billing_schema(): array {
+  $field = [
+    'description' => 'Append-only billing events. Raw payloads are not stored.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'order_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'type' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ],
+      'provider_status' => [
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ],
+      'payload_hash' => [
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ],
+      'received_at' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'result' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'event__order' => ['order_id'],
+    ],
+  ];
+  $promo = [
+    'description' => 'Promo slot counters. One row per promo id.',
+    'fields' => [
+      'id' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ],
+      'active' => [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'slot_limit' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 100,
+      ],
+      'paid_count' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'starts' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'ends' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'price_minor' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 9900,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  $use = [
+    'description' => 'One promo attempt per person.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'promo_id' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ],
+      'uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'order_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'state' => [
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => TRUE,
+      ],
+      'reserved_until' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'unique keys' => [
+      'promo_uid' => ['promo_id', 'uid'],
+      'order_id' => ['order_id'],
+    ],
+    'indexes' => [
+      'promo_state' => ['promo_id', 'state', 'reserved_until'],
+    ],
+  ];
+  return [
+    'lifebalance_billing_event' => $field,
+    'lifebalance_billing_promo' => $promo,
+    'lifebalance_billing_promo_use' => $use,
+  ];
+}

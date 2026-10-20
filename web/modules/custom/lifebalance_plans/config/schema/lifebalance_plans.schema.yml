@@ -1,0 +1,26 @@
+lifebalance_plans.settings:
+  type: config_object
+  label: 'LifeBalance plans settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    support_block:
+      type: text
+      label: 'Support block'
+    sensitive_criteria:
+      type: sequence
+      label: 'Sensitive criteria'
+      sequence:
+        type: string
+        label: 'Criterion key'
+        constraints:
+          Regex:
+            pattern: '/^[a-z0-9][a-z0-9._-]{0,63}$/'
+            message: 'Criterion key must be a catalog key.'
+    active_goal_limit:
+      type: integer
+      label: 'Active goal limit'
+      constraints:
+        Range:
+          min: 1
+          max: 10

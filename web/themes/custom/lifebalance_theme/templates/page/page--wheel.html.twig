@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Wheel page. The reading column matches the front page.
+ */
+#}
+{% set page_attributes = attributes ?: create_attribute() %}
+{% set page_classes = ['page']|merge(page_utility_classes ?: []) %}
+
+<div {{ page_attributes.addClass(page_classes) }}>
+  {% include 'radix:page-navigation' %}
+  {% set page_main_utility_classes = page_main_utility_classes ?: ['py-5'] %}
+  {% set page_header_container_utility_classes = page_header_container_utility_classes ?: ['mb-3', 'lifebalance-measure'] %}
+  {% set page_content_container_utility_classes = ['lifebalance-measure'] %}
+  {% include 'radix:page-content' with {
+    page_main_utility_classes,
+    page_header_container_utility_classes,
+    page_content_container_utility_classes,
+  } %}
+  <footer class="page__footer">
+    <div class="container">
+      {% if page.footer %}
+        {{ page.footer }}
+      {% endif %}
+      <p class="page__copyright">{{ '© @year LifeBalance.'|t({'@year': 'now'|date('Y')}) }} <a href="https://github.com/mbSOULlution" rel="noopener noreferrer">mbSOULlution</a>.</p>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         bootstrap="web/core/tests/bootstrap.php"
+         colors="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutChangesToGlobalState="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         failOnEmptyTestSuite="false"
+         cacheDirectory=".phpunit.cache"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd">
+  <php>
+    <ini name="error_reporting" value="32767"/>
+    <ini name="memory_limit" value="-1"/>
+    <env name="SIMPLETEST_BASE_URL" value="https://lifebalance.ddev.site"/>
+    <env name="SIMPLETEST_DB" value="mysql://db:db@db/db"/>
+    <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="/var/www/html/web/sites/simpletest/browser_output"/>
+    <env name="BROWSERTEST_OUTPUT_BASE_URL" value="https://lifebalance.ddev.site"/>
+  </php>
+  <testsuites>
+    <testsuite name="lifebalance">
+      <directory>web/modules/custom/lifebalance/tests</directory>
+      <directory>web/modules/custom/lifebalance_plans/tests</directory>
+      <directory>web/modules/custom/lifebalance_billing/tests</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

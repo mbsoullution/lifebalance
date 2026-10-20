@@ -1,0 +1,85 @@
+lifebalance.sector.*:
+  type: config_entity
+  label: 'LifeBalance sector'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+      constraints:
+        Regex:
+          pattern: '/^[a-z0-9_]{1,32}$/'
+          message: 'Sector ID must be a machine name of at most 32 characters.'
+        Length:
+          max: 32
+    label:
+      type: required_label
+      label: 'Label'
+    description:
+      type: text
+      label: 'Description'
+      constraints:
+        NotBlank: {}
+    weight:
+      type: integer
+      label: 'Weight'
+    color:
+      type: color_hex
+      label: 'Color'
+    scale_low:
+      type: string
+      label: 'Caption for score 0'
+      constraints:
+        Length:
+          max: 255
+    scale_high:
+      type: string
+      label: 'Caption for score 10'
+      constraints:
+        Length:
+          max: 255
+
+lifebalance.settings:
+  type: config_object
+  label: 'LifeBalance settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    premium_enabled:
+      type: boolean
+      label: 'Premium criteria enabled'
+    trial_enabled:
+      type: boolean
+      label: 'Self-serve trial enabled'
+    ga_measurement_id:
+      type: string
+      label: 'Google Analytics measurement ID'
+      constraints:
+        Regex:
+          pattern: '/^(G-[A-Z0-9]{4,32})?$/'
+          message: 'Measurement ID must be empty or look like G-XXXXXXXX.'
+        Length:
+          max: 32
+    formula_version:
+      type: string
+      label: 'Guide formula version'
+      constraints:
+        Regex:
+          pattern: '/^v[0-9]+$/'
+          message: 'Formula version must look like v1.'
+        Length:
+          max: 16
+    feature_sets:
+      type: mapping
+      label: 'Feature sets'
+      mapping:
+        premium:
+          type: sequence
+          label: 'Premium features'
+          sequence:
+            type: string
+            label: 'Feature'
+            constraints:
+              Length:
+                max: 64

@@ -1,0 +1,22 @@
+name: LifeBalance
+description: 'LifeBalance theme on Radix 6 and Bootstrap 5.'
+screenshot: screenshot.png
+'alt text': 'lifebalance_theme theme screenshot'
+core_version_requirement: ^11
+engine: twig
+type: theme
+'base theme': radix
+'interface translation project': lifebalance_theme
+'interface translation server pattern': themes/custom/lifebalance_theme/translations/%language.po
+regions:
+  navbar_branding: 'Navbar branding'
+  navbar_left: 'Navbar left'
+  navbar_right: 'Navbar right'
+  header: Header
+  content: Content
+  page_bottom: 'Page bottom'
+  footer: Footer
+libraries:
+  - lifebalance_theme/style
+ckeditor5-stylesheets:
+  - build/css/main.style.css

@@ -1,0 +1,22 @@
+uuid: 3579fc56-9fb7-4560-890f-a0e17893e25f
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - lifebalance_theme
+_core:
+  default_config_hash: OfD4Zegb1UeWDUOZry9ugrQhJOPzgs9OlFhjgeWgnhM
+id: lifebalance_theme_messages
+theme: lifebalance_theme
+region: header
+weight: -3
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

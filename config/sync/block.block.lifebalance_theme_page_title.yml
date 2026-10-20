@@ -1,0 +1,20 @@
+uuid: 270ac13c-6607-4755-9333-ab27181833f6
+langcode: en
+status: true
+dependencies:
+  theme:
+    - lifebalance_theme
+_core:
+  default_config_hash: k34B_DWcu5M-DiYJqUxq4kAyn9kI23dVF6LOEZDqsvw
+id: lifebalance_theme_page_title
+theme: lifebalance_theme
+region: header
+weight: -2
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

@@ -1,0 +1,80 @@
+services:
+  Drupal\lifebalance\Repository\SectorRepository:
+    autowire: true
+  Drupal\lifebalance\Repository\CriterionRepository:
+    autowire: true
+  Drupal\lifebalance\Repository\SnapshotRepository:
+    autowire: true
+  Drupal\lifebalance\Service\GuideCalculator:
+    autowire: true
+  Drupal\lifebalance\Service\CatalogVersion:
+    autowire: true
+    arguments:
+      $appRoot: '%app.root%'
+  Drupal\lifebalance\Service\Clock:
+    autowire: true
+  Drupal\lifebalance\Seo\PublicMeta:
+    autowire: true
+    arguments:
+      $metatagManager: '@metatag.manager'
+  Drupal\lifebalance\Seo\VisitStats:
+    autowire: true
+  Drupal\lifebalance\Service\VisitorCountry:
+    autowire: true
+    arguments:
+      $appRoot: '%app.root%'
+  Drupal\lifebalance\Service\WheelCreation:
+    autowire: true
+  Drupal\lifebalance\Service\EntitlementCheckerInterface:
+    class: Drupal\lifebalance\Service\EntityEntitlementChecker
+    autowire: true
+  Drupal\lifebalance\Service\EntitlementLog:
+    autowire: true
+  Drupal\lifebalance\Service\EntitlementManager:
+    autowire: true
+  Drupal\lifebalance\Service\EntitlementAdmin:
+    autowire: true
+  Drupal\lifebalance\Service\EntitlementNotifier:
+    autowire: true
+  Drupal\lifebalance\Access\EntitlementOperationAccess:
+    autowire: true
+  Drupal\lifebalance\Service\SnapshotPreparer:
+    autowire: true
+  Drupal\lifebalance\Service\DraftStorage:
+    autowire: true
+  Drupal\lifebalance\Service\RadarGeometry:
+    autowire: true
+  Drupal\lifebalance\Controller\DraftController:
+    autowire: true
+  Drupal\lifebalance\EventSubscriber\PrivateCacheSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+  Drupal\lifebalance\EventSubscriber\AnonymousLoginRedirectSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+  logger.channel.lifebalance:
+    parent: logger.channel_base
+    arguments: ['lifebalance']
+  Drupal\lifebalance\Service\SnapshotHistory:
+    autowire: true
+  Drupal\lifebalance\Service\SnapshotDelta:
+    autowire: true
+  Drupal\lifebalance\Service\TrendGeometry:
+    autowire: true
+  Drupal\lifebalance\Service\PersonalExport:
+    autowire: true
+  Drupal\lifebalance\Service\AdminUserStats:
+    autowire: true
+  Drupal\lifebalance\Service\FunnelStats:
+    autowire: true
+  Drupal\lifebalance\SocialAuth\ProviderLinks:
+    autowire: true
+  Drupal\lifebalance\Service\CriterionImporter:
+    autowire: true
+    arguments:
+      $logger: '@logger.channel.lifebalance'
+      $currentUser: '@current_user'
+      $connection: '@database'
+      $appRoot: '%app.root%'

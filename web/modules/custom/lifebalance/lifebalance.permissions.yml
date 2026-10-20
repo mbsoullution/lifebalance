@@ -1,0 +1,47 @@
+administer lifebalance sectors:
+  title: 'Адміністрування секторів'
+  description: 'Зміна назви, підказки, порядку, кольору та статусу секторів.'
+
+administer lifebalance criteria:
+  title: 'Адміністрування критеріїв'
+  description: 'Перегляд, зміна та архівування критеріїв самооцінки.'
+
+administer lifebalance snapshots:
+  title: 'Адміністрування зрізів'
+  description: 'Не видається жодній ролі. Зріз бачить і видаляє лише власник.'
+  restrict access: true
+
+administer lifebalance entitlements:
+  title: 'Адміністрування доступу'
+  description: 'Не видається жодній ролі. Записи доступу змінює лише менеджер доступу.'
+  restrict access: true
+
+administer lifebalance settings:
+  title: 'Налаштування LifeBalance'
+  description: 'Увімкнення розширеного оцінювання для всього сайту.'
+  restrict access: true
+
+view lifebalance user metadata:
+  title: 'Метадані користувачів LifeBalance'
+  description: 'Список і картка: назва, стан колеса, кількість зрізів. Без оцінок і нотаток.'
+  restrict access: true
+
+view lifebalance user emails:
+  title: 'Електронні адреси користувачів'
+  description: 'Показ і експорт електронної адреси в адмінсписку.'
+  restrict access: true
+
+manage lifebalance premium:
+  title: 'Керування доступом Premium'
+  description: 'Надання, продовження, скорочення і скасування ручного доступу.'
+  restrict access: true
+
+view lifebalance entitlement history:
+  title: 'Історія доступу'
+  description: 'Хто, коли і чому змінив запис доступу. Без оцінок і нотаток.'
+  restrict access: true
+
+view lifebalance entitlement log:
+  title: 'Журнал доступу'
+  description: 'Хто, кому, що і чому змінив доступ. Без оцінок і нотаток.'
+  restrict access: true

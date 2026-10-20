@@ -1,0 +1,30 @@
+.lifebalance-compare,
+.lifebalance-trend,
+.lifebalance-trend-page {
+  max-width: min(40rem, 100%);
+  overflow-wrap: anywhere;
+}
+
+.lifebalance-compare .lifebalance-summary,
+.lifebalance-trend-page .lifebalance-summary {
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+}
+
+.lifebalance-compare .lifebalance-summary th,
+.lifebalance-compare .lifebalance-summary td,
+.lifebalance-trend-page .lifebalance-summary th,
+.lifebalance-trend-page .lifebalance-summary td {
+  overflow-wrap: anywhere;
+}
+
+.lifebalance-trend-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lifebalance-average {
+  font-size: 0.875rem;
+}

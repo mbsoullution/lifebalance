@@ -1,0 +1,5 @@
+# Schema for the configuration files of the lifebalance_theme theme.
+
+lifebalance_theme.settings:
+  type: theme_settings
+  label: 'lifebalance_theme settings'

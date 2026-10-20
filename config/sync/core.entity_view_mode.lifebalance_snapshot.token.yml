@@ -1,0 +1,11 @@
+uuid: 91a93ab6-58da-4ab9-8fc7-a6cf86c61535
+langcode: en
+status: true
+dependencies:
+  module:
+    - lifebalance
+id: lifebalance_snapshot.token
+label: Token
+description: null
+targetEntityType: lifebalance_snapshot
+cache: true

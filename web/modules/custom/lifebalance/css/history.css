@@ -1,0 +1,28 @@
+.lifebalance-average {
+  font-size: 0.875rem;
+}
+
+.lifebalance-history,
+.lifebalance-history-answers {
+  max-width: min(40rem, 100%);
+  overflow-wrap: anywhere;
+}
+
+.lifebalance-summary {
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+}
+
+.lifebalance-summary th,
+.lifebalance-summary td {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 360px) {
+  .lifebalance-history,
+  .lifebalance-history-answers,
+  .lifebalance-radar {
+    max-width: 100%;
+  }
+}

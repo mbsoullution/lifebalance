@@ -1,0 +1,79 @@
+history:
+  css:
+    component:
+      css/history.css: {}
+
+compare:
+  css:
+    component:
+      css/compare.css: {}
+
+trend:
+  css:
+    component:
+      css/compare.css: {}
+  js:
+    js/trend.js:
+      preprocess: false
+      attributes:
+        type: module
+  dependencies:
+    - core/drupal
+    - core/once
+
+landing:
+  css:
+    component:
+      css/landing.css: {}
+      css/wheel.css: {}
+
+wheel:
+  css:
+    component:
+      css/wheel.css: {}
+  js:
+    js/wheel.js:
+      preprocess: false
+      attributes:
+        type: module
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+
+faq:
+  css:
+    component:
+      css/faq.css: {}
+  js:
+    js/faq.js:
+      preprocess: false
+      attributes:
+        type: module
+  dependencies:
+    - core/drupal
+    - core/once
+
+language-switcher:
+  js:
+    js/language-switcher.js:
+      preprocess: false
+      attributes:
+        type: module
+  dependencies:
+    - core/drupal
+    - core/once
+
+questionnaire:
+  css:
+    component:
+      css/questionnaire.css: {}
+  js:
+    js/questionnaire.js:
+      preprocess: false
+      attributes:
+        type: module
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once

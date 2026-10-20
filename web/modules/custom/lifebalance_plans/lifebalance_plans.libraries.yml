@@ -1,0 +1,6 @@
+print:
+  css:
+    component:
+      css/print.css: {}
+  js:
+    js/print.js: {}

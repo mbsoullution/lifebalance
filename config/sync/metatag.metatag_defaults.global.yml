@@ -1,0 +1,9 @@
+uuid: 2306d48c-9fcb-40c7-bae5-fe599b7844b3
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags: {  }

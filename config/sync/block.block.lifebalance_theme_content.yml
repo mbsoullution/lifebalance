@@ -1,0 +1,22 @@
+uuid: ac20f078-a462-4e34-8080-ab8c8a214012
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - lifebalance_theme
+_core:
+  default_config_hash: oULXFrD1QFv79-Di8BCE7jrvr1ayuwwURe6OHmeu4QU
+id: lifebalance_theme_content
+theme: lifebalance_theme
+region: content
+weight: -5
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

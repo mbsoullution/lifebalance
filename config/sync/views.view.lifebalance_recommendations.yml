@@ -1,0 +1,318 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lifebalance_plans
+    - options
+    - views
+id: lifebalance_recommendations
+label: 'Рекомендації'
+module: views
+description: 'Бібліотека рекомендацій.'
+tag: ''
+base_table: lifebalance_recommendation
+base_field: id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: Рекомендації
+      access:
+        type: perm
+        options:
+          perm: 'edit lifebalance recommendations'
+      cache:
+        type: tag
+        options: {  }
+      query:
+        type: views_query
+        options:
+          query_comment: false
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Фільтрувати
+          reset_button: true
+          reset_button_label: Скинути
+          exposed_sorts_label: Сортування
+          expose_sort_order: false
+          sort_asc_label: За зростанням
+          sort_desc_label: За спаданням
+      pager:
+        type: mini
+        options:
+          items_per_page: 50
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            next: ›
+            previous: ‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'На сторінці'
+            items_per_page_options: '25, 50, 100'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: Усі
+            offset: false
+            offset_label: Зміщення
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            title: title
+            key: key
+            sector: sector
+            status: status
+            safety: safety
+            tier: tier
+            operations: operations
+          default: ''
+          info:
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            key:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            sector:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            status:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            safety:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            tier:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      fields:
+        title:
+          id: title
+          table: lifebalance_recommendation
+          field: title
+          plugin_id: field
+          entity_type: lifebalance_recommendation
+          entity_field: title
+          label: Назва
+        key:
+          id: key
+          table: lifebalance_recommendation
+          field: key
+          plugin_id: field
+          entity_type: lifebalance_recommendation
+          entity_field: key
+          label: Ключ
+        sector:
+          id: sector
+          table: lifebalance_recommendation
+          field: sector
+          plugin_id: field
+          entity_type: lifebalance_recommendation
+          entity_field: sector
+          label: Сектор
+        status:
+          id: status
+          table: lifebalance_recommendation
+          field: status
+          plugin_id: field
+          entity_type: lifebalance_recommendation
+          entity_field: status
+          label: Статус
+        safety:
+          id: safety
+          table: lifebalance_recommendation
+          field: safety
+          plugin_id: field
+          entity_type: lifebalance_recommendation
+          entity_field: safety
+          label: Безпека
+        tier:
+          id: tier
+          table: lifebalance_recommendation
+          field: tier
+          plugin_id: field
+          entity_type: lifebalance_recommendation
+          entity_field: tier
+          label: Рівень
+        operations:
+          id: operations
+          table: lifebalance_recommendation
+          field: operations
+          plugin_id: entity_operations
+          label: Дії
+      filters:
+        sector:
+          id: sector
+          table: lifebalance_recommendation
+          field: sector
+          plugin_id: string
+          entity_type: lifebalance_recommendation
+          entity_field: sector
+          operator: '='
+          value: ''
+          exposed: true
+          expose:
+            operator_id: sector_op
+            label: Сектор
+            identifier: sector
+            required: false
+            remember: false
+            multiple: false
+            operator: sector_op
+        status:
+          id: status
+          table: lifebalance_recommendation
+          field: status
+          plugin_id: list_field
+          entity_type: lifebalance_recommendation
+          entity_field: status
+          operator: or
+          value: {  }
+          exposed: true
+          expose:
+            operator_id: status_op
+            label: Статус
+            identifier: status
+            required: false
+            remember: false
+            multiple: false
+            reduce: false
+        safety:
+          id: safety
+          table: lifebalance_recommendation
+          field: safety
+          plugin_id: list_field
+          entity_type: lifebalance_recommendation
+          entity_field: safety
+          operator: or
+          value: {  }
+          exposed: true
+          expose:
+            operator_id: safety_op
+            label: Безпека
+            identifier: safety
+            required: false
+            remember: false
+            multiple: false
+            reduce: false
+        tier:
+          id: tier
+          table: lifebalance_recommendation
+          field: tier
+          plugin_id: list_field
+          entity_type: lifebalance_recommendation
+          entity_field: tier
+          operator: or
+          value: {  }
+          exposed: true
+          expose:
+            operator_id: tier_op
+            label: Рівень
+            identifier: tier
+            required: false
+            remember: false
+            multiple: false
+            reduce: false
+      sorts:
+        weight:
+          id: weight
+          table: lifebalance_recommendation
+          field: weight
+          plugin_id: standard
+          entity_type: lifebalance_recommendation
+          entity_field: weight
+          order: ASC
+        key:
+          id: key
+          table: lifebalance_recommendation
+          field: key
+          plugin_id: standard
+          entity_type: lifebalance_recommendation
+          entity_field: key
+          order: ASC
+      header: {  }
+      footer: {  }
+      empty: {  }
+      relationships: {  }
+      arguments: {  }
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      defaults:
+        title: true
+        access: true
+        cache: true
+        query: true
+        exposed_form: true
+        pager: true
+        style: true
+        row: true
+        fields: true
+        filters: true
+        sorts: true
+        header: true
+        footer: true
+        empty: true
+        relationships: true
+        arguments: true
+      display_extenders: {  }
+      path: admin/lifebalance/recommendations

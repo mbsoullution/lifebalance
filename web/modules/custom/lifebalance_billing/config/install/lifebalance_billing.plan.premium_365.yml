@@ -1,0 +1,13 @@
+uuid: 22222222-2222-4222-8222-222222222202
+langcode: uk
+status: true
+dependencies:
+  enforced:
+    module:
+      - lifebalance_billing
+id: premium_365
+label: '365 днів'
+duration_days: 365
+price_minor: 119000
+currency: UAH
+weight: 1

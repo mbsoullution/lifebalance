@@ -1,0 +1,62 @@
+.lifebalance-print-actions {
+  margin: 1rem 0;
+}
+
+.lifebalance-radar {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+}
+
+.lifebalance-reassess {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d0d5dd;
+}
+
+@page {
+  size: A4;
+  margin: 16mm;
+}
+
+@media print {
+  header,
+  footer,
+  nav,
+  .toolbar,
+  .gin-secondary-toolbar,
+  .lifebalance-plan-tabs,
+  .lifebalance-print-actions,
+  .lifebalance-reassess {
+    display: none !important;
+  }
+
+  body {
+    color: #000;
+    background: #fff;
+  }
+
+  .lifebalance-radar {
+    width: 80mm;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  .lifebalance-print-plan,
+  .lifebalance-print-goal {
+    break-inside: avoid;
+    margin-bottom: 8mm;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  a[href]::after {
+    content: none;
+  }
+}

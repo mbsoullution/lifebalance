@@ -1,0 +1,17 @@
+uuid: 11111111-1111-4111-8111-111111111204
+langcode: en
+status: true
+dependencies:
+  module:
+    - lifebalance_billing
+  enforced:
+    module:
+      - lifebalance_billing
+id: finance_manager
+label: 'Фінанси'
+weight: 6
+is_admin: false
+permissions:
+  - 'refund lifebalance orders'
+  - 'view lifebalance orders'
+  - 'view lifebalance stats'

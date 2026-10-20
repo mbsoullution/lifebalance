@@ -1,0 +1,5 @@
+client_id: ''
+client_secret: ''
+graph_version: '21.0'
+scopes: email
+endpoints: ''

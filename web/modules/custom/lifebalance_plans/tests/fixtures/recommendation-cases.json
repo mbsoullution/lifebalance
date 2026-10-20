@@ -1,0 +1,254 @@
+{
+  "cases": [
+    {
+      "name": "order",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f01", "sector": "health", "answer": "partial", "weight": 1},
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 8}
+      ],
+      "recommendations": [
+        {"key": "health.early", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 5},
+        {"key": "health.late", "sector": "health", "triggers": ["health.f01"], "trigger_answers": ["no", "partial"], "safety": "none", "tier": "premium", "status": "published", "weight": 1},
+        {"key": "health.mid", "sector": "health", "triggers": ["health.f01"], "trigger_answers": ["partial"], "safety": "none", "tier": "premium", "status": "published", "weight": 3}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": ["health.early", "health.late", "health.mid"]},
+      "expect_health": []
+    },
+    {
+      "name": "limit_two",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.one", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1},
+        {"key": "health.two", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 2},
+        {"key": "health.three", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 3},
+        {"key": "health.four", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 4}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": ["health.one", "health.two"]},
+      "expect_health": []
+    },
+    {
+      "name": "limit_criteria",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health", "finances"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f01", "sector": "health", "answer": "no", "weight": 1},
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 2},
+        {"key": "finances.f02", "sector": "finances", "answer": "no", "weight": 9},
+        {"key": "finances.f01", "sector": "finances", "answer": "partial", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.first", "sector": "health", "triggers": ["health.f01"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1},
+        {"key": "health.second", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1},
+        {"key": "finances.kept", "sector": "finances", "triggers": ["finances.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1},
+        {"key": "finances.dropped", "sector": "finances", "triggers": ["finances.f01"], "trigger_answers": ["partial"], "safety": "none", "tier": "premium", "status": "published", "weight": 1}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": ["health.first", "health.second"], "finances": ["finances.kept"]},
+      "expect_health": []
+    },
+    {
+      "name": "stable",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.b", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1},
+        {"key": "health.a", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": ["health.a", "health.b"]},
+      "expect_health": []
+    },
+    {
+      "name": "excluded",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": ["health.one"],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.one", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1},
+        {"key": "health.two", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 2},
+        {"key": "health.three", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 3},
+        {"key": "health.four", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 4}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": ["health.two", "health.three"]},
+      "expect_health": []
+    },
+    {
+      "name": "tier_without_premium",
+      "mode": "sectors",
+      "premium": false,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.paid", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1},
+        {"key": "health.demo", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "free_preview", "status": "published", "weight": 2}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": ["health.demo"]},
+      "expect_health": []
+    },
+    {
+      "name": "empty",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [],
+      "expect_support": false,
+      "expect_keys": {"health": []},
+      "expect_health": []
+    },
+    {
+      "name": "sensitive_no",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["relationships"],
+      "excluded": [],
+      "sensitive": ["relationships.p10"],
+      "answers": [
+        {"key": "relationships.p10", "sector": "relationships", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "relationships.advice", "sector": "relationships", "triggers": ["relationships.p10"], "trigger_answers": ["no", "partial"], "safety": "none", "tier": "premium", "status": "published", "weight": 1}
+      ],
+      "expect_support": true,
+      "expect_keys": {"relationships": []},
+      "expect_health": []
+    },
+    {
+      "name": "sensitive_recommendation",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "partial", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.hidden", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["partial"], "safety": "sensitive", "tier": "premium", "status": "published", "weight": 1}
+      ],
+      "expect_support": true,
+      "expect_keys": {"health": []},
+      "expect_health": []
+    },
+    {
+      "name": "health_note",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.care", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "health", "tier": "premium", "status": "published", "weight": 1}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": ["health.care"]},
+      "expect_health": ["health.care"]
+    },
+    {
+      "name": "trigger_answers",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "partial", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.only_no", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": []},
+      "expect_health": []
+    },
+    {
+      "name": "draft_ignored",
+      "mode": "sectors",
+      "premium": true,
+      "sectors": ["health"],
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "health.draft", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "draft", "weight": 1}
+      ],
+      "expect_support": false,
+      "expect_keys": {"health": []},
+      "expect_health": []
+    },
+    {
+      "name": "preview_one",
+      "mode": "preview",
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f01", "sector": "health", "answer": "partial", "weight": 1},
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 2}
+      ],
+      "recommendations": [
+        {"key": "preview.partial", "sector": "health", "triggers": ["health.f01"], "trigger_answers": ["partial"], "safety": "none", "tier": "free_preview", "status": "published", "weight": 1},
+        {"key": "preview.no", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "free_preview", "status": "published", "weight": 9},
+        {"key": "preview.premium", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1}
+      ],
+      "expect_support": false,
+      "expect_key": "preview.no"
+    },
+    {
+      "name": "preview_none",
+      "mode": "preview",
+      "excluded": [],
+      "sensitive": [],
+      "answers": [
+        {"key": "health.f02", "sector": "health", "answer": "no", "weight": 1}
+      ],
+      "recommendations": [
+        {"key": "preview.premium", "sector": "health", "triggers": ["health.f02"], "trigger_answers": ["no"], "safety": "none", "tier": "premium", "status": "published", "weight": 1}
+      ],
+      "expect_support": false,
+      "expect_key": null
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for LifeBalance plans.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\lifebalance_plans\Entity\Goal;
+
+/**
+ * Installs goals and the active-goal limit on sites that already had plans.
+ */
+function lifebalance_plans_update_10001(): void {
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  if ($manager->getEntityType('lifebalance_goal') === NULL) {
+    $manager->installEntityType(\Drupal::entityTypeManager()->getDefinition('lifebalance_goal'));
+  }
+  $config = \Drupal::configFactory()->getEditable('lifebalance_plans.settings');
+  if ($config->get('active_goal_limit') === NULL) {
+    $config->set('active_goal_limit', 10)->save(TRUE);
+  }
+}
+
+/**
+ * Adds the 30-day plan and the nullable goal plan reference.
+ */
+function lifebalance_plans_update_10002(): void {
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  if ($manager->getEntityType('lifebalance_plan') === NULL) {
+    $entity_type = \Drupal::entityTypeManager()->getDefinition('lifebalance_plan');
+    $manager->installEntityType($entity_type);
+  }
+  if ($manager->getFieldStorageDefinition('plan_id', 'lifebalance_goal') !== NULL) {
+    return;
+  }
+  $goal_type = \Drupal::entityTypeManager()->getDefinition('lifebalance_goal');
+  $fields = Goal::baseFieldDefinitions($goal_type);
+  $plan_id = $fields['plan_id'] ?? NULL;
+  if (!$plan_id instanceof FieldStorageDefinitionInterface) {
+    throw new \RuntimeException('Goal plan_id storage is missing.');
+  }
+  $manager->installFieldStorageDefinition('plan_id', 'lifebalance_goal', 'lifebalance_plans', $plan_id);
+}

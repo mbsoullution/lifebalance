@@ -1,0 +1,7 @@
+name: 'LifeBalance billing'
+type: module
+description: 'One-time Premium payments for LifeBalance.'
+package: LifeBalance
+core_version_requirement: ^11
+dependencies:
+  - lifebalance:lifebalance

@@ -1,0 +1,78 @@
+.page:has(.lifebalance-questionnaire) .page__header {
+  display: none;
+}
+
+.lifebalance-questionnaire__heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lifebalance-questionnaire__title,
+.lifebalance-questionnaire__heading .lifebalance-progress {
+  margin: 0;
+}
+
+.lifebalance-questionnaire__heading .lifebalance-progress {
+  margin-left: auto;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.lifebalance-questionnaire .form-radios {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  width: 100%;
+}
+
+.lifebalance-questionnaire .form-radios > .form-item {
+  width: auto;
+  margin: 0;
+}
+
+.lifebalance-questionnaire .form-radios > .form-item:nth-child(1) {
+  justify-self: start;
+}
+
+.lifebalance-questionnaire .form-radios > .form-item:nth-child(2) {
+  justify-self: center;
+}
+
+.lifebalance-questionnaire .form-radios > .form-item:nth-child(3) {
+  justify-self: end;
+}
+
+.lifebalance-questionnaire .lifebalance-choices label {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.lifebalance-questionnaire .form-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.lifebalance-questionnaire :focus-visible {
+  outline: 3px solid #1f7a4d;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lifebalance-questionnaire * {
+    scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .lifebalance-questionnaire {
+    max-width: 100%;
+  }
+}

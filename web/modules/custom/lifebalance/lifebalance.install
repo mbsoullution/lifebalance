@@ -1,0 +1,362 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for LifeBalance.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\lifebalance\Entity\Criterion;
+use Drupal\lifebalance\Entity\Snapshot;
+use Drupal\lifebalance\Install\InterfaceLanguage;
+use Drupal\lifebalance\Service\Clock;
+use Drupal\lifebalance\Service\WheelCreation;
+use Drupal\user\Entity\Role;
+
+/**
+ * Enables Ukrainian, Russian, and English and follows the visitor country.
+ */
+function lifebalance_install(): void {
+  InterfaceLanguage::apply();
+}
+
+/**
+ * Installs the entitlement content entity on sites that already run the module.
+ */
+function lifebalance_update_11001(): void {
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  $existing = $manager->getEntityType('lifebalance_entitlement');
+  if ($existing instanceof EntityTypeInterface) {
+    return;
+  }
+  $definition = \Drupal::entityTypeManager()->getDefinition('lifebalance_entitlement');
+  $manager->installEntityType($definition);
+}
+
+/**
+ * Creates the support role on sites that already run the module.
+ */
+function lifebalance_update_11002(): void {
+  $storage = \Drupal::entityTypeManager()->getStorage('user_role');
+  if ($storage->load('support_manager') !== NULL) {
+    return;
+  }
+  $role = Role::create([
+    'id' => 'support_manager',
+    'label' => 'Підтримка',
+    'weight' => 4,
+    'is_admin' => FALSE,
+    'permissions' => [
+      'manage lifebalance premium',
+      'view lifebalance entitlement history',
+      'view lifebalance user emails',
+      'view lifebalance user metadata',
+    ],
+  ]);
+  $role->set('uuid', '11111111-1111-4111-8111-111111111202');
+  $role->save();
+}
+
+/**
+ * Stores empty scale captions on sectors created before v0.7.
+ */
+function lifebalance_update_11003(): void {
+  $factory = \Drupal::configFactory();
+  $storage = \Drupal::entityTypeManager()->getStorage('lifebalance_sector');
+  foreach (array_keys($storage->loadMultiple()) as $id) {
+    $config = $factory->getEditable('lifebalance.sector.' . $id);
+    if ($config->get('scale_low') !== NULL && $config->get('scale_high') !== NULL) {
+      continue;
+    }
+    $config
+      ->set('scale_low', '')
+      ->set('scale_high', '')
+      ->save();
+  }
+}
+
+/**
+ * Adds the optional criterion subtopic field.
+ */
+function lifebalance_update_11004(): void {
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  if ($manager->getFieldStorageDefinition('subtopic', 'lifebalance_criterion') !== NULL) {
+    return;
+  }
+  $entity_type = \Drupal::entityTypeManager()->getDefinition('lifebalance_criterion');
+  $fields = Criterion::baseFieldDefinitions($entity_type);
+  $subtopic = $fields['subtopic'] ?? NULL;
+  if (!$subtopic instanceof FieldStorageDefinitionInterface) {
+    throw new \RuntimeException('Criterion subtopic storage is missing.');
+  }
+  $manager->installFieldStorageDefinition('subtopic', 'lifebalance_criterion', 'lifebalance', $subtopic);
+}
+
+/**
+ * Stores the criteria catalog version on snapshots.
+ */
+function lifebalance_update_11005(): void {
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  if ($manager->getFieldStorageDefinition('catalog_version', 'lifebalance_snapshot') !== NULL) {
+    return;
+  }
+  $entity_type = \Drupal::entityTypeManager()->getDefinition('lifebalance_snapshot');
+  $fields = Snapshot::baseFieldDefinitions($entity_type);
+  $catalog_version = $fields['catalog_version'] ?? NULL;
+  if (!$catalog_version instanceof BaseFieldDefinition) {
+    throw new \RuntimeException('Snapshot catalog_version storage is missing.');
+  }
+  $catalog_version->setInitialValue(1);
+  $manager->installFieldStorageDefinition('catalog_version', 'lifebalance_snapshot', 'lifebalance', $catalog_version);
+}
+
+/**
+ * Marks wheels that already exist as created.
+ */
+function lifebalance_update_11006(): void {
+  $database = \Drupal::database();
+  /** @var \Drupal\user\UserDataInterface $user_data */
+  $user_data = \Drupal::service('user.data');
+  /** @var \Drupal\lifebalance\Service\WheelCreation $creation */
+  $creation = \Drupal::service(WheelCreation::class);
+  $now = \Drupal::service(Clock::class)->now();
+  $started = [];
+  if ($database->schema()->tableExists('lifebalance_snapshot')) {
+    $query = $database->select('lifebalance_snapshot', 's');
+    $query->addField('s', 'uid');
+    $query->addExpression('MIN(s.created)', 'started');
+    $query->condition('s.uid', 0, '>');
+    $query->groupBy('s.uid');
+    $snapshots = $query->execute();
+    if ($snapshots !== NULL) {
+      foreach ($snapshots as $row) {
+        $started[(int) $row->uid] = (int) $row->started;
+      }
+    }
+  }
+  $draft_query = $database->select('users_data', 'd')
+    ->fields('d', ['uid'])
+    ->condition('module', 'lifebalance')
+    ->condition('name', 'draft')
+    ->condition('uid', 0, '>');
+  $drafts = $draft_query->execute();
+  if ($drafts !== NULL) {
+    foreach ($drafts as $row) {
+      $uid = (int) $row->uid;
+      if (!isset($started[$uid])) {
+        $started[$uid] = $now;
+      }
+    }
+  }
+  foreach ($started as $uid => $timestamp) {
+    if ($creation->timestampForUid($uid) !== NULL) {
+      continue;
+    }
+    $stored = $timestamp > 0 ? $timestamp : $now;
+    $user_data->set('lifebalance', $uid, 'wheel_created', $stored);
+  }
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * @phpstan-ignore missingType.iterableValue
+ */
+function lifebalance_schema(): array {
+  $schema['lifebalance_entitlement_log'] = [
+    'description' => 'Append-only audit of entitlement changes.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'entitlement_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'target_uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ],
+      'actor_uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ],
+      'action' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ],
+      'old_ends' => [
+        'type' => 'int',
+        'not null' => FALSE,
+      ],
+      'new_ends' => [
+        'type' => 'int',
+        'not null' => FALSE,
+      ],
+      'old_status' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => FALSE,
+      ],
+      'new_status' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ],
+      'reason' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'created' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'entitlement_log__target_created' => ['target_uid', 'created'],
+      'entitlement_log__actor_created' => ['actor_uid', 'created'],
+      'entitlement_log__entitlement' => ['entitlement_id'],
+    ],
+  ];
+  $schema['lifebalance_trial_usage'] = [
+    'description' => 'One trial per account. The row stays until the account is deleted.',
+    'fields' => [
+      'uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'used_at' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'entitlement_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['uid'],
+  ];
+  return $schema;
+}
+
+/**
+ * Stores the entitlement audit and drops unused revisions.
+ */
+function lifebalance_update_11007(): void {
+  $database = \Drupal::database();
+  $schema = $database->schema();
+  $definition = lifebalance_schema();
+  foreach (['lifebalance_entitlement_log', 'lifebalance_trial_usage'] as $table) {
+    if (!$schema->tableExists($table)) {
+      $schema->createTable($table, $definition[$table]);
+    }
+  }
+  $config = \Drupal::configFactory()->getEditable('lifebalance.settings');
+  if ($config->get('feature_sets') === NULL) {
+    $config->set('feature_sets', [
+      'premium' => [
+        'premium_criteria',
+        'recommendations',
+        'goals',
+        'plan_30',
+      ],
+    ])->save(TRUE);
+  }
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  $installed = $manager->getEntityType('lifebalance_entitlement');
+  if (!$installed instanceof EntityTypeInterface || !$installed->isRevisionable()) {
+    return;
+  }
+  $count = $database->select('lifebalance_entitlement', 'e')->countQuery()->execute()?->fetchField();
+  if (is_numeric($count) && (int) $count > 0) {
+    throw new \RuntimeException('Entitlement records exist, so revisions cannot be removed in this update.');
+  }
+  $manager->uninstallEntityType($installed);
+  $updated = \Drupal::entityTypeManager()->getDefinition('lifebalance_entitlement');
+  $manager->installEntityType($updated);
+}
+
+/**
+ * Lets support read the entitlement log.
+ */
+function lifebalance_update_11008(): void {
+  $role = \Drupal::entityTypeManager()->getStorage('user_role')->load('support_manager');
+  if (!$role instanceof Role || $role->hasPermission('view lifebalance entitlement log')) {
+    return;
+  }
+  $role->grantPermission('view lifebalance entitlement log');
+  $role->save();
+}
+
+/**
+ * Adds the self-serve trial switch. It stays off.
+ */
+function lifebalance_update_11009(): void {
+  $config = \Drupal::configFactory()->getEditable('lifebalance.settings');
+  if ($config->get('trial_enabled') === NULL) {
+    $config->set('trial_enabled', FALSE)->save(TRUE);
+  }
+}
+
+/**
+ * Switches the interface between Ukrainian and English by browser language.
+ */
+function lifebalance_update_11010(): void {
+  \Drupal::service('module_installer')->install(['language', 'locale']);
+  InterfaceLanguage::apply();
+}
+
+/**
+ * Stores English labels where the first save was discarded.
+ */
+function lifebalance_update_11011(): void {
+  InterfaceLanguage::apply();
+}
+
+/**
+ * Adds Russian and follows the visitor country instead of the browser.
+ */
+function lifebalance_update_11012(): void {
+  InterfaceLanguage::apply();
+}
+
+/**
+ * Allows the Google tag and stores an empty measurement id.
+ */
+function lifebalance_update_11013(): void {
+  $settings = \Drupal::configFactory()->getEditable('lifebalance.settings');
+  if (!is_string($settings->get('ga_measurement_id'))) {
+    $settings->set('ga_measurement_id', '')->save();
+  }
+  if (\Drupal::moduleHandler()->moduleExists('seckit')) {
+    $seckit = \Drupal::configFactory()->getEditable('seckit.settings');
+    $csp = $seckit->get('seckit_xss.csp');
+    if (is_array($csp)) {
+      $csp['script-src'] = "'self' https://www.googletagmanager.com";
+      $csp['img-src'] = "'self' data: https://www.google-analytics.com "
+        . 'https://www.googletagmanager.com';
+      $csp['connect-src'] = "'self' https://www.google-analytics.com "
+        . 'https://*.google-analytics.com https://*.analytics.google.com '
+        . 'https://www.googletagmanager.com';
+      $seckit->set('seckit_xss.csp', $csp)->save();
+    }
+  }
+  InterfaceLanguage::apply();
+}

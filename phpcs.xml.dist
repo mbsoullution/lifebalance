@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="lifebalance">
+  <description>Drupal and DrupalPractice checks for LifeBalance custom code.</description>
+
+  <file>web/modules/custom</file>
+  <file>web/themes/custom</file>
+
+  <arg name="extensions" value="php,module,inc,install,test,profile,theme,info,yml"/>
+  <arg value="sp"/>
+
+  <exclude-pattern>*/node_modules/*</exclude-pattern>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/build/*</exclude-pattern>
+  <exclude-pattern>web/modules/custom/lifebalance/data/*</exclude-pattern>
+
+  <config name="drupal_core_version" value="11"/>
+
+  <rule ref="Drupal"/>
+  <rule ref="DrupalPractice"/>
+</ruleset>

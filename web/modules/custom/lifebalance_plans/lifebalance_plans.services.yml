@@ -1,0 +1,35 @@
+services:
+  Drupal\lifebalance_plans\Form\OwnGoalForm:
+    autowire: true
+  Drupal\lifebalance_plans\Repository\GoalRepository:
+    autowire: true
+  Drupal\lifebalance_plans\Service\GoalManager:
+    autowire: true
+  Drupal\lifebalance_plans\Service\PlanManager:
+    autowire: true
+  Drupal\lifebalance_plans\Form\CurrentPlanForm:
+    autowire: true
+  Drupal\lifebalance_plans\Service\ReassessmentPrompt:
+    autowire: true
+  Drupal\lifebalance_plans\Service\RecommendationMatcher:
+    autowire: true
+  Drupal\lifebalance_plans\Service\RecommendationEngine:
+    autowire: true
+  Drupal\lifebalance_plans\EventSubscriber\PrivateCacheSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+  Drupal\lifebalance_plans\EventSubscriber\AnonymousLoginRedirectSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+  logger.channel.lifebalance_plans:
+    parent: logger.channel_base
+    arguments: ['lifebalance_plans']
+  Drupal\lifebalance_plans\Service\RecommendationImporter:
+    autowire: true
+    arguments:
+      $logger: '@logger.channel.lifebalance_plans'
+      $currentUser: '@current_user'
+      $connection: '@database'
+      $appRoot: '%app.root%'

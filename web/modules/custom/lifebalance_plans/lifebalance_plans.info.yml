@@ -1,0 +1,11 @@
+name: 'LifeBalance plans'
+type: module
+description: 'Recommendation library for LifeBalance.'
+package: LifeBalance
+core_version_requirement: ^11
+dependencies:
+  - drupal:filter
+  - drupal:options
+  - drupal:text
+  - drupal:views
+  - lifebalance:lifebalance

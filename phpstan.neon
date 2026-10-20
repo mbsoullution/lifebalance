@@ -1,0 +1,10 @@
+parameters:
+  level: 6
+  paths:
+    - web/modules/custom
+    - web/themes/custom
+  scanDirectories:
+    - web/core/tests/Drupal/FunctionalJavascriptTests
+  excludePaths:
+    - web/themes/custom/*/node_modules/*
+    - web/themes/custom/*/build/*

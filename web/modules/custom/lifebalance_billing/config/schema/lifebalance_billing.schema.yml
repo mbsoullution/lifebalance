@@ -1,0 +1,42 @@
+lifebalance_billing.plan.*:
+  type: config_entity
+  label: 'Billing plan'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+      constraints:
+        Regex:
+          pattern: '/^[a-z0-9_]{1,32}$/'
+          message: 'Plan ID must be a machine name of at most 32 characters.'
+        Length:
+          max: 32
+    label:
+      type: required_label
+      label: 'Label'
+    duration_days:
+      type: integer
+      label: 'Duration in days'
+      constraints:
+        Range:
+          min: 1
+          max: 3650
+    price_minor:
+      type: integer
+      label: 'Price in minor units'
+      constraints:
+        Range:
+          min: 1
+          max: 100000000
+    currency:
+      type: string
+      label: 'Currency'
+      constraints:
+        Regex:
+          pattern: '/^UAH$/'
+          message: 'Currency must be UAH.'
+    weight:
+      type: integer
+      label: 'Weight'

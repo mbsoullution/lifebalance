@@ -1,0 +1,8 @@
+langcode: ru
+status: true
+dependencies: {  }
+id: ru
+label: Русский
+direction: ltr
+weight: 1
+locked: false

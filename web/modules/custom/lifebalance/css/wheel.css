@@ -1,0 +1,127 @@
+.lifebalance-radar {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 1rem;
+}
+
+.lifebalance-radar__label {
+  font-family: system-ui, sans-serif;
+}
+
+.lifebalance-radar__guides,
+.lifebalance-radar__labels {
+  pointer-events: none;
+}
+
+.lifebalance-radar__hit {
+  pointer-events: all;
+}
+
+.lifebalance-radar__grow {
+  pointer-events: none;
+}
+
+.lifebalance-radar__sector:hover .lifebalance-radar__echo,
+.lifebalance-radar__sector:focus .lifebalance-radar__echo {
+  fill-opacity: 0.22;
+}
+
+.lifebalance-radar__sector {
+  cursor: pointer;
+}
+
+.lifebalance-radar__sector:hover .lifebalance-radar__hit,
+.lifebalance-radar__sector:focus .lifebalance-radar__hit {
+  fill-opacity: 0.22;
+}
+
+.lifebalance-sector {
+  scroll-margin-top: 5.5rem;
+  margin-bottom: 0.85rem;
+  padding: 0.9rem 1.1rem 0.35rem;
+  border: 2px solid transparent;
+  border-radius: 1.25rem;
+}
+
+.lifebalance-sector__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.75rem;
+}
+
+.lifebalance-sector__title {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.lifebalance-sector__row .lifebalance-progress {
+  margin: 0;
+  text-align: center;
+}
+
+.lifebalance-sector:hover {
+  background-color: color-mix(in srgb, var(--lifebalance-sector, #1f7a4d) 22%, white);
+}
+
+.lifebalance-sector:target,
+.lifebalance-sector.is-current {
+  border-color: #1f7a4d;
+  border-radius: 1.25rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.lifebalance-wheel) {
+    scroll-behavior: smooth;
+  }
+}
+
+.lifebalance-radar line,
+.lifebalance-radar circle,
+.lifebalance-radar polygon {
+  stroke: #c5ccd4;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.lifebalance-scale,
+.lifebalance-progress {
+  margin-bottom: 0.5rem;
+}
+
+.lifebalance-status:empty {
+  margin: 0;
+}
+
+.lifebalance-wheel .form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.75rem;
+}
+
+a.lifebalance-assess {
+  display: inline-block;
+  justify-self: end;
+  margin-top: 0;
+  padding: 0.45rem 0.9rem;
+  white-space: nowrap;
+  background: #1f7a4d;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.4rem;
+}
+
+a.lifebalance-assess:hover,
+a.lifebalance-assess:focus {
+  color: #fff;
+}
+
+@media (max-width: 360px) {
+  .lifebalance-wheel,
+  .lifebalance-radar {
+    max-width: 100%;
+  }
+}

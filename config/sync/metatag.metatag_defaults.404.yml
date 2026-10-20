@@ -1,0 +1,9 @@
+uuid: 3fb0b942-76c0-4b97-b6f1-ec67fc902421
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: puBstSLDz8mbaWU357zaqQDBGMGsJzG0j-TQNQkjg20
+id: '404'
+label: '404 page not found'
+tags: {  }

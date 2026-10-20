@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: HlN7eAN2N4JIHsYv56V4E7sqC9bS609KwvGFjyD_mgk
+langcode: uk
+uuid: 791562eb-b2f2-49a0-a194-56c2da4d8d37
+name: LifeBalance
+mail: admin@example.com
+slogan: 'Збалансуй своє життя.'
+page:
+  403: ''
+  404: ''
+  front: /welcome
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: uk
+mail_notification: null
