@@ -21,7 +21,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Admin list, card, and stage 0 statistics. Scores and notes stay out.
+ * Admin list, card, and stage 0 statistics.
+ *
+ * The list and the card stay aggregate. Wheels open on a separate route
+ * that only the site owner can reach.
  */
 final class AdminUserController extends ControllerBase {
 
@@ -105,11 +108,13 @@ final class AdminUserController extends ControllerBase {
     foreach ($records as $record) {
       $build['table']['#rows'][] = $this->tableRow($record, $emails);
     }
+    $this->wheelColumn($build, $records);
+    $this->moduleHandler()->alter('lifebalance_admin_user_list', $build, $records);
     return $build;
   }
 
   /**
-   * One account card without scores or notes.
+   * One account card. Scores stay on the owner's wheel page.
    *
    * @return array<string, mixed>
    *   A render array.
@@ -147,12 +152,16 @@ final class AdminUserController extends ControllerBase {
         '#title' => $this->t('До списку'),
         '#url' => Url::fromRoute('lifebalance.admin_users'),
       ],
-      'table' => [
-        '#type' => 'table',
-        '#rows' => $rows,
-      ],
-      'access' => $this->accessBlock($user),
     ];
+    $wheel = $this->wheelLink((int) $user->id());
+    if ($wheel !== []) {
+      $build['wheel'] = $wheel;
+    }
+    $build['table'] = [
+      '#type' => 'table',
+      '#rows' => $rows,
+    ];
+    $build['access'] = $this->accessBlock($user);
     $account = $user;
     $this->moduleHandler()->alter('lifebalance_user_card', $build, $account);
     return $build;
@@ -719,6 +728,47 @@ final class AdminUserController extends ControllerBase {
       return (string) $this->t('Безстроково');
     }
     return is_int($ends) ? $this->stats->formatTimestamp($ends, TRUE) : '—';
+  }
+
+  /**
+   * Adds a wheel link when the viewer is the site owner.
+   *
+   * @param array<string, mixed> $build
+   *   The list render array.
+   * @param list<array<string, int|string|null>> $records
+   *   Rows already placed in the table.
+   */
+  private function wheelColumn(array &$build, array $records): void {
+    $allowed = $this->currentUser()->hasPermission('administer lifebalance snapshots');
+    if (!$allowed) {
+      return;
+    }
+    $build['table']['#header'][] = (string) $this->t('Колесо');
+    foreach ($records as $index => $record) {
+      $build['table']['#rows'][$index][] = [
+        'data' => $this->wheelLink((int) $record['uid']),
+      ];
+    }
+  }
+
+  /**
+   * Link to one account's wheels, or an empty array without permission.
+   *
+   * @return array<string, mixed>
+   *   A link render element.
+   */
+  private function wheelLink(int $uid): array {
+    $allowed = $this->currentUser()->hasPermission('administer lifebalance snapshots');
+    if ($uid < 1 || !$allowed) {
+      return [];
+    }
+    return [
+      '#type' => 'link',
+      '#title' => $this->t('Відкрити'),
+      '#url' => Url::fromRoute('lifebalance.admin_user_wheel', [
+        'user' => $uid,
+      ]),
+    ];
   }
 
   /**

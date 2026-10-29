@@ -1,12 +1,23 @@
+.lifebalance-faq > h2 {
+  margin: 3.25rem 0 0.85rem;
+  font-size: 1.35rem;
+}
+
+.lifebalance-faq > h2:first-child {
+  margin-top: 0;
+}
+
 .lifebalance-faq details {
   border-bottom: 1px solid #d0d5dd;
+  scroll-margin-top: 1rem;
 }
 
 .lifebalance-faq summary {
   cursor: pointer;
-  padding: 0.85rem 0;
+  padding: 1.25rem 0;
   font-weight: 700;
   list-style: none;
+  color: #5a6570;
 }
 
 .lifebalance-faq summary::-webkit-details-marker {
@@ -31,5 +42,5 @@
 }
 
 .lifebalance-faq details p:last-child {
-  margin-bottom: 0.85rem;
+  margin-bottom: 1.15rem;
 }

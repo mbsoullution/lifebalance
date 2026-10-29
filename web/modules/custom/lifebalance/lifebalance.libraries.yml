@@ -54,6 +54,32 @@ faq:
     - core/drupal
     - core/once
 
+account-access:
+  css:
+    component:
+      css/account-access.css: {}
+  js:
+    js/account-access.js:
+      preprocess: false
+      attributes:
+        type: module
+  dependencies:
+    - core/drupal
+    - core/once
+
+login-icons:
+  css:
+    component:
+      css/login-icons.css: {}
+  js:
+    js/login-dialog.js:
+      preprocess: false
+      attributes:
+        type: module
+  dependencies:
+    - core/drupal
+    - core/once
+
 language-switcher:
   js:
     js/language-switcher.js:
@@ -63,6 +89,18 @@ language-switcher:
   dependencies:
     - core/drupal
     - core/once
+
+admin_toolbar_side:
+  css:
+    theme:
+      css/admin-toolbar.css: {}
+  js:
+    js/admin-toolbar.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/drupal.displace
+    - gin/navigation
 
 questionnaire:
   css:

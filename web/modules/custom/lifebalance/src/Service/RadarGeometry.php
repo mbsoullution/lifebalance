@@ -14,20 +14,16 @@ final class RadarGeometry {
   private const RADIUS = 70.0;
 
   /**
-   * Label arc above the top half. Glyphs extend outward.
+   * One arc for every name. The text is centered on this radius.
    */
-  private const LABEL_OUTER = 76.0;
-
-  /**
-   * Label arc outside the bottom half. Glyphs extend inward.
-   */
-  private const LABEL_INNER = 86.0;
+  private const LABEL_RADIUS = 80.0;
 
   /**
    * Builds axis endpoints and the score polygon.
    *
-   * @param list<array{label: string, color: string, value: int|null}> $sectors
-   *   Sectors in display order. A NULL value is not assessed.
+   * @param list<array{label: string, color: string, value: int|float|null}> $sectors
+   *   Sectors in display order. A NULL value is not assessed. A float keeps
+   *   one decimal, such as 8.5.
    *
    * @return array<string, mixed>
    *   Axis endpoints, ring radii, and the polygon points.
@@ -55,7 +51,7 @@ final class RadarGeometry {
         $this->sectorId($sector),
         $sector['label'],
       );
-      $ratio = $sector['value'] === NULL ? 0.0 : $sector['value'] / 10;
+      $ratio = $sector['value'] === NULL ? 0.0 : (float) $sector['value'] / 10;
       if ($sector['value'] !== NULL) {
         $assessed = TRUE;
       }
@@ -155,8 +151,8 @@ final class RadarGeometry {
    *   Score is empty when the sector is not assessed. Hit is the full slice
    *   when the sector can scroll to its form.
    */
-  private function wedge(float $angle, int $count, string $color, ?int $value, string $id, string $label): array {
-    $ratio = $value === NULL ? 0.0 : $value / 10;
+  private function wedge(float $angle, int $count, string $color, int|float|null $value, string $id, string $label): array {
+    $ratio = $value === NULL ? 0.0 : (float) $value / 10;
     return [
       'color' => $color,
       'score' => $this->wedgePath($angle, $count, $ratio),
@@ -169,7 +165,7 @@ final class RadarGeometry {
   /**
    * Sector machine name, or empty when this chart is not a form control.
    *
-   * @param array{label: string, color: string, value: int|null, id?: string} $sector
+   * @param array{label: string, color: string, value: int|float|null, id?: string} $sector
    *   One sector row.
    */
   private function sectorId(array $sector): string {
@@ -227,7 +223,7 @@ final class RadarGeometry {
     }
     $span = 2 * M_PI / $count;
     $lower = sin($angle + ($span / 2)) > 0;
-    $radius = $lower ? self::LABEL_INNER : self::LABEL_OUTER;
+    $radius = self::LABEL_RADIUS;
     $from = $lower ? $angle + $span : $angle;
     $to = $lower ? $angle : $angle + $span;
     return 'M ' . $this->position(cos($from) * $radius)

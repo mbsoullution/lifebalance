@@ -48,6 +48,13 @@ final class ThemeHooks {
         ],
         'template' => 'lifebalance-language-switcher',
       ],
+      'lifebalance_login_icons' => [
+        'variables' => [
+          'google_url' => NULL,
+          'facebook_url' => NULL,
+        ],
+        'template' => 'lifebalance-login-icons',
+      ],
       'lifebalance_trend' => [
         'variables' => [
           'geometry' => [

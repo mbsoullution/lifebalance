@@ -1,7 +1,7 @@
 .lifebalance-compare,
 .lifebalance-trend,
 .lifebalance-trend-page {
-  max-width: min(40rem, 100%);
+  max-width: 100%;
   overflow-wrap: anywhere;
 }
 

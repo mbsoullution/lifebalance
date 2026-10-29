@@ -25,14 +25,6 @@ import { renderRadar } from './svg-radar.js';
           color: sector.color,
         }));
         const series = [{ values: scores, style: 'solid' }];
-        const toggle = form.querySelector('[data-lifebalance-show-guide]');
-        if (toggle instanceof HTMLInputElement && toggle.checked) {
-          const guides = {};
-          for (const sector of settings.sectors) {
-            guides[sector.id] = sector.guide;
-          }
-          series.push({ values: guides, style: 'dashed' });
-        }
         previous.replaceWith(renderRadar({ axes, series, size: 200 }));
         for (const sector of settings.sectors) {
           writeScore(form, sector.id, scores[sector.id]);
@@ -44,7 +36,7 @@ import { renderRadar } from './svg-radar.js';
         timer = window.setTimeout(() => {
           const current = ++request;
           const scores = collectScores(settings);
-          saveDraft(settings.draftUrl, scores, answerPayload(settings)).then((ok) => {
+          saveDraft(settings.draftUrl, wholeScores(scores), answerPayload(settings)).then((ok) => {
             if (current !== request || !status) {
               return;
             }
@@ -53,23 +45,8 @@ import { renderRadar } from './svg-radar.js';
         }, 1000);
       };
 
-      if (settings.sectors.some((sector) => Number.isInteger(sector.guide))) {
-        const label = document.createElement('label');
-        label.className = 'lifebalance-guide-toggle';
-        const input = document.createElement('input');
-        input.type = 'checkbox';
-        input.dataset.lifebalanceShowGuide = '1';
-        label.append(input, document.createTextNode(' Показати орієнтир'));
-        const radar = form.querySelector('svg.lifebalance-radar');
-        radar?.before(label);
-        input.addEventListener('change', redraw);
-      }
-
       form.addEventListener('input', (event) => {
         if (!(event.target instanceof HTMLInputElement)) {
-          return;
-        }
-        if (event.target.dataset.lifebalanceShowGuide) {
           return;
         }
         if (event.target.type !== 'range' && event.target.type !== 'checkbox') {
@@ -80,9 +57,6 @@ import { renderRadar } from './svg-radar.js';
       });
       form.addEventListener('change', (event) => {
         if (!(event.target instanceof HTMLInputElement) || event.target.type !== 'checkbox') {
-          return;
-        }
-        if (event.target.dataset.lifebalanceShowGuide) {
           return;
         }
         redraw();
@@ -202,9 +176,24 @@ function collectScores(settings) {
   const scores = {};
   for (const sector of settings.sectors) {
     const value = sector.score;
-    scores[sector.id] = Number.isInteger(value) && value >= 0 && value <= 10 ? value : null;
+    const numeric = typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 10;
+    scores[sector.id] = numeric ? value : null;
   }
   return scores;
+}
+
+/**
+ * Whole numbers only. The draft rejects a one-decimal score.
+ *
+ * @param {Record<string, number|null>} scores
+ * @returns {Record<string, number|null>}
+ */
+function wholeScores(scores) {
+  const stored = {};
+  for (const [id, value] of Object.entries(scores)) {
+    stored[id] = Number.isInteger(value) ? value : null;
+  }
+  return stored;
 }
 
 /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\lifebalance\Functional;
 
+use Drupal\lifebalance\Install\InterfaceLanguage;
 use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
@@ -19,6 +20,7 @@ final class LandingPageTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
+    'block',
     'lifebalance',
   ];
 
@@ -31,6 +33,7 @@ final class LandingPageTest extends BrowserTestBase {
    * The sample is public, and the create link leads toward the wheel.
    */
   public function testSampleWheelAndCreateLink(): void {
+    InterfaceLanguage::placeLoginIcons();
     $this->drupalGet('/welcome');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains('Що таке колесо балансу');
@@ -57,11 +60,18 @@ final class LandingPageTest extends BrowserTestBase {
     $this->assertSession()->linkExists('Створити власне колесо');
     $this->assertSession()->linkNotExists('Запитання');
     $this->assertSession()->linkNotExists('Оферта');
+    $this->assertSession()->elementNotExists('css', '#login');
+    $this->assertSession()->elementExists('css', 'dialog.lifebalance-login-dialog');
+    $this->assertSession()->buttonExists('Увійти з паролем');
+    $this->clickLink('Створити власне колесо');
+    $this->assertSession()->addressMatches('#/user/login#');
+    $this->assertSession()->elementExists('css', 'dialog.lifebalance-login-dialog form.lifebalance-login-form');
+    $this->assertSession()->elementsCount('css', 'form.user-login-form', 1);
+    $this->assertSession()->pageTextContains('ВХІД');
     $this->assertSession()->fieldExists("Ім'я або пошта");
     $this->assertSession()->fieldExists('Пароль');
     $this->assertSession()->buttonExists('Увійти');
-    $this->clickLink('Створити власне колесо');
-    $this->assertSession()->addressMatches('#/user/login#');
+    $this->assertSession()->buttonExists('Увійти з паролем');
 
     $account = $this->drupalCreateUser();
     $this->drupalLogin($account);

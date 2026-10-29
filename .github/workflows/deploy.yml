@@ -1,0 +1,155 @@
+name: Deploy
+
+# Manual production pipeline for www.mbprotest.site.
+# The default action is plan: it reads the server and does not publish a release.
+# deploy and rollback stay blocked until confirm is deploy-www.mbprotest.site.
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: plan is a dry run. deploy and rollback need the confirmation phrase.
+        type: choice
+        options:
+          - plan
+          - deploy
+          - rollback
+        default: plan
+      confirm:
+        description: Type deploy-www.mbprotest.site for deploy or rollback.
+        required: false
+        type: string
+        default: ""
+
+concurrency:
+  group: production-www-mbprotest-site
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: Check the branch and confirmation
+    runs-on: ubuntu-latest
+    outputs:
+      release_id: ${{ steps.id.outputs.release_id }}
+    steps:
+      - name: Require main
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "Production actions run only from main. This ref is $GITHUB_REF."
+            echo "This repository currently publishes master. Push main before the first deploy."
+            exit 1
+          fi
+
+      - name: Require confirmation
+        env:
+          ACTION: ${{ inputs.action }}
+          CONFIRM: ${{ inputs.confirm }}
+        run: |
+          if [ "$ACTION" != "plan" ] && [ "$CONFIRM" != "deploy-www.mbprotest.site" ]; then
+            echo "Refusing $ACTION without the confirmation phrase."
+            exit 1
+          fi
+
+      - id: id
+        name: Release id
+        run: echo "release_id=$(date -u +%Y%m%dT%H%M%SZ)-${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: Build the production tree
+    needs: gate
+    if: inputs.action != 'rollback'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+          tools: composer:v2
+          extensions: mbstring, xml, curl, zip, gd, intl
+
+      - name: Validate and install
+        run: |
+          composer validate --no-check-publish --no-interaction
+          composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+
+      - name: Assemble the release
+        run: |
+          mkdir -p release-src
+          rsync -a --exclude-from=scripts/deploy/rsync-excludes.txt ./ release-src/
+          test -f release-src/web/index.php
+          test -f release-src/web/.htaccess
+          test -f release-src/vendor/bin/drush
+          test -f release-src/config/sync/core.extension.yml
+          test ! -e release-src/web/sites/default/settings.local.php
+          test ! -e release-src/web/sites/default/settings.ddev.php
+          test ! -e release-src/.env
+          test ! -d release-src/web/sites/default/files
+
+      - name: Upload the release
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: release-src/
+          retention-days: 5
+          if-no-files-found: error
+
+  remote:
+    name: Contact production
+    needs: [gate, build]
+    if: >-
+      always() &&
+      needs.gate.result == 'success' &&
+      (needs.build.result == 'success' ||
+       (needs.build.result == 'skipped' && inputs.action == 'rollback'))
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://www.mbprotest.site
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download the release
+        if: inputs.action != 'rollback'
+        uses: actions/download-artifact@v4
+        with:
+          name: release
+          path: release-src
+
+      - name: Run the selected action
+        env:
+          ACTION: ${{ inputs.action }}
+          CONFIRM: ${{ inputs.confirm }}
+          RELEASE_ID: ${{ needs.gate.outputs.release_id }}
+          SOURCE_DIR: ${{ github.workspace }}/release-src
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          DEPLOY_ROOT: ${{ secrets.DEPLOY_ROOT }}
+          PHP_BIN: ${{ secrets.PHP_BIN }}
+        run: bash scripts/deploy/runner.sh
+
+      - name: Explain a failure
+        if: failure()
+        run: |
+          {
+            echo "The production action failed."
+            echo "www/shared was not a copy destination and was not deleted."
+            echo "A failed deploy does not move the current symlink."
+            echo "An incomplete directory under releases/ can be left behind. It is not live."
+            echo "A database restore was not run."
+          } >> "$GITHUB_STEP_SUMMARY"

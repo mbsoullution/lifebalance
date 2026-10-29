@@ -130,16 +130,6 @@ final class AccountDataForm extends FormBase {
       '#title' => $this->t('Завантажити CSV'),
       '#url' => Url::fromRoute('lifebalance.export_csv'),
     ];
-    $form['faq'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Запитання'),
-      '#url' => Url::fromRoute('lifebalance.faq'),
-    ];
-    $form['privacy'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Конфіденційність'),
-      '#url' => Url::fromRoute('lifebalance.privacy'),
-    ];
     if ((int) $account->id() > 1) {
       $form['delete_account'] = [
         '#type' => 'link',

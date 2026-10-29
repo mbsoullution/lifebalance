@@ -122,7 +122,7 @@ function appendLabels(svg, center, axes) {
     const angle = angleAt(index, axes.length);
     const span = axes.length === 0 ? 0 : (2 * Math.PI) / axes.length;
     const lower = Math.sin(angle + (span / 2)) > 0;
-    const radius = lower ? 86 : 76;
+    const radius = 80;
     const from = lower ? angle + span : angle;
     const to = lower ? angle : angle + span;
     const sweep = lower ? 0 : 1;
@@ -138,6 +138,7 @@ function appendLabels(svg, center, axes) {
     text.setAttribute('fill', '#243040');
     text.setAttribute('font-size', '4.2');
     text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('dominant-baseline', 'central');
     const pathText = element('textPath');
     pathText.setAttribute('href', `#${id}`);
     pathText.setAttribute('startOffset', '50%');

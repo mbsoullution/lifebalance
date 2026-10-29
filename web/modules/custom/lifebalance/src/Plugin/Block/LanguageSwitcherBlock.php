@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Language switcher as a short list: UK, RU, EN.
+ * Language switcher as a short list: UA, RU, EN.
  */
 #[Block(
   id: 'lifebalance_language_switcher',
@@ -34,7 +34,7 @@ final class LanguageSwitcherBlock extends BlockBase implements
    * Abbreviations shown in the list. The codes are language codes.
    */
   private const LABELS = [
-    'uk' => 'UK',
+    'uk' => 'UA',
     'ru' => 'RU',
     'en' => 'EN',
   ];

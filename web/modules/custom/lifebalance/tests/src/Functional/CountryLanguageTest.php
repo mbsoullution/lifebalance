@@ -66,7 +66,7 @@ final class CountryLanguageTest extends BrowserTestBase {
     $this->drupalGet('/welcome', ['query' => ['language' => 'uk']]);
     $this->assertSession()->pageTextContains('Створити власне колесо');
     $select = $this->assertSession()->selectExists('language');
-    $this->assertSame(['UK', 'RU', 'EN'], $this->optionLabels($select));
+    $this->assertSame(['UA', 'RU', 'EN'], $this->optionLabels($select));
     $russian = $select->find('css', 'option[value="ru"]');
     $this->assertNotNull($russian);
     $target = $russian->getAttribute('data-url');

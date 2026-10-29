@@ -4,14 +4,20 @@
  * Main menu. A parent with children opens a list and stays a link.
  */
 #}
-{{ _self.links(items, attributes) }}
+{{ _self.links(items, attributes, '', null) }}
 
-{% macro links(items, attributes) %}
+{% macro links(items, attributes, parent_title, parent_url) %}
   {% if items %}
     {% if attributes %}
       <ul{{ attributes.addClass('navbar-nav') }}>
     {% else %}
       <ul class="lifebalance-menu__sub">
+        <li class="lifebalance-menu__back">
+          <button type="button" class="lifebalance-menu__backbutton" aria-label="{{ 'Назад'|t }}"></button>
+          {% if parent_url %}
+            {{ link(parent_title, parent_url, { 'class': ['lifebalance-menu__sublink'] }) }}
+          {% endif %}
+        </li>
     {% endif %}
     {% for item in items %}
       {% set item_classes = ['nav-item'] %}
@@ -28,7 +34,8 @@
       <li{{ item.attributes.addClass(item_classes) }}>
         {{ link(item.title, item.url, { 'class': link_classes }) }}
         {% if item.below %}
-          {{ _self.links(item.below, false) }}
+          <button type="button" class="lifebalance-menu__toggle" aria-expanded="false" aria-label="{{ 'Відкрити підменю'|t }}"></button>
+          {{ _self.links(item.below, false, item.title, item.url) }}
         {% endif %}
       </li>
     {% endfor %}

@@ -5,5 +5,7 @@ style:
       css/brand.css: {}
   js:
     build/js/main.script.js: {}
+    js/menu.js: {}
   dependencies:
     - core/drupal
+    - core/once

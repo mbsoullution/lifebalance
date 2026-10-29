@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\lifebalance\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
 use Drupal\lifebalance\Seo\PublicMeta;
 
 /**
@@ -33,11 +32,6 @@ final class PolicyController extends ControllerBase {
         $this->t('Оплата йде на сторінку платіжного сервісу. Цей сайт не отримує номер картки.'),
         $this->t('Доступ після оплати відкривається після підтвердження платежу, не після повернення з платіжної сторінки.'),
       ],
-      [
-        'lifebalance.faq' => $this->t('Запитання'),
-        'lifebalance.refunds' => $this->t('Повернення'),
-        'lifebalance.privacy' => $this->t('Конфіденційність'),
-      ],
     );
   }
 
@@ -57,41 +51,27 @@ final class PolicyController extends ControllerBase {
         $this->t('Часткове повернення саме не завершує доступ. Рішення про доступ ухвалюється окремо.'),
         $this->t('Повернення оформлюється у продавця. Номер картки на цьому сайті не вводиться.'),
       ],
-      [
-        'lifebalance.faq' => $this->t('Запитання'),
-        'lifebalance.terms' => $this->t('Оферта'),
-        'lifebalance.privacy' => $this->t('Конфіденційність'),
-      ],
     );
   }
 
   /**
-   * Paragraphs, links, and the public metatag pair.
+   * Paragraphs and the public metatag pair.
    *
    * @param string $route
    *   Public route that supplies the title and description.
    * @param list<\Drupal\Core\StringTranslation\TranslatableMarkup> $paragraphs
    *   Notice paragraphs.
-   * @param array<string, \Drupal\Core\StringTranslation\TranslatableMarkup> $links
-   *   Link titles keyed by route name.
    *
    * @return array<string, mixed>
    *   A render array.
    */
-  private function page(string $route, array $paragraphs, array $links): array {
+  private function page(string $route, array $paragraphs): array {
     $build = [];
     foreach ($paragraphs as $index => $text) {
       $build['p' . $index] = [
         '#type' => 'html_tag',
         '#tag' => 'p',
         '#value' => $text,
-      ];
-    }
-    foreach ($links as $link_route => $link_title) {
-      $build['link_' . count($build)] = [
-        '#type' => 'link',
-        '#title' => $link_title,
-        '#url' => Url::fromRoute($link_route),
       ];
     }
     $meta = $this->publicMeta->elements($route);

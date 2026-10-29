@@ -10,15 +10,39 @@
 }
 
 .lifebalance-questionnaire__title,
-.lifebalance-questionnaire__heading .lifebalance-progress {
+.lifebalance-questionnaire__heading .lifebalance-progress,
+.lifebalance-questionnaire__heading .lifebalance-score {
   margin: 0;
 }
 
-.lifebalance-questionnaire__heading .lifebalance-progress {
+.lifebalance-questionnaire__figures {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
   margin-left: auto;
+}
+
+.lifebalance-questionnaire__heading .lifebalance-progress,
+.lifebalance-questionnaire__heading .lifebalance-score {
   font-size: 2rem;
   font-weight: 700;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .lifebalance-questionnaire__heading {
+    flex-wrap: wrap;
+  }
+
+  .lifebalance-questionnaire__figures {
+    margin-left: 0;
+  }
+
+  .lifebalance-questionnaire__heading .lifebalance-progress,
+  .lifebalance-questionnaire__heading .lifebalance-score {
+    font-size: 1.5rem;
+  }
 }
 
 .lifebalance-questionnaire .form-radios {
@@ -50,6 +74,10 @@
   align-items: center;
   min-height: 2.75rem;
   padding: 0.25rem 0.5rem;
+}
+
+.lifebalance-questionnaire .lifebalance-status:empty {
+  display: none;
 }
 
 .lifebalance-questionnaire .form-actions {

@@ -289,6 +289,9 @@ msgstr "Sector"
 msgid "Оцінка"
 msgstr "Score"
 
+msgid "Відповіді"
+msgstr "Answers"
+
 msgid "Орієнтир"
 msgstr "Guide"
 
@@ -1033,6 +1036,12 @@ msgstr "Sign in"
 msgid "Вхід"
 msgstr "Sign-in"
 
+msgid "ВХІД"
+msgstr "SIGN IN"
+
+msgid "Закрити"
+msgstr "Close"
+
 msgid "Колесо зводить вісім сфер на одну фігуру."
 msgstr "The wheel brings eight areas into one figure."
 
@@ -1125,6 +1134,18 @@ msgstr "Questions | LifeBalance"
 
 msgid "Відповіді про колесо, зрізи, доступ і дані."
 msgstr "Answers about the wheel, snapshots, access, and data."
+
+msgid "Часті запитання — Колесо балансу"
+msgstr "Frequent questions — Balance wheel"
+
+msgid "Відкрити підменю"
+msgstr "Open submenu"
+
+msgid "Назад"
+msgstr "Back"
+
+msgid "Відповіді про оцінювання, приватність, історію, розширений доступ і оплату."
+msgstr "Answers about assessment, privacy, history, extended access, and payment."
 
 msgid "Що це за сайт?"
 msgstr "What is this site?"
@@ -1567,11 +1588,20 @@ msgstr "Catalog statements have not had psychometric validation."
 msgid "TODO для власника сайту: вкажіть юридичну особу, контактну адресу і юрисдикцію."
 msgstr "TODO for the site owner: specify the legal entity, contact address, and jurisdiction."
 
-msgid "Якщо ви просите Facebook видалити дані, видаліть акаунт на сторінці «Мої дані». TODO для власника: додайте в застосунок Meta посилання на цю сторінку як інструкцію видалення даних і, якщо Meta цього вимагає, окрему адресу callback."
-msgstr "If you ask Facebook to delete data, delete the account on the “My data” page. TODO for the owner: add a link to this page in the Meta app as the data-deletion instructions and, if Meta requires it, a separate callback address."
+msgid "Якщо ви просите Facebook видалити дані, видаліть акаунт на сторінці «Мої дані»."
+msgstr "If you ask Facebook to delete data, delete the account on the “My data” page."
 
-msgid "Технічний доступ до бази має адміністратор сервера. Резервні копії теж містять ці дані. Адміністратор сайту не бачить зрізи в інтерфейсі."
-msgstr "The server administrator has technical access to the database. Backups also contain this data. The site administrator does not see snapshots in the interface."
+msgid "Технічний доступ до бази має адміністратор сервера."
+msgstr "The server administrator has technical access to the database."
+
+msgid "Резервні копії теж містять ці дані."
+msgstr "Backups also contain this data."
+
+msgid "Власник сайту може відкрити збережені колеса."
+msgstr "The site owner can open saved wheels."
+
+msgid "Інші ролі бачать лише кількість зрізів і дату останнього."
+msgstr "Other roles see only the number of snapshots and the date of the latest one."
 
 msgid "TODO для власника: опишіть, як довго зберігаються резервні копії і коли особисті дані з них видаляються."
 msgstr "TODO for the owner: describe how long backups are kept and when personal data is removed from them."
@@ -1988,3 +2018,114 @@ msgstr "Reassess"
 
 msgid "Зберегти результат"
 msgstr "Save the result"
+
+msgid "Зареєструватися"
+msgstr "Create an account"
+
+msgid "Отримати преміум"
+msgstr "Get Premium"
+
+msgid "Обліковий запис зберігає колесо й історію."
+msgstr "An account keeps the wheel and the history."
+
+msgid "Увійти можна через Google, Facebook або електронну пошту."
+msgstr "You can sign in with Google, Facebook, or email."
+
+msgid "Продовжити з Google"
+msgstr "Continue with Google"
+
+msgid "Продовжити з Facebook"
+msgstr "Continue with Facebook"
+
+msgid "Або за електронною поштою"
+msgstr "Or with email"
+
+msgid "Прізвище"
+msgstr "Surname"
+
+msgid "Мобільний телефон"
+msgstr "Mobile phone"
+
+msgid "Необов'язково"
+msgstr "Optional"
+
+msgid "Електронна пошта"
+msgstr "Email"
+
+msgid "Створити обліковий запис"
+msgstr "Create the account"
+
+msgid "Вкажіть ім'я."
+msgstr "Enter a given name."
+
+msgid "Вкажіть прізвище."
+msgstr "Enter a surname."
+
+msgid "Вкажіть електронну пошту."
+msgstr "Enter an email address."
+
+msgid "Ця пошта вже зареєстрована. Увійдіть наявним способом."
+msgstr "This email is already registered. Sign in with the existing method."
+
+msgid "Пароль має містити щонайменше 8 символів."
+msgstr "The password needs at least 8 characters."
+
+msgid "Вкажіть телефон цифрами або залиште поле порожнім."
+msgstr "Enter the phone in digits, or leave the field empty."
+
+msgid "Спробуйте пізніше."
+msgstr "Try again later."
+
+msgid "Ви вже маєте обліковий запис."
+msgstr "You already have an account."
+
+msgid "Обліковий запис створено."
+msgstr "The account has been created."
+
+msgid "Що дає преміум"
+msgstr "What Premium adds"
+
+msgid "Після реєстрації: колесо, 80 тверджень, історія, порівняння і динаміка."
+msgstr "After registration: the wheel, 80 statements, history, comparison, and trend."
+
+msgid "Преміум додає"
+msgstr "Premium adds"
+
+msgid "Ще 80 поглиблених тверджень."
+msgstr "80 more in-depth statements."
+
+msgid "Рекомендації за вашими відповідями."
+msgstr "Prompts based on your answers."
+
+msgid "Особисті цілі з чеклістами."
+msgstr "Personal goals with checklists."
+
+msgid "План на 30 днів."
+msgstr "A 30-day plan."
+
+msgid "Зараз розширений доступ відкривається за запрошенням."
+msgstr "Extended access is currently opened by invitation."
+
+msgid "Реєстрація і преміум"
+msgstr "Registration and Premium"
+
+msgid "Аватар"
+msgstr "Avatar"
+
+msgid "Обов'язково. PNG, JPG, GIF або WebP, до 2 МБ."
+msgstr "Required. PNG, JPG, GIF, or WebP, up to 2 MB."
+
+msgid "Додайте аватар."
+msgstr "Add an avatar."
+
+msgid "Аватар має бути зображенням PNG, JPG, GIF або WebP."
+msgstr "The avatar must be a PNG, JPG, GIF, or WebP image."
+
+msgid "Аватар має бути не більшим за 2 МБ."
+msgstr "The avatar must be no larger than 2 MB."
+
+msgid "Аватар має бути не більшим за 2000×2000 пікселів."
+msgstr "The avatar must be no larger than 2000×2000 pixels."
+
+msgid "Не вдалося зберегти аватар."
+msgstr "The avatar could not be saved."

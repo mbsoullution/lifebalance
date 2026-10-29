@@ -1,0 +1,32 @@
+/**
+ * @file
+ * Pins the Gin admin sidebar to the right edge.
+ */
+
+html .gin--navigation .admin-toolbar {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+  border-inline-end: 0;
+  border-inline-start: 1px solid var(--gin-border-color-layer);
+}
+
+html .admin-toolbar__displace-placeholder {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+@media (min-width: 61em) {
+  html .admin-toolbar ~ .dialog-off-canvas-main-canvas {
+    margin-inline-start: 0;
+    margin-inline-end: var(--drupal-displace-offset-right, var(--sidebar-width));
+  }
+
+  html .gin--navigation .gin-secondary-toolbar--frontend {
+    margin-inline-start: 0;
+    margin-inline-end: var(--drupal-displace-offset-right, var(--sidebar-width));
+  }
+}
+
+html .gin--navigation-top-bar {
+  padding-inline: var(--gin-spacing-m) calc(var(--admin-toolbar-sidebar-width) + var(--gin-spacing-m)) !important;
+}

@@ -88,6 +88,13 @@ final class InterfaceLanguage {
   /**
    * Imports the shipped English and Russian interface translations.
    */
+  public static function importTranslations(): void {
+    self::translations();
+  }
+
+  /**
+   * Imports the English and Russian catalogs shipped with the module.
+   */
   private static function translations(): void {
     foreach (['en', 'ru'] as $langcode) {
       self::importCatalog($langcode);
@@ -185,6 +192,115 @@ final class InterfaceLanguage {
     ];
     if ($id === 'lifebalance_theme_languageswitcher') {
       $values['uuid'] = 'a7c3e1d4-6b28-4f0a-9c55-1e8d4b2a7f60';
+    }
+    Block::create($values)->save();
+  }
+
+  /**
+   * Places the register and premium prompts under the header.
+   */
+  public static function placeAccountAccess(): void {
+    if (!\Drupal::moduleHandler()->moduleExists('block')) {
+      return;
+    }
+    $handler = \Drupal::service('theme_handler');
+    if (!$handler->themeExists('lifebalance_theme')) {
+      return;
+    }
+    $regions = $handler->getTheme('lifebalance_theme')->info['regions'] ?? [];
+    if (!isset($regions['header'])) {
+      return;
+    }
+    $id = 'lifebalance_theme_account_access';
+    $storage = \Drupal::entityTypeManager()->getStorage('block');
+    $existing = $storage->load($id);
+    if ($existing instanceof Block) {
+      $placed = $existing->getPluginId() === 'lifebalance_account_access'
+        && $existing->getRegion() === 'header';
+      if ($placed) {
+        return;
+      }
+      $existing->delete();
+    }
+    Block::create([
+      'id' => $id,
+      'uuid' => '7c2e9a14-6b80-4d3f-9a51-2f8e0c6b1d44',
+      'plugin' => 'lifebalance_account_access',
+      'theme' => 'lifebalance_theme',
+      'region' => 'header',
+      'weight' => -20,
+      'status' => TRUE,
+      'settings' => [
+        'label' => 'Account access',
+        'label_display' => '0',
+      ],
+    ])->save();
+  }
+
+  /**
+   * Places the anonymous sign-in icons in the header.
+   */
+  public static function placeLoginIcons(): void {
+    if (!\Drupal::moduleHandler()->moduleExists('block')) {
+      return;
+    }
+    $themes = [];
+    $default = \Drupal::config('system.theme')->get('default');
+    if (is_string($default) && $default !== '') {
+      $themes[] = $default;
+    }
+    $handler = \Drupal::service('theme_handler');
+    if ($handler->themeExists('lifebalance_theme')) {
+      $themes[] = 'lifebalance_theme';
+    }
+    foreach (array_unique($themes) as $theme) {
+      self::placeLoginBlock($theme);
+    }
+  }
+
+  /**
+   * Places one sign-in block when the theme has a header region.
+   */
+  private static function placeLoginBlock(string $theme): void {
+    $handler = \Drupal::service('theme_handler');
+    if (!$handler->themeExists($theme)) {
+      return;
+    }
+    $regions = $handler->getTheme($theme)->info['regions'] ?? [];
+    if (isset($regions['navbar_right'])) {
+      $region = 'navbar_right';
+    }
+    elseif (isset($regions['header'])) {
+      $region = 'header';
+    }
+    else {
+      return;
+    }
+    $id = $theme . '_login_icons';
+    $storage = \Drupal::entityTypeManager()->getStorage('block');
+    $existing = $storage->load($id);
+    if ($existing instanceof Block) {
+      $placed = $existing->getPluginId() === 'lifebalance_login_icons'
+        && $existing->getRegion() === $region;
+      if ($placed) {
+        return;
+      }
+      $existing->delete();
+    }
+    $values = [
+      'id' => $id,
+      'plugin' => 'lifebalance_login_icons',
+      'theme' => $theme,
+      'region' => $region,
+      'weight' => 0,
+      'status' => TRUE,
+      'settings' => [
+        'label' => 'Login',
+        'label_display' => '0',
+      ],
+    ];
+    if ($id === 'lifebalance_theme_login_icons') {
+      $values['uuid'] = 'c3a91e70-4b2d-4f68-9a15-6e0d8c2b7f41';
     }
     Block::create($values)->save();
   }

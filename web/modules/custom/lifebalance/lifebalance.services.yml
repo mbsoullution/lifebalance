@@ -67,10 +67,18 @@ services:
     autowire: true
   Drupal\lifebalance\Service\AdminUserStats:
     autowire: true
+  Drupal\lifebalance\Service\LoginEntry:
+    autowire: true
   Drupal\lifebalance\Service\FunnelStats:
     autowire: true
   Drupal\lifebalance\SocialAuth\ProviderLinks:
     autowire: true
+  Drupal\lifebalance\Breadcrumb\MenuTrailBreadcrumbBuilder:
+    autowire: true
+    arguments:
+      $router: '@router.no_access_checks'
+    tags:
+      - { name: breadcrumb_builder, priority: 1000 }
   Drupal\lifebalance\Service\CriterionImporter:
     autowire: true
     arguments:

@@ -138,11 +138,11 @@ lifebalance.settings:
   weight: 12
 
 lifebalance.admin_users:
-  title: 'Користувачі'
-  description: 'Стан колеса без оцінок і нотаток.'
+  title: 'Користувачі LifeBalance'
+  description: 'Облікові записи, доступ і стан колеса. Оцінки й нотатки відкриває лише власник сайту.'
   route_name: lifebalance.admin_users
-  parent: system.admin_config
-  weight: 14
+  parent: system.admin
+  weight: 5
 
 lifebalance.admin_stats:
   title: 'Статистика'

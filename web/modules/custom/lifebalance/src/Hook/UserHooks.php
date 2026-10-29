@@ -8,6 +8,8 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\file\FileInterface;
+use Drupal\file\FileUsage\FileUsageInterface;
 use Drupal\lifebalance\Entity\Criterion;
 use Drupal\lifebalance\Service\EntitlementLog;
 use Drupal\user\UserDataInterface;
@@ -27,6 +29,7 @@ final class UserHooks {
     private readonly EntitlementLog $entitlementLog,
     private readonly Connection $database,
     private readonly LoggerChannelFactoryInterface $loggerFactory,
+    private readonly FileUsageInterface $fileUsage,
   ) {}
 
   /**
@@ -39,6 +42,7 @@ final class UserHooks {
       return;
     }
     $this->deleteSnapshots($uid);
+    $this->deleteAvatar($uid);
     $this->deleteEntitlements($uid);
     $this->deleteTrialUsage($uid);
     $this->entitlementLog->anonymizeTarget($uid);
@@ -63,6 +67,26 @@ final class UserHooks {
       return;
     }
     $storage->delete($storage->loadMultiple($ids));
+  }
+
+  /**
+   * Deletes the registration avatar stored for this uid.
+   */
+  private function deleteAvatar(int $uid): void {
+    $profile = $this->userData->get('lifebalance', $uid, 'profile');
+    if (!is_array($profile)) {
+      return;
+    }
+    $fid = $profile['avatar'] ?? NULL;
+    if (!is_int($fid) && !(is_string($fid) && ctype_digit($fid))) {
+      return;
+    }
+    $file = $this->entityTypeManager->getStorage('file')->load((int) $fid);
+    if (!$file instanceof FileInterface) {
+      return;
+    }
+    $this->fileUsage->delete($file, 'lifebalance', 'user', (string) $uid, 0);
+    $file->delete();
   }
 
   /**

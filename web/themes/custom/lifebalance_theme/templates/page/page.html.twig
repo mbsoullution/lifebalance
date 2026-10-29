@@ -3,18 +3,27 @@
  * @file
  * Page wrapper. Header branding comes from the navbar region.
  * The footer always names the manufacturer.
+ *
+ * Wheel submenu pages use the same reading column as the front page.
  */
 #}
 {% set page_attributes = attributes ?: create_attribute() %}
 {% set page_classes = ['page']|merge(page_utility_classes ?: []) %}
 
 <div {{ page_attributes.addClass(page_classes) }}>
-  {% include 'radix:page-navigation' %}
+  {% include '@lifebalance_theme/navigation/lifebalance-navigation.html.twig' %}
   {% set page_main_utility_classes = page_main_utility_classes ?: ['py-5'] %}
-  {% set page_header_container_utility_classes = page_header_container_utility_classes ?: ['mb-3'] %}
+  {% set path_parts = path('<current>')|trim('/')|split('/') %}
+  {% set path_parts = (path_parts|first in ['ru', 'en']) ? path_parts|slice(1) : path_parts %}
+  {% set path_section = path_parts|first|default('') %}
+  {% set path_child = path_parts|slice(1)|first|default('') %}
+  {% set wheel_section = path_section in ['history', 'plan'] or (path_section == 'account' and path_child == 'data') %}
+  {% set page_header_container_utility_classes = wheel_section ? ['mb-3', 'lifebalance-measure'] : (page_header_container_utility_classes ?: ['mb-3']) %}
+  {% set page_content_container_utility_classes = wheel_section ? ['lifebalance-measure'] : [] %}
   {% include 'radix:page-content' with {
     page_main_utility_classes,
     page_header_container_utility_classes,
+    page_content_container_utility_classes,
   } %}
   <footer class="page__footer">
     <div class="container">

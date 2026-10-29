@@ -7,6 +7,7 @@ namespace Drupal\lifebalance\Form;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Flood\FloodInterface;
 use Drupal\Core\Form\FormBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\lifebalance\Entity\Criterion;
@@ -25,10 +26,11 @@ use Drupal\lifebalance\Service\RadarGeometry;
 use Drupal\lifebalance\Service\ScaleLabels;
 
 /**
- * Wheel page: guides and saving a snapshot.
+ * Wheel page: sector scores and saving a snapshot.
  *
- * The guide is only a hint. It is copied into the score when the person
- * presses "Взяти орієнтир".
+ * Beside the answer count, the page shows the calculated score to one
+ * decimal, and the wheel is filled to that score. The stored guide stays a
+ * rounded integer.
  */
 final class WheelForm extends FormBase {
 
@@ -98,12 +100,7 @@ final class WheelForm extends FormBase {
       '#type' => 'html_tag',
       '#tag' => 'p',
       '#value' => $this->t('0 — зовсім не так, як хочу. 10 — саме так, як хочу.'),
-      '#attributes' => ['class' => ['lifebalance-scale']],
-    ];
-    $form['formula'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => $this->t('Орієнтир — частка тверджень, з якими ви погодились (частково = половина), переведена в шкалу 0–10.'),
+      '#attributes' => ['class' => ['lifebalance-scale', 'lifebalance-scale--legend']],
     ];
     if ($draft->outdated !== []) {
       $form['outdated'] = [
@@ -113,6 +110,31 @@ final class WheelForm extends FormBase {
       ];
     }
     $chart = [];
+    $form['columns'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['lifebalance-columns'],
+        'aria-hidden' => 'true',
+      ],
+      'sector' => [
+        '#type' => 'html_tag',
+        '#tag' => 'span',
+        '#value' => $this->t('Сфера'),
+        '#attributes' => ['class' => ['lifebalance-columns__sector']],
+      ],
+      'answers' => [
+        '#type' => 'html_tag',
+        '#tag' => 'span',
+        '#value' => $this->t('Відповіді'),
+        '#attributes' => ['class' => ['lifebalance-columns__answers']],
+      ],
+      'score' => [
+        '#type' => 'html_tag',
+        '#tag' => 'span',
+        '#value' => $this->t('Оцінка'),
+        '#attributes' => ['class' => ['lifebalance-columns__score']],
+      ],
+    ];
     $form['sectors'] = ['#tree' => TRUE];
     foreach ($sectors as $id => $sector) {
       $score = $draft->scores[$id] ?? NULL;
@@ -121,7 +143,10 @@ final class WheelForm extends FormBase {
       $chart[] = [
         'label' => $label,
         'color' => $sector->getColor(),
-        'value' => $score,
+        'value' => $this->wheelValue(
+          is_int($score) ? $score : NULL,
+          $guide['precise'],
+        ),
         'id' => $id,
       ];
       $form['sectors'][$id] = $this->sectorFields($id, $sector, $score, $guide);
@@ -192,10 +217,6 @@ final class WheelForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $trigger = $form_state->getTriggeringElement();
     $name = is_array($trigger) ? (string) ($trigger['#name'] ?? '') : '';
-    if (str_starts_with($name, 'take_')) {
-      $this->takeGuide($form_state, substr($name, 5));
-      return;
-    }
     if ($name === 'save_snapshot') {
       $this->saveSnapshot($form_state);
       return;
@@ -204,31 +225,6 @@ final class WheelForm extends FormBase {
       return;
     }
     $this->messenger()->addStatus($this->t('Чернетку збережено.'));
-    $form_state->setRedirect('lifebalance.wheel');
-  }
-
-  /**
-   * Copies the guide into one score and stores the draft.
-   */
-  private function takeGuide(FormStateInterface $form_state, string $sector): void {
-    $account = $this->currentUser();
-    $draft = $this->draftStorage->load($account);
-    $guides = $this->guides($draft, $this->publishedBySector($this->sectorRepository->loadActive()));
-    $display = $guides[$sector]['display'] ?? NULL;
-    if (!is_int($display)) {
-      $this->messenger()->addError($this->t('Для цього сектора ще немає орієнтира.'));
-      return;
-    }
-    $scores = $this->submittedScores();
-    if (!array_key_exists($sector, $scores)) {
-      $this->messenger()->addError($this->t('Чернетку не збережено.'));
-      return;
-    }
-    $scores[$sector] = $display;
-    if (!$this->persistScores($scores) instanceof Draft) {
-      return;
-    }
-    $this->messenger()->addStatus($this->t('Орієнтир перенесено в оцінку.'));
     $form_state->setRedirect('lifebalance.wheel');
   }
 
@@ -315,8 +311,8 @@ final class WheelForm extends FormBase {
    *   Active sectors.
    * @param \Drupal\lifebalance\Service\Draft $draft
    *   The current draft.
-   * @param array<string, array{display: int|null, answered: int, total: int, progress: int}> $guides
-   *   Per-sector guide figures.
+   * @param array<string, array{precise: int|null}> $guides
+   *   Calculated scores in tenths.
    *
    * @return array<string, mixed>
    *   drupalSettings.lifebalance.
@@ -325,12 +321,15 @@ final class WheelForm extends FormBase {
     $listed = [];
     foreach ($sectors as $id => $sector) {
       $score = $draft->scores[$id] ?? NULL;
+      $precise = $guides[$id]['precise'] ?? NULL;
       $listed[] = [
         'id' => $id,
         'label' => (string) $sector->label(),
         'color' => $sector->getColor(),
-        'guide' => $guides[$id]['display'],
-        'score' => is_int($score) ? $score : NULL,
+        'score' => $this->wheelValue(
+          is_int($score) ? $score : NULL,
+          is_int($precise) ? $precise : NULL,
+        ),
       ];
     }
     $answers = [];
@@ -356,8 +355,8 @@ final class WheelForm extends FormBase {
    *   The sector.
    * @param int|null $score
    *   Current score, or NULL when it is not assessed.
-   * @param array{display: int|null, answered: int, total: int, progress: int} $guide
-   *   Guide and progress for this sector.
+   * @param array{progress: int, total: int, precise: int|null} $guide
+   *   Progress and the score in tenths for this sector.
    *
    * @return array<string, mixed>
    *   Form elements.
@@ -385,17 +384,32 @@ final class WheelForm extends FormBase {
           '#attributes' => ['class' => ['lifebalance-sector__title']],
         ],
         'progress' => [
-          '#type' => 'html_tag',
-          '#tag' => 'p',
-          '#value' => $this->t('@answered/@total', [
-            '@answered' => $guide['progress'],
-            '@total' => $guide['total'],
-          ]),
+          '#type' => 'container',
           '#attributes' => ['class' => ['lifebalance-progress']],
+          'label' => [
+            '#type' => 'html_tag',
+            '#tag' => 'span',
+            '#value' => $this->t('Відповіді'),
+            '#attributes' => ['class' => ['lifebalance-field-label']],
+          ],
+          'value' => [
+            '#type' => 'html_tag',
+            '#tag' => 'span',
+            '#value' => $this->t('@answered/@total', [
+              '@answered' => $guide['progress'],
+              '@total' => $guide['total'],
+            ]),
+            '#attributes' => ['class' => ['lifebalance-progress__value']],
+          ],
         ],
+        'score' => ScoreColumn::element(
+          $this->t('Оцінка'),
+          $guide['precise'],
+          'lifebalance-field-label',
+        ),
         'help' => [
           '#type' => 'link',
-          '#title' => $score === NULL ? $this->t('Оцінити') : $this->t('Переоцінити'),
+          '#title' => $this->assessLabel($score, $guide['progress']),
           '#url' => Url::fromUri('internal:/wheel/' . $id),
           '#attributes' => ['class' => ['lifebalance-assess']],
         ],
@@ -410,35 +424,38 @@ final class WheelForm extends FormBase {
         '#attributes' => ['class' => ['lifebalance-scale']],
       ];
     }
-    if (is_int($guide['display'])) {
-      $fields['guide'] = [
-        '#type' => 'html_tag',
-        '#tag' => 'p',
-        '#value' => $this->t('Орієнтир: @score', ['@score' => $guide['display']]),
-      ];
-      if ($score !== NULL && $score !== $guide['display']) {
-        $fields['difference'] = [
-          '#type' => 'html_tag',
-          '#tag' => 'p',
-          '#value' => $this->t('Ваша оцінка відрізняється від орієнтиру — це нормально, орієнтир лише підказка.'),
-        ];
-      }
-      $fields['take'] = [
-        '#type' => 'submit',
-        '#name' => 'take_' . $id,
-        '#value' => $this->t('Взяти орієнтир (@score)', [
-          '@score' => $guide['display'],
-        ]),
-        '#limit_validation_errors' => [
-          ['sectors'],
-        ],
-      ];
-    }
     return $fields;
   }
 
   /**
-   * Scores already stored in the draft.
+   * Wheel radius uses the visible one-decimal score.
+   *
+   * A stored whole-number score is used only when that result is not ready.
+   */
+  private function wheelValue(?int $score, ?int $precise): int|float|null {
+    if ($precise !== NULL) {
+      return $precise / 10;
+    }
+    return $score;
+  }
+
+  /**
+   * Button for a sector that can still be opened.
+   *
+   * A sector with any answer, or with a score already chosen, can be
+   * assessed again. An empty sector is assessed for the first time.
+   */
+  private function assessLabel(?int $score, int $progress): TranslatableMarkup {
+    if ($score !== NULL || $progress > 0) {
+      return $this->t('Переоцінити');
+    }
+    return $this->t('Оцінити');
+  }
+
+  /**
+   * Whole-number scores for a saved result.
+   *
+   * A missing choice uses the calculated score, rounded half up.
    *
    * @return array<string, int|null>
    *   Scores keyed by sector ID.
@@ -446,9 +463,15 @@ final class WheelForm extends FormBase {
   private function submittedScores(): array {
     $draft = $this->draftStorage->load($this->currentUser());
     $scores = [];
-    foreach (array_keys($this->sectorRepository->loadActive()) as $id) {
+    $sectors = $this->sectorRepository->loadActive();
+    $guides = $this->guides($draft, $this->publishedBySector($sectors));
+    foreach (array_keys($sectors) as $id) {
       $value = $draft->scores[$id] ?? NULL;
-      $scores[$id] = is_int($value) ? $value : NULL;
+      if (!is_int($value)) {
+        $precise = $guides[$id]['precise'] ?? NULL;
+        $value = is_int($precise) ? (int) round($precise / 10) : NULL;
+      }
+      $scores[$id] = $value;
     }
     return $scores;
   }
@@ -489,8 +512,8 @@ final class WheelForm extends FormBase {
    * @param array<string, list<\Drupal\lifebalance\Entity\Criterion>> $published
    *   Visible criteria.
    *
-   * @return array<string, array{display: int|null, answered: int, total: int, progress: int}>
-   *   Per-sector figures. display is the 0–10 guide.
+   * @return array<string, array{progress: int, total: int, precise: int|null}>
+   *   Per-sector progress and the score in tenths.
    */
   private function guides(Draft $draft, array $published): array {
     $premium = FALSE;
@@ -535,6 +558,7 @@ final class WheelForm extends FormBase {
         'answered' => $result->answered,
         'total' => count($criteria),
         'progress' => $progress,
+        'precise' => $result->precise,
       ];
     }
     return $guides;

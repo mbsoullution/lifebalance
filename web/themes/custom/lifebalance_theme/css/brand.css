@@ -86,6 +86,12 @@ h3,
   color: #3d4a3f;
 }
 
+.navbar .ms-auto {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 @media (min-width: 992px) {
   .navbar > .container {
     display: grid;
@@ -97,6 +103,12 @@ h3,
     display: contents !important;
   }
 
+  .navbar .block-system-branding-block,
+  .navbar .me-auto,
+  .navbar .ms-auto {
+    grid-row: 1;
+  }
+
   .navbar .me-auto {
     grid-column: 2;
     margin-right: 0 !important;
@@ -105,6 +117,9 @@ h3,
 
   .navbar .ms-auto {
     grid-column: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     margin-left: 0 !important;
     justify-self: end;
   }
@@ -123,6 +138,120 @@ h3,
   .lifebalance-menu__branch:hover > .lifebalance-menu__sub,
   .lifebalance-menu__branch:focus-within > .lifebalance-menu__sub {
     display: block;
+  }
+}
+
+/* Tablet: sign-in is centered on the bar; language and the menu stay right. */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .navbar > .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    max-width: none;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .navbar .ms-auto {
+    display: contents;
+  }
+
+  .navbar .block-system-branding-block,
+  .navbar .block-lifebalance-language-switcher {
+    margin: 0;
+  }
+
+  .navbar .block-lifebalance-language-switcher {
+    margin-left: auto;
+  }
+
+  .navbar .block-lifebalance-login-icons {
+    position: absolute;
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+  }
+
+  .navbar .navbar-toggler {
+    margin: 0 0 0 1.25rem;
+  }
+
+  .navbar .navbar-collapse {
+    flex-basis: 100%;
+  }
+}
+
+/* Phone: logo, language, and the menu share one row. Sign-in is below. */
+@media (max-width: 767.98px) {
+  .navbar > .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .navbar .ms-auto {
+    display: contents;
+  }
+
+  .navbar > .container {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  .navbar .navbar-brand {
+    margin-right: 0;
+  }
+
+  .navbar .navbar-brand__text > span:first-child {
+    font-size: 1rem;
+  }
+
+  .navbar .navbar-brand__text .small {
+    font-size: 0.75rem;
+  }
+
+  .navbar .block-system-branding-block {
+    order: 1;
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .navbar .block-lifebalance-language-switcher {
+    order: 2;
+    flex: 1 1 auto;
+    margin: 0;
+  }
+
+  .navbar .block-lifebalance-language-switcher .lifebalance-lang {
+    width: max-content;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .navbar .navbar-toggler {
+    order: 3;
+    flex: 0 0 auto;
+    margin: 0;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .navbar .block-lifebalance-login-icons {
+    order: 4;
+    flex: 0 0 100%;
+    margin: 0.75rem 0 0;
+  }
+
+  .navbar .block-lifebalance-login-icons .lifebalance-login-entry {
+    width: max-content;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .navbar .navbar-collapse {
+    order: 5;
+    flex-basis: 100%;
   }
 }
 
@@ -171,20 +300,185 @@ h3,
   color: #1c2420;
 }
 
+@media (min-width: 992px) {
+  .lifebalance-menu__toggle,
+  .lifebalance-menu__back {
+    display: none;
+  }
+}
+
 @media (max-width: 991.98px) {
-  .lifebalance-menu__branch > .lifebalance-menu__sub {
-    display: block;
-    position: static;
-    min-width: 0;
-    padding: 0 0 0.25rem 0.75rem;
-    background: transparent;
+  .navbar {
+    position: relative;
+  }
+
+  .navbar-collapse.show,
+  .navbar-collapse.collapsing {
+    position: absolute;
+    top: var(--lb-nav-menu-top, 4.5rem);
+    right: 0;
+    left: 0;
+    z-index: 40;
+    width: auto;
+    height: auto !important;
+    margin: 0;
+    background: #fff;
+    border-top: 1px solid #d0d5dd;
+    box-shadow: 0 16px 32px rgba(28, 36, 32, 0.12);
+    transition: none;
+  }
+
+  .navbar-collapse.show {
+    animation: lb-menu-in 0.18s ease;
+  }
+
+  .navbar-collapse .me-auto,
+  .navbar-collapse .block,
+  .navbar-collapse .navbar-nav {
+    width: 100%;
+    margin: 0;
+  }
+
+  .navbar-nav > .nav-item {
+    border-bottom: 1px solid #d0d5dd;
+  }
+
+  .navbar-nav > .nav-item > .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0.85rem 1rem;
+    color: #1c2420;
+    text-decoration: none;
+  }
+
+  .navbar-nav > .nav-item > .nav-link:hover,
+  .navbar-nav > .nav-item > .nav-link:focus {
+    background: #f3f6f4;
+    color: #1c2420;
+  }
+
+  .lifebalance-menu__branch {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  .lifebalance-menu__branch > .nav-link {
+    flex: 1 1 auto;
+  }
+
+  .lifebalance-menu__branch > .nav-link::after {
+    content: none;
+  }
+
+  .lifebalance-menu__toggle,
+  .lifebalance-menu__backbutton {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    margin: 0;
+    padding: 0;
     border: 0;
-    border-radius: 0;
-    box-shadow: none;
+    background: transparent;
+    color: #1c2420;
+  }
+
+  .lifebalance-menu__toggle::before,
+  .lifebalance-menu__backbutton::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+  }
+
+  .lifebalance-menu__toggle::before {
+    transform: rotate(-45deg);
+  }
+
+  .lifebalance-menu__branch.is-open > .lifebalance-menu__toggle::before {
+    transform: rotate(45deg);
+  }
+
+  .lifebalance-menu__backbutton::before {
+    transform: rotate(135deg);
+  }
+
+  .lifebalance-menu__sub {
+    display: none;
   }
 
   .lifebalance-menu__sub::before {
     content: none;
+  }
+
+  .lifebalance-menu__branch.is-open > .lifebalance-menu__sub {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    left: 1rem;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+    border: 0;
+    border-left: 3px solid #1f7a4d;
+    border-radius: 0;
+    box-shadow: -10px 0 24px rgba(28, 36, 32, 0.1);
+    animation: lb-menu-slide 0.18s ease;
+  }
+
+  .lifebalance-menu__sub .nav-item {
+    border-bottom: 1px solid #d0d5dd;
+  }
+
+  .lifebalance-menu__sub .nav-item:last-child {
+    border-bottom: 0;
+  }
+
+  .lifebalance-menu__back {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid #d0d5dd;
+  }
+
+  .lifebalance-menu__sublink {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0.85rem 1rem;
+  }
+}
+
+@keyframes lb-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes lb-menu-slide {
+  from {
+    opacity: 0;
+    transform: translateX(1.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 

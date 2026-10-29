@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\lifebalance\Functional;
 
+use Drupal\lifebalance\Install\InterfaceLanguage;
 use Drupal\social_auth\Entity\SocialAuth;
 use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
@@ -20,6 +21,7 @@ final class AccountDataTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
+    'block',
     'lifebalance',
     'social_auth',
   ];
@@ -33,15 +35,16 @@ final class AccountDataTest extends BrowserTestBase {
    * Anonymous visitors are sent to login, and providers stay with the owner.
    */
   public function testAccountData(): void {
+    InterfaceLanguage::placeLoginIcons();
     $this->drupalGet('user/password');
     $this->assertSession()->statusCodeEquals(200);
 
     $this->config('system.site')->set('page.front', '/welcome')->save();
     $this->drupalGet('<front>');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->pageTextContains('Оцініть вісім сфер життя');
+    $this->assertSession()->pageTextContains('Колесо балансу — простий інструмент самоспостереження.');
     $this->assertSession()->linkExists('Увійти через Google');
-    $this->assertSession()->linkExists('Увійти з паролем');
+    $this->assertSession()->buttonExists('Увійти з паролем');
 
     $this->drupalGet('/login/email-match');
     $this->assertSession()->statusCodeEquals(200);

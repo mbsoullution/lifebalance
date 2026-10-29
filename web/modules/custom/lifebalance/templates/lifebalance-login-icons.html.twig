@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Anonymous sign-in: a label and Google, Facebook, and password icons.
+ */
+#}
+<div class="lifebalance-login-icons">
+  <span class="lifebalance-login-icons__label">{{ 'Увійти'|t }}</span>
+  {% if google_url %}
+    <a class="lifebalance-login-icons__item" href="{{ google_url }}" data-tooltip="{{ 'Увійти через Google'|t }}" aria-label="{{ 'Увійти через Google'|t }}" title="{{ 'Увійти через Google'|t }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.2-2.27H12v4.3h6.45a5.52 5.52 0 0 1-2.4 3.62v3h3.88c2.27-2.09 3.56-5.17 3.56-8.65z"/>
+        <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.88-3c-1.08.72-2.46 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.95H1.26v3.09A12 12 0 0 0 12 24z"/>
+        <path fill="#FBBC05" d="M5.27 14.29A7.2 7.2 0 0 1 4.89 12c0-.8.14-1.57.38-2.29V6.62H1.26a12 12 0 0 0 0 10.76l4.01-3.09z"/>
+        <path fill="#EA4335" d="M12 4.75c1.76 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.14 15.24 0 12 0A12 12 0 0 0 1.26 6.62l4.01 3.09C6.22 6.87 8.87 4.75 12 4.75z"/>
+      </svg>
+      <span class="visually-hidden">{{ 'Увійти через Google'|t }}</span>
+    </a>
+  {% endif %}
+  {% if facebook_url %}
+    <a class="lifebalance-login-icons__item" href="{{ facebook_url }}" data-tooltip="{{ 'Увійти через Facebook'|t }}" aria-label="{{ 'Увійти через Facebook'|t }}" title="{{ 'Увійти через Facebook'|t }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.27h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07z"/>
+      </svg>
+      <span class="visually-hidden">{{ 'Увійти через Facebook'|t }}</span>
+    </a>
+  {% endif %}
+  <button class="lifebalance-login-icons__item" type="button" data-lifebalance-login-open data-tooltip="{{ 'Увійти з паролем'|t }}" aria-label="{{ 'Увійти з паролем'|t }}" title="{{ 'Увійти з паролем'|t }}">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M15 3.5h4.2A1.3 1.3 0 0 1 20.5 4.8v14.4a1.3 1.3 0 0 1-1.3 1.3H15"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3.5 12h10"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M10 8.2 13.8 12 10 15.8"/>
+    </svg>
+    <span class="visually-hidden">{{ 'Увійти з паролем'|t }}</span>
+  </button>
+</div>

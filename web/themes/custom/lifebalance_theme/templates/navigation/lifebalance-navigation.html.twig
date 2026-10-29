@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Header. Sign-in and the language switcher stay visible on a phone.
+ */
+#}
+<nav class="navbar navbar-expand-lg" data-bs-theme="light">
+  <div class="container">
+    {% if page.navbar_branding %}
+      {{ page.navbar_branding }}
+    {% endif %}
+    {% if page.navbar_right %}
+      <div class="ms-auto">
+        {{ page.navbar_right }}
+      </div>
+    {% endif %}
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lifebalance-nav" aria-controls="lifebalance-nav" aria-expanded="false" aria-label="{{ 'Toggle navigation'|t }}">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="lifebalance-nav" class="collapse navbar-collapse">
+      {% if page.navbar_left %}
+        <div class="me-auto">
+          {{ page.navbar_left }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</nav>

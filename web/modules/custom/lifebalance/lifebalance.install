@@ -22,6 +22,8 @@ use Drupal\user\Entity\Role;
  */
 function lifebalance_install(): void {
   InterfaceLanguage::apply();
+  InterfaceLanguage::placeLoginIcons();
+  InterfaceLanguage::placeAccountAccess();
 }
 
 /**
@@ -359,4 +361,28 @@ function lifebalance_update_11013(): void {
     }
   }
   InterfaceLanguage::apply();
+}
+
+/**
+ * Places the anonymous sign-in icons in the header.
+ */
+function lifebalance_update_11014(): void {
+  InterfaceLanguage::placeLoginIcons();
+  InterfaceLanguage::importTranslations();
+}
+
+/**
+ * Places the register and premium prompts under the header.
+ */
+function lifebalance_update_11015(): void {
+  InterfaceLanguage::placeAccountAccess();
+  InterfaceLanguage::importTranslations();
+}
+
+/**
+ * Enables the file module used by the required registration avatar.
+ */
+function lifebalance_update_11016(): void {
+  \Drupal::service('module_installer')->install(['file']);
+  InterfaceLanguage::importTranslations();
 }

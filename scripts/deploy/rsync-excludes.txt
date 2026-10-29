@@ -1,0 +1,32 @@
+# Paths that must never be copied onto a release.
+# User uploads and server-only settings live in www/shared and are linked later.
+
+.git/
+release-src/
+.ddev/
+.cursor/
+.github/
+.idea/
+.vscode/
+node_modules/
+deploy_keys/
+tests/
+.phpunit.cache/
+.phpunit.result.cache
+
+.env
+.env.*
+*.deploy_key
+*.sql
+*.sql.enc
+*.gz
+
+web/sites/default/settings.local.php
+web/sites/default/settings.ddev.php
+web/sites/*/settings.local.php
+web/sites/*/settings.ddev.php
+web/sites/default/files/
+web/sites/default/private/
+web/sites/*/files/
+web/sites/*/private/
+web/sites/simpletest/

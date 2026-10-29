@@ -109,7 +109,7 @@ lifebalance.faq:
   path: '/faq'
   defaults:
     _controller: '\Drupal\lifebalance\Controller\FaqController::page'
-    _title: 'Запитання'
+    _title: 'Часті запитання — Колесо балансу'
   requirements:
     # Public FAQ. It contains no personal data.
     _access: 'TRUE'
@@ -213,6 +213,33 @@ lifebalance.admin_user:
     _title_callback: '\Drupal\lifebalance\Controller\AdminUserController::title'
   requirements:
     _permission: 'view lifebalance user metadata'
+  options:
+    _admin_route: TRUE
+    parameters:
+      user:
+        type: entity:user
+
+lifebalance.admin_user_wheel:
+  path: '/admin/lifebalance/users/{user}/wheel'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\AdminWheelController::wheel'
+    _title_callback: '\Drupal\lifebalance\Controller\AdminWheelController::title'
+  requirements:
+    _permission: 'administer lifebalance snapshots'
+  options:
+    _admin_route: TRUE
+    parameters:
+      user:
+        type: entity:user
+
+lifebalance.admin_user_snapshot:
+  path: '/admin/lifebalance/users/{user}/wheel/{uuid}'
+  defaults:
+    _controller: '\Drupal\lifebalance\Controller\AdminWheelController::snapshot'
+    _title_callback: '\Drupal\lifebalance\Controller\AdminWheelController::snapshotTitle'
+  requirements:
+    _permission: 'administer lifebalance snapshots'
+    uuid: '[0-9a-fA-F-]+'
   options:
     _admin_route: TRUE
     parameters:

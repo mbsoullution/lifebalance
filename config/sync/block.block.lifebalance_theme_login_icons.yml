@@ -1,0 +1,20 @@
+uuid: c3a91e70-4b2d-4f68-9a15-6e0d8c2b7f41
+langcode: uk
+status: true
+dependencies:
+  module:
+    - lifebalance
+  theme:
+    - lifebalance_theme
+id: lifebalance_theme_login_icons
+theme: lifebalance_theme
+region: navbar_right
+weight: 0
+provider: null
+plugin: lifebalance_login_icons
+settings:
+  id: lifebalance_login_icons
+  label: Login
+  label_display: '0'
+  provider: lifebalance
+visibility: {  }

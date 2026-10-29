@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\lifebalance_billing\Service;
 
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\lifebalance_billing\Entity\BillingPlan;
@@ -16,6 +17,7 @@ final class OrderAdminList {
 
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly Connection $database,
   ) {}
 
   /**
@@ -31,6 +33,37 @@ final class OrderAdminList {
     $query->sort('created', 'DESC');
     $query->pager(50);
     return $this->load($query->execute());
+  }
+
+  /**
+   * Sum of paid orders for each account. Refunded orders are not included.
+   *
+   * @param list<int> $uids
+   *   Account ids from the current page.
+   *
+   * @return array<int, int>
+   *   Minor units keyed by uid.
+   */
+  public function paidTotals(array $uids): array {
+    $ids = array_values(array_filter($uids, static fn (int $uid): bool => $uid > 0));
+    if ($ids === []) {
+      return [];
+    }
+    $query = $this->database->select('lifebalance_payment_order', 'o');
+    $query->addField('o', 'uid');
+    $query->addExpression('SUM(o.amount_minor)', 'paid');
+    $query->condition('uid', $ids, 'IN');
+    $query->condition('status', PaymentOrder::STATUS_PAID);
+    $query->groupBy('uid');
+    $result = $query->execute();
+    if ($result === NULL) {
+      return [];
+    }
+    $totals = [];
+    foreach ($result as $row) {
+      $totals[(int) $row->uid] = (int) $row->paid;
+    }
+    return $totals;
   }
 
   /**

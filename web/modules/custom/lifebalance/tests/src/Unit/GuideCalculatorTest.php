@@ -6,6 +6,7 @@ namespace Drupal\Tests\lifebalance\Unit;
 
 use Drupal\lifebalance\Service\GuideAnswer;
 use Drupal\lifebalance\Service\GuideCalculator;
+use Drupal\lifebalance\Service\GuideResult;
 use Drupal\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\Group;
 
@@ -53,6 +54,7 @@ final class GuideCalculatorTest extends UnitTestCase {
       $result = $calculator->calculate($mode, $answers);
       $this->assertSame($this->nullableInt($case, 'guide'), $result->guide, $name);
       $this->assertSame($this->intValue($case, 'answered'), $result->answered, $name);
+      $this->assertSame($this->nullableInt($case, 'precise'), $result->precise, $name);
     }
     foreach ([
       'all_yes',
@@ -64,6 +66,16 @@ final class GuideCalculatorTest extends UnitTestCase {
     ] as $required) {
       $this->assertContains($required, $names);
     }
+  }
+
+  /**
+   * The column keeps one decimal and a comma.
+   */
+  public function testFormatsOneDecimal(): void {
+    $this->assertSame('8,5', GuideResult::formatTenths(85));
+    $this->assertSame('6,0', GuideResult::formatTenths(60));
+    $this->assertSame('10,0', GuideResult::formatTenths(100));
+    $this->assertSame('—', GuideResult::formatTenths(NULL));
   }
 
   /**

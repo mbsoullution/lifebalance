@@ -14,6 +14,10 @@ declare(strict_types=1);
  * live in settings.php. DRUPAL_COOKIE_SECURE=0 is only for a local HTTP site.
  * MAILER_DSN, for example smtp://user:pass@smtp.example.com:587, is read
  * by settings.php. The password is not stored in config sync.
+ *
+ * PHP on shared hosting does not see variables exported in an SSH session.
+ * Set them in the hosting panel, or assign them in the server copy of this
+ * file. That copy is settings.local.php and is never committed.
  */
 
 $db_host = getenv('DRUPAL_DB_HOST');
@@ -53,5 +57,14 @@ foreach ($oauth as $config_name => $keys) {
     if (is_string($value) && $value !== '') {
       $config[$config_name][$config_key] = $value;
     }
+  }
+}
+
+// The deploy layout is www/releases/ID/web. Three levels up is www/.
+// The directory is absent on DDEV, so this stays unset there.
+if (isset($app_root) && is_string($app_root)) {
+  $private = dirname($app_root, 3) . '/shared/private';
+  if (is_dir($private)) {
+    $settings['file_private_path'] = $private;
   }
 }

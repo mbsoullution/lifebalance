@@ -38,6 +38,8 @@ final class PrivateCacheSubscriber implements EventSubscriberInterface {
     'lifebalance.snapshot_delete',
     'lifebalance.admin_users',
     'lifebalance.admin_user',
+    'lifebalance.admin_user_wheel',
+    'lifebalance.admin_user_snapshot',
     'lifebalance.admin_user_grant',
     'lifebalance.admin_entitlement_extend',
     'lifebalance.admin_entitlement_shorten',

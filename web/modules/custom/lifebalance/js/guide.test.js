@@ -12,7 +12,7 @@ test('JavaScript guide matches the PHP fixture', () => {
     const result = calculateGuide(item.mode, item.answers);
     assert.deepEqual(
       result,
-      { guide: item.guide, answered: item.answered },
+      { guide: item.guide, answered: item.answered, precise: item.precise },
       item.name,
     );
   }

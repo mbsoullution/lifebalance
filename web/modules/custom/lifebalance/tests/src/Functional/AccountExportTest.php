@@ -60,15 +60,18 @@ final class AccountExportTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains('Самооцінка в LifeBalance не є діагностикою');
     $this->assertSession()->pageTextContains('TODO для власника');
-    $this->assertSession()->pageTextContains('Meta');
+    $this->assertSession()->pageTextContains('Якщо ви просите Facebook видалити дані');
+    $this->assertSession()->pageTextContains('Власник сайту може відкрити збережені колеса');
     $this->assertSession()->pageTextContains('Номер картки на цей сайт не передається');
     $this->assertSession()->addressMatches('#/privacy$#');
-    $this->clickLink('Оферта');
+    $this->assertSession()->linkNotExists('Оферта');
+    $this->drupalGet('/terms');
     $this->assertSession()->addressMatches('#/terms$#');
     $this->assertSession()->pageTextContains('Вона ще не є договором.');
     $this->assertSession()->pageTextContains('TODO для власника');
-    $this->clickLink('Повернення');
+    $this->drupalGet('/refunds');
     $this->assertSession()->addressMatches('#/refunds$#');
+    $this->assertSession()->linkNotExists('Оферта');
     $this->assertSession()->pageTextContains('Часткове повернення саме не завершує доступ.');
     $this->assertSession()->pageTextContains('TODO для власника');
 

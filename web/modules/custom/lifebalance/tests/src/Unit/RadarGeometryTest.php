@@ -53,4 +53,22 @@ final class RadarGeometryTest extends UnitTestCase {
     $this->assertNotSame('', $chart['wedges'][0]['hit']);
   }
 
+  /**
+   * A one-decimal score fills part of the slice.
+   */
+  public function testDecimalScoreFillsTheSlice(): void {
+    $chart = (new RadarGeometry())->build([
+      [
+        'label' => 'Health',
+        'color' => '#2BD56A',
+        'value' => 8.5,
+        'id' => 'health',
+      ],
+    ]);
+    $score = $chart['wedges'][0]['score'];
+    $this->assertIsString($score);
+    $this->assertStringContainsString('59.50', $score);
+    $this->assertStringNotContainsString('70.00', $score);
+  }
+
 }

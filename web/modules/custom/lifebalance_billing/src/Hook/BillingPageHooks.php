@@ -103,6 +103,33 @@ final class BillingPageHooks {
   }
 
   /**
+   * Adds the paid total. Only accounts that may see orders get the column.
+   *
+   * @param array<string, mixed> $build
+   *   The user list.
+   * @param list<array<string, int|string|null>> $records
+   *   Rows on this page, in table order.
+   */
+  #[Hook('lifebalance_admin_user_list_alter')]
+  public function adminUserList(array &$build, array $records): void {
+    if (!$this->currentUser->hasPermission('view lifebalance orders')) {
+      return;
+    }
+    $uids = [];
+    foreach ($records as $record) {
+      $uids[] = (int) $record['uid'];
+    }
+    $totals = $this->orders->paidTotals($uids);
+    $build['table']['#header'][] = (string) $this->translation->translate('Сплачено');
+    foreach ($records as $index => $record) {
+      $minor = $totals[(int) $record['uid']] ?? 0;
+      $build['table']['#rows'][$index][] = $minor > 0
+        ? MinorMoney::format($minor) . ' грн'
+        : '—';
+    }
+  }
+
+  /**
    * Adds an order block that stays separate from manual grants.
    *
    * @param array<string, mixed> $build

@@ -11,10 +11,10 @@ namespace Drupal\lifebalance\Service;
  * ignored. Statements with in_formula FALSE are ignored. Free mode uses only
  * the basic tier. Premium mode uses both tiers together.
  *
- * The displayed guide is round(10 × sum / substantive), an integer 0–10.
- * The stored guide is that integer times 10. Half values round half up.
- * Below 5 substantive answers in free mode, or 10 in premium mode, the guide
- * is NULL and the answered count is still returned.
+ * The stored guide is round(10 × sum / substantive) times 10, an integer.
+ * Half values round half up. precise keeps one decimal of the same average,
+ * in tenths. Below 5 substantive answers in free mode, or 10 in premium mode,
+ * both are NULL and the answered count is still returned.
  */
 final class GuideCalculator {
 
@@ -67,10 +67,11 @@ final class GuideCalculator {
       $answered++;
     }
     if ($answered < $minimum) {
-      return new GuideResult(NULL, $answered);
+      return new GuideResult(NULL, $answered, NULL);
     }
     $display = (int) round(5 * $half_points / $answered, 0, PHP_ROUND_HALF_UP);
-    return new GuideResult($display * 10, $answered);
+    $precise = (int) round(50 * $half_points / $answered, 0, PHP_ROUND_HALF_UP);
+    return new GuideResult($display * 10, $answered, $precise);
   }
 
 }

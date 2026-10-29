@@ -33,31 +33,37 @@ final class FaqPageTest extends BrowserTestBase {
   public function testFaqIsPublic(): void {
     $this->drupalGet('/faq');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->pageTextContains('Це самооцінка, а не діагностика.');
-    $this->assertSession()->pageTextContains('Автопродовження немає.');
-    $this->assertSession()->pageTextContains('Оферта і політика повернення ще є заготовками власника.');
+    $this->assertSession()->pageTextContains('Простий інструмент самоспостереження.');
+    $this->assertSession()->pageTextContains('не валідований психологічний тест');
+    $this->assertSession()->pageTextNotContains('149 грн');
+    $this->assertSession()->pageTextNotContains('Спробувати Premium 7 днів');
+    $this->assertSession()->pageTextNotContains('[TODO');
     $this->assertSession()->linkNotExists('Конфіденційність');
     $this->assertSession()->linkNotExists('Оферта');
     $this->assertSession()->linkNotExists('Повернення');
     $this->drupalGet('/privacy');
-    $this->clickLink('Запитання');
-    $this->assertSession()->addressMatches('#/faq$#');
+    $this->assertSession()->linkNotExists('Запитання');
+    $this->assertSession()->linkNotExists('Оферта');
+    $this->assertSession()->linkNotExists('Повернення');
 
     $this->drupalGet('/terms');
-    $this->clickLink('Запитання');
-    $this->assertSession()->addressMatches('#/faq$#');
+    $this->assertSession()->linkNotExists('Запитання');
+    $this->assertSession()->linkNotExists('Повернення');
+    $this->assertSession()->linkNotExists('Конфіденційність');
     $this->drupalGet('/refunds');
-    $this->clickLink('Запитання');
-    $this->assertSession()->addressMatches('#/faq$#');
+    $this->assertSession()->linkNotExists('Запитання');
+    $this->assertSession()->linkNotExists('Оферта');
+    $this->assertSession()->linkNotExists('Конфіденційність');
 
     $account = $this->drupalCreateUser();
     $this->drupalLogin($account);
     $this->drupalGet('/faq');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->pageTextContains('Оцінки, відповіді й нотатки бачите лише ви.');
+    $this->assertSession()->pageTextContains('Лише ви.');
+    $this->assertSession()->pageTextContains('Власник сайту може відкрити збережене колесо');
     $this->drupalGet('/account/data');
-    $this->clickLink('Запитання');
-    $this->assertSession()->addressMatches('#/faq$#');
+    $this->assertSession()->linkNotExists('Запитання');
+    $this->assertSession()->linkNotExists('Конфіденційність');
   }
 
 }

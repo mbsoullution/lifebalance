@@ -95,6 +95,7 @@ final class QuestionnaireFormTest extends BrowserTestBase {
     $this->assertSession()->elementNotExists('css', 'input[value="na"]');
     $this->assertSession()->elementExists('css', 'input[value="yes"]');
     $this->assertSession()->elementTextEquals('css', '[data-lifebalance-progress]', '0/10');
+    $this->assertSession()->elementTextEquals('css', '[data-lifebalance-score-value]', '—');
     $this->assertSession()->pageTextNotContains('Замало відповідей для орієнтиру');
     $this->assertSession()->pageTextNotContains('зовсім не так, як хочу');
     $this->assertSession()->elementNotExists('css', 'input[type="range"]');
@@ -155,15 +156,12 @@ final class QuestionnaireFormTest extends BrowserTestBase {
     }
     $this->submitForm($edit, 'Зберегти відповіді');
     $this->assertSession()->pageTextContains('Відповіді збережено.');
-    $this->assertSession()->pageTextContains('Орієнтир: 10');
+    $this->assertSession()->pageTextNotContains('Орієнтир');
+    $this->assertSession()->buttonNotExists('Взяти орієнтир (10)');
     $this->assertSession()->elementTextEquals('css', '[data-lifebalance-progress]', '5/10');
+    $this->assertSession()->elementTextEquals('css', '[data-lifebalance-score-value]', '10,0');
     $this->assertSession()->pageTextNotContains('Замало відповідей для орієнтиру');
     $this->assertNull($this->draftScore($owner, 'health'));
-    $this->assertSame(1, $this->snapshotCount($owner));
-
-    $this->submitForm([], 'Взяти орієнтир (10)');
-    $this->assertSession()->pageTextContains('Орієнтир перенесено в оцінку.');
-    $this->assertSame(10, $this->draftScore($owner, 'health'));
     $this->assertSame(1, $this->snapshotCount($owner));
 
     $this->submitForm([], 'Наступний сектор');
@@ -206,7 +204,7 @@ final class QuestionnaireFormTest extends BrowserTestBase {
     $this->assertSession()->responseHeaderContains('Cache-Control', 'private');
     $this->assertSession()->pageTextNotContains('Орієнтир: 10');
     $this->assertNull($this->getSession()->getPage()->find('css', 'input[type="radio"]:checked'));
-    $this->assertSame(10, $this->draftScore($owner, 'health'));
+    $this->assertNull($this->draftScore($owner, 'health'));
   }
 
   /**

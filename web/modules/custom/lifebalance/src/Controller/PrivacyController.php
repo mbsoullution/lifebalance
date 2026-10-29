@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\lifebalance\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
 use Drupal\lifebalance\Seo\PublicMeta;
 
 /**
@@ -32,21 +31,6 @@ final class PrivacyController extends ControllerBase {
         '#value' => $text,
       ];
     }
-    $build['faq'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Запитання'),
-      '#url' => Url::fromRoute('lifebalance.faq'),
-    ];
-    $build['terms'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Оферта'),
-      '#url' => Url::fromRoute('lifebalance.terms'),
-    ];
-    $build['refunds'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Повернення'),
-      '#url' => Url::fromRoute('lifebalance.refunds'),
-    ];
     $meta = $this->publicMeta->elements('lifebalance.privacy');
     if (isset($meta['#attached'])) {
       $build['#attached'] = $meta['#attached'];
@@ -67,8 +51,11 @@ final class PrivacyController extends ControllerBase {
       $this->t('Твердження каталогу не проходили психометричної валідації.'),
       $this->t("Щоб видалити акаунт, увійдіть і відкрийте сторінку «Мої дані». Підтвердження видаляє зрізи, відповіді, нотатки, чернетку і прив'язку Google або Facebook."),
       $this->t('TODO для власника сайту: вкажіть юридичну особу, контактну адресу і юрисдикцію.'),
-      $this->t('Якщо ви просите Facebook видалити дані, видаліть акаунт на сторінці «Мої дані». TODO для власника: додайте в застосунок Meta посилання на цю сторінку як інструкцію видалення даних і, якщо Meta цього вимагає, окрему адресу callback.'),
-      $this->t('Технічний доступ до бази має адміністратор сервера. Резервні копії теж містять ці дані. Адміністратор сайту не бачить зрізи в інтерфейсі.'),
+      $this->t('Якщо ви просите Facebook видалити дані, видаліть акаунт на сторінці «Мої дані».'),
+      $this->t('Технічний доступ до бази має адміністратор сервера.'),
+      $this->t('Резервні копії теж містять ці дані.'),
+      $this->t('Власник сайту може відкрити збережені колеса.'),
+      $this->t('Інші ролі бачать лише кількість зрізів і дату останнього.'),
       $this->t('TODO для власника: опишіть, як довго зберігаються резервні копії і коли особисті дані з них видаляються.'),
       $this->t('Оплата приймається на сторінці платіжного сервісу monobank. Номер картки на цей сайт не передається.'),
       $this->t('Після оплати зберігаються план, сума, валюта, статус, дати і номер рахунку провайдера. Оцінки і нотатки в замовлення не записуються.'),

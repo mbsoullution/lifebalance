@@ -4,6 +4,7 @@ description: 'Life balance assessments: sectors, criteria, and snapshots.'
 package: LifeBalance
 core_version_requirement: ^11
 dependencies:
+  - drupal:file
   - drupal:language
   - drupal:locale
   - drupal:metatag

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\Tests\lifebalance\Functional;
 
 use Drupal\Core\Config\FileStorage;
+use Drupal\lifebalance\Install\InterfaceLanguage;
 use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
@@ -20,6 +21,7 @@ final class ReleaseHardeningTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
+    'block',
     'lifebalance',
     'seckit',
     'social_auth_google',
@@ -44,6 +46,7 @@ final class ReleaseHardeningTest extends BrowserTestBase {
     $this->assertIsArray($front);
     $this->config('metatag.metatag_defaults.front')->setData($front)->save();
     $this->config('system.site')->set('page.front', '/welcome')->save();
+    InterfaceLanguage::placeLoginIcons();
   }
 
   /**
@@ -85,6 +88,11 @@ final class ReleaseHardeningTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->responseNotContains($front);
     $this->assertSession()->responseContains('noindex, nofollow');
+    $this->assertSession()->linkExists('Увійти через Google');
+    $this->assertSession()->linkExists('Увійти через Facebook');
+    $this->assertSession()->pageTextContains('ВХІД');
+    $this->assertSession()->elementExists('css', 'dialog.lifebalance-login-dialog form.lifebalance-login-form');
+    $this->assertSession()->elementsCount('css', 'form.user-login-form', 1);
 
     $this->drupalGet('/sitemap.xml');
     $this->assertSession()->statusCodeEquals(200);

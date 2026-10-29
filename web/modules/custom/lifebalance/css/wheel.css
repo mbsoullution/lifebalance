@@ -8,6 +8,7 @@
 
 .lifebalance-radar__label {
   font-family: system-ui, sans-serif;
+  dominant-baseline: central;
 }
 
 .lifebalance-radar__guides,
@@ -47,7 +48,7 @@
 
 .lifebalance-sector__row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto auto minmax(0, 1fr);
   align-items: center;
   column-gap: 0.75rem;
 }
@@ -58,9 +59,62 @@
   line-height: 1.3;
 }
 
-.lifebalance-sector__row .lifebalance-progress {
+.lifebalance-sector__row .lifebalance-progress,
+.lifebalance-sector__row .lifebalance-score {
   margin: 0;
   text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.lifebalance-sector__row .lifebalance-progress {
+  min-width: 5.5rem;
+}
+
+.lifebalance-sector__row .lifebalance-score {
+  min-width: 4.5rem;
+  font-weight: 700;
+}
+
+.lifebalance-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto minmax(0, 1fr);
+  column-gap: 0.75rem;
+  align-items: end;
+  margin: 0.35rem 0 0.15rem;
+  padding: 0 calc(1.1rem + 2px);
+  color: #5a6570;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.lifebalance-columns__sector {
+  grid-column: 1;
+  text-align: left;
+}
+
+.lifebalance-columns__answers {
+  grid-column: 2;
+  min-width: 5.5rem;
+  text-align: center;
+}
+
+.lifebalance-columns__score {
+  grid-column: 3;
+  min-width: 4.5rem;
+  text-align: center;
+}
+
+.lifebalance-field-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .lifebalance-sector:hover {
@@ -92,6 +146,11 @@
   margin-bottom: 0.5rem;
 }
 
+.lifebalance-scale--legend {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
 .lifebalance-status:empty {
   margin: 0;
 }
@@ -117,6 +176,53 @@ a.lifebalance-assess {
 a.lifebalance-assess:hover,
 a.lifebalance-assess:focus {
   color: #fff;
+}
+
+@media (max-width: 640px) {
+  .lifebalance-columns {
+    display: none;
+  }
+
+  .lifebalance-sector__row .lifebalance-field-label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0 0 0.15rem;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    display: block;
+    color: #5a6570;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .lifebalance-sector__row {
+    grid-template-columns: auto auto minmax(0, 1fr);
+    grid-template-areas:
+      "title title title"
+      "progress score action";
+    row-gap: 0.45rem;
+  }
+
+  .lifebalance-sector__title {
+    grid-area: title;
+  }
+
+  .lifebalance-sector__row .lifebalance-progress {
+    grid-area: progress;
+    text-align: left;
+  }
+
+  .lifebalance-sector__row .lifebalance-score {
+    grid-area: score;
+    text-align: left;
+  }
+
+  a.lifebalance-assess {
+    grid-area: action;
+  }
 }
 
 @media (max-width: 360px) {

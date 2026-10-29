@@ -78,6 +78,9 @@ final class WheelFormTest extends BrowserTestBase {
     $this->assertSession()->buttonNotExists('Зберегти чернетку');
     $this->assertSession()->buttonExists('Зберегти результат');
     $this->assertSession()->linkExists('Оцінити');
+    $this->assertSession()->elementTextEquals('css', '.lifebalance-columns__sector', 'Сфера');
+    $this->assertSession()->elementTextEquals('css', '.lifebalance-columns__answers', 'Відповіді');
+    $this->assertSession()->elementTextEquals('css', '.lifebalance-columns__score', 'Оцінка');
     $this->assertSession()->elementNotExists('css', 'table');
     $this->assertSession()->elementNotExists('css', 'input[type="range"]');
     $this->assertSession()->fieldNotExists('Нотатка');
@@ -103,23 +106,45 @@ final class WheelFormTest extends BrowserTestBase {
     for ($i = 0; $i < 5; $i++) {
       $criteria[] = $this->addCriterion($owner);
     }
-    $this->storeGuidedDraft($owner, $criteria);
+    $this->storeGuidedDraft($owner, $criteria, NULL);
     $this->drupalGet('/wheel');
-    $this->assertSession()->pageTextContains('Орієнтир: 10');
+    $this->assertNull($this->draftScore($owner, 'health'));
     $this->assertSession()->elementTextEquals(
       'css',
-      '#lifebalance-sector-health .lifebalance-progress',
+      '#lifebalance-sector-health a.lifebalance-assess',
+      'Переоцінити',
+    );
+    $this->storeGuidedDraft($owner, $criteria);
+    $this->drupalGet('/wheel');
+    $this->assertSession()->pageTextNotContains('Орієнтир');
+    $this->assertSession()->elementTextEquals(
+      'css',
+      '#lifebalance-sector-health .lifebalance-progress__value',
       '5/5',
     );
-    $this->assertSession()->pageTextContains('відрізняється від орієнтиру');
-    $this->assertSession()->linkExists('Переоцінити');
-    $this->assertSession()->buttonExists('Взяти орієнтир (10)');
+    $this->assertSession()->elementExists('css', 'svg.lifebalance-radar .lifebalance-radar__score');
+    $this->assertSession()->elementTextEquals(
+      'css',
+      '#lifebalance-sector-health [data-lifebalance-score-value]',
+      '10,0',
+    );
+    $this->assertSession()->elementTextEquals(
+      'css',
+      '#lifebalance-sector-purpose [data-lifebalance-score-value]',
+      '—',
+    );
+    $this->assertSession()->elementTextEquals(
+      'css',
+      '#lifebalance-sector-health a.lifebalance-assess',
+      'Переоцінити',
+    );
+    $this->assertSession()->elementTextEquals(
+      'css',
+      '#lifebalance-sector-purpose a.lifebalance-assess',
+      'Оцінити',
+    );
+    $this->assertSession()->buttonNotExists('Взяти орієнтир (10)');
     $this->assertSame(3, $this->draftScore($owner, 'health'));
-    $this->assertSame(0, $this->snapshotCount($owner));
-
-    $this->submitForm([], 'Взяти орієнтир (10)');
-    $this->assertSession()->pageTextContains('Орієнтир перенесено в оцінку.');
-    $this->assertSame(10, $this->draftScore($owner, 'health'));
     $this->assertSame(0, $this->snapshotCount($owner));
 
     $scores = [];
@@ -164,15 +189,23 @@ final class WheelFormTest extends BrowserTestBase {
    *   Account that owns the draft.
    * @param list<\Drupal\lifebalance\Entity\Criterion> $criteria
    *   Five published statements answered yes.
+   * @param int|null $health
+   *   Stored health score, or NULL when the person has not chosen one.
    */
-  private function storeGuidedDraft(UserInterface $owner, array $criteria): void {
+  private function storeGuidedDraft(
+    UserInterface $owner,
+    array $criteria,
+    ?int $health = 3,
+  ): void {
     $scores = [];
     foreach (self::SECTORS as $sector) {
       $scores[$sector] = NULL;
     }
     $storage = $this->container->get(DraftStorage::class);
     $storage->saveScores($owner, $scores, 'нотатка-лише-для-власника');
-    $scores['health'] = 3;
+    if ($health !== NULL) {
+      $scores['health'] = $health;
+    }
     $answers = [];
     foreach ($criteria as $criterion) {
       $answers[(string) $criterion->id()] = [

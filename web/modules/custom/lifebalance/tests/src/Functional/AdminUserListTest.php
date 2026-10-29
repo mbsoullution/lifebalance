@@ -131,6 +131,10 @@ final class AdminUserListTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('Є зріз');
     $this->assertSession()->pageTextNotContains('Секретна нотатка 84721');
     $this->assertSession()->pageTextNotContains('scored-list@example.com');
+    $this->assertSession()->responseNotContains('/users/' . $scored->id() . '/wheel');
+
+    $this->drupalGet('/admin/lifebalance/users/' . $scored->id() . '/wheel');
+    $this->assertSession()->statusCodeEquals(403);
 
     $this->drupalGet('/history/' . $this->snapshotUuid($scored));
     $this->assertSession()->statusCodeEquals(404);
@@ -166,6 +170,60 @@ final class AdminUserListTest extends BrowserTestBase {
     $this->assertSession()->pageTextNotContains('Секретна нотатка 84721');
     $this->assertSession()->responseHeaderContains('Cache-Control', 'private');
     $this->assertSession()->responseHeaderContains('Cache-Control', 'no-store');
+  }
+
+  /**
+   * The site owner sees another person's wheel. Other roles do not.
+   */
+  public function testSiteOwnerSeesAnotherWheel(): void {
+    $scored = $this->drupalCreateUser([], 'scoredwheel');
+    $other = $this->drupalCreateUser([], 'otherwheel');
+    $this->container->get('current_user')->setAccount($scored);
+    $this->saveSnapshot($scored);
+    $this->container->get('current_user')->setAccount($other);
+    $this->saveSnapshot($other);
+    $uuid = $this->snapshotUuid($scored);
+    $foreign = $this->snapshotUuid($other);
+    $wheel = '/admin/lifebalance/users/' . $scored->id() . '/wheel';
+
+    $this->drupalGet($wheel);
+    $this->assertSession()->statusCodeEquals(403);
+    $stranger = $this->drupalCreateUser();
+    $this->drupalLogin($stranger);
+    $this->drupalGet($wheel);
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($wheel . '/' . $uuid);
+    $this->assertSession()->statusCodeEquals(403);
+
+    $owner = $this->drupalCreateUser([
+      'administer lifebalance snapshots',
+      'view lifebalance user metadata',
+    ]);
+    $this->drupalLogin($owner);
+    $this->drupalGet('/admin/lifebalance/users');
+    $this->assertSession()->responseContains($wheel);
+    $this->drupalGet('/admin/lifebalance/users/' . $scored->id());
+    $this->assertSession()->linkExists('Відкрити');
+    $this->drupalGet($wheel);
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Секретна нотатка 84721');
+    $this->assertSession()->pageTextContains("Здоров'я");
+    $this->assertSession()->pageTextContains('6');
+    $this->assertSession()->pageTextNotContains('Видалити зріз');
+    $this->assertSession()->responseHeaderContains('Cache-Control', 'private');
+    $this->assertSession()->responseHeaderContains('Cache-Control', 'no-store');
+
+    $this->drupalGet($wheel . '/' . $uuid);
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Секретна нотатка 84721');
+    $this->drupalGet($wheel . '/' . $foreign);
+    $this->assertSession()->statusCodeEquals(404);
+    $this->drupalGet('/history/' . $uuid);
+    $this->assertSession()->statusCodeEquals(404);
+
+    $this->drupalGet('/admin/lifebalance/users/' . $stranger->id() . '/wheel');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Зрізів ще немає.');
   }
 
   /**

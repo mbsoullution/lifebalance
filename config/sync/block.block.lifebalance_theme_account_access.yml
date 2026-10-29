@@ -1,0 +1,20 @@
+uuid: 7c2e9a14-6b80-4d3f-9a51-2f8e0c6b1d44
+langcode: uk
+status: true
+dependencies:
+  module:
+    - lifebalance
+  theme:
+    - lifebalance_theme
+id: lifebalance_theme_account_access
+theme: lifebalance_theme
+region: header
+weight: -20
+provider: null
+plugin: lifebalance_account_access
+settings:
+  id: lifebalance_account_access
+  label: 'Account access'
+  label_display: '0'
+  provider: lifebalance
+visibility: {  }

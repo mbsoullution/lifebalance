@@ -49,3 +49,7 @@
 # Theme build dependencies. Compiled assets stay tracked.
 /web/themes/custom/**/node_modules/
 /web/themes/custom/**/.env.local
+
+# SSH keys for deployment. Never commit these.
+/deploy_keys/
+*.deploy_key

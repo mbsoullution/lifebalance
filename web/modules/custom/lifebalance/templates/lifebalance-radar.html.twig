@@ -45,7 +45,7 @@
   </g>
   <g class="lifebalance-radar__labels">
   {% for label in geometry.labels|default([]) %}
-    <text class="lifebalance-radar__label" fill="#243040" font-size="4.2" text-anchor="middle">
+    <text class="lifebalance-radar__label" fill="#243040" font-size="4.2" text-anchor="middle" dominant-baseline="central">
       <textPath href="#lb-radar-label-{{ loop.index0 }}" startOffset="50%">{{ label.text }}</textPath>
     </text>
   {% endfor %}

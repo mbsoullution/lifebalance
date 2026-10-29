@@ -24,8 +24,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * One sector of the optional questionnaire.
  *
- * Answers are stored in the draft. The guide is a hint and is copied into
- * the score only when "Взяти орієнтир" is pressed.
+ * Answers are stored in the draft. Beside the answer count, the page shows
+ * the calculated score to one decimal. The stored guide stays a rounded
+ * integer.
  */
 final class SectorQuestionnaireForm extends FormBase {
 
@@ -93,7 +94,6 @@ final class SectorQuestionnaireForm extends FormBase {
     $figure = $this->figure($draft, $sectorId, $visible, $premium);
     $sectorEntity = $this->sectorRepository->loadActive()[$sectorId];
     $label = (string) $sectorEntity->label();
-    $score = $draft->scores[$sectorId] ?? NULL;
 
     $form['#attributes']['class'][] = 'lifebalance-questionnaire';
     // The draft changes before access expires, so this page is not cached.
@@ -124,24 +124,23 @@ final class SectorQuestionnaireForm extends FormBase {
         '#value' => $label,
         '#attributes' => ['class' => ['lifebalance-questionnaire__title']],
       ],
-      'progress' => [
-        '#type' => 'html_tag',
-        '#tag' => 'p',
-        '#value' => $this->t('@answered/@total', [
-          '@answered' => $figure['progress'],
-          '@total' => $figure['total'],
-        ]),
-        '#attributes' => [
-          'class' => ['lifebalance-progress'],
-          'data-lifebalance-progress' => $sectorId,
+      'figures' => [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['lifebalance-questionnaire__figures']],
+        'progress' => [
+          '#type' => 'html_tag',
+          '#tag' => 'p',
+          '#value' => $this->t('@answered/@total', [
+            '@answered' => $figure['progress'],
+            '@total' => $figure['total'],
+          ]),
+          '#attributes' => [
+            'class' => ['lifebalance-progress'],
+            'data-lifebalance-progress' => $sectorId,
+          ],
         ],
+        'score' => ScoreColumn::element($this->t('Оцінка'), $figure['precise']),
       ],
-    ];
-    $form['formula'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => $this->t('Орієнтир — частка тверджень, з якими ви погодились (частково = половина), переведена в шкалу 0–10.'),
-      '#weight' => -18,
     ];
     if ($this->sectorOutdated($draft, $sectorId)) {
       $form['outdated'] = [
@@ -209,7 +208,7 @@ final class SectorQuestionnaireForm extends FormBase {
       ];
     }
 
-    $form['summary'] = $this->summary($sectorId, $score, $figure);
+    $form['summary'] = $this->summary();
     $form['actions'] = [
       '#type' => 'actions',
       '#weight' => 40,
@@ -291,10 +290,6 @@ final class SectorQuestionnaireForm extends FormBase {
     if (!$draft instanceof Draft) {
       return;
     }
-    if ($name === 'take') {
-      $this->copyGuide($draft, $sectorId, $form_state);
-      return;
-    }
     if ($clearId !== NULL) {
       $this->messenger()->addStatus($this->t('Відповідь очищено.'));
     }
@@ -302,34 +297,6 @@ final class SectorQuestionnaireForm extends FormBase {
       $this->messenger()->addStatus($this->t('Відповіді збережено.'));
     }
     $this->redirectAfter($form_state, $name, $sectorId);
-  }
-
-  /**
-   * Copies the recomputed guide into this sector's score.
-   */
-  private function copyGuide(Draft $draft, string $sectorId, FormStateInterface $form_state): void {
-    $premium = $this->entitlementChecker->hasFeatureAccess($this->currentUser(), 'premium_criteria');
-    $visible = $this->visible($sectorId, $premium);
-    $display = $this->figure($draft, $sectorId, $visible, $premium)['display'];
-    if (!is_int($display)) {
-      $this->messenger()->addError($this->t('Для цього сектора ще немає орієнтира.'));
-      $this->redirectAfter($form_state, 'save', $sectorId);
-      return;
-    }
-    $scores = $draft->scores;
-    $scores[$sectorId] = $display;
-    try {
-      $this->draftStorage->store($this->currentUser(), [
-        'scores' => $scores,
-        'answers' => $draft->answers,
-      ]);
-    }
-    catch (DraftRejected) {
-      $this->messenger()->addError($this->t('Відповіді не збережено.'));
-      return;
-    }
-    $this->messenger()->addStatus($this->t('Орієнтир перенесено в оцінку.'));
-    $this->redirectAfter($form_state, 'save', $sectorId);
   }
 
   /**
@@ -425,73 +392,27 @@ final class SectorQuestionnaireForm extends FormBase {
   }
 
   /**
-   * Guide hint for this sector. The person does not set the score here.
-   *
-   * @param string $sectorId
-   *   Sector ID.
-   * @param int|null $score
-   *   Current score, or NULL when it is not assessed.
-   * @param array{display: int|null, progress: int, total: int, yes: int, partial: int, no: int, na: int} $figure
-   *   Figures for this sector.
+   * Holds a draft-save error. A successful save stays silent.
    *
    * @return array<string, mixed>
    *   The summary render array.
    */
-  private function summary(string $sectorId, ?int $score, array $figure): array {
-    $summary = [
+  private function summary(): array {
+    return [
       '#type' => 'container',
       '#weight' => 30,
       '#attributes' => ['class' => ['lifebalance-summary']],
-    ];
-    $guideText = is_int($figure['display'])
-      ? $this->t('Орієнтир: @score', ['@score' => $figure['display']])
-      : '';
-    $summary['guide'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => $guideText,
-      '#attributes' => [
-        'data-lifebalance-guide' => $sectorId,
-        'aria-live' => 'polite',
+      'status' => [
+        '#type' => 'html_tag',
+        '#tag' => 'p',
+        '#value' => '',
+        '#attributes' => [
+          'class' => ['lifebalance-status'],
+          'data-lifebalance-status' => '1',
+          'aria-live' => 'polite',
+        ],
       ],
     ];
-    $differs = is_int($figure['display']) && $score !== NULL && $score !== $figure['display'];
-    $summary['difference'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => $this->t('Ваша оцінка відрізняється від орієнтиру — це нормально, орієнтир лише підказка.'),
-      '#attributes' => ['data-lifebalance-difference' => $sectorId],
-    ];
-    if (!$differs) {
-      $summary['difference']['#attributes']['hidden'] = 'hidden';
-    }
-    $summary['take'] = [
-      '#type' => 'submit',
-      '#name' => 'take',
-      '#value' => $this->t('Взяти орієнтир (@score)', [
-        '@score' => $figure['display'] ?? 0,
-      ]),
-      '#limit_validation_errors' => [
-        ['criteria'],
-      ],
-      '#attributes' => [
-        'data-lifebalance-take' => $sectorId,
-      ],
-    ];
-    if (!is_int($figure['display'])) {
-      $summary['take']['#attributes']['hidden'] = 'hidden';
-    }
-    $summary['status'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => '',
-      '#attributes' => [
-        'class' => ['lifebalance-status'],
-        'data-lifebalance-status' => '1',
-        'aria-live' => 'polite',
-      ],
-    ];
-    return $summary;
   }
 
   /**
@@ -581,8 +502,8 @@ final class SectorQuestionnaireForm extends FormBase {
    * @param bool $premium
    *   Whether this person may answer premium criteria.
    *
-   * @return array{display: int|null, progress: int, total: int, yes: int, partial: int, no: int, na: int}
-   *   Figures. display is the 0–10 guide.
+   * @return array{progress: int, total: int, precise: int|null}
+   *   Progress and the one-decimal score in tenths.
    */
   private function figure(Draft $draft, string $sectorId, array $visible, bool $premium): array {
     $mode = Snapshot::MODE_FREE;
@@ -633,6 +554,7 @@ final class SectorQuestionnaireForm extends FormBase {
       'partial' => $counts['partial'],
       'no' => $counts['no'],
       'na' => $counts['na'],
+      'precise' => $result->precise,
     ];
   }
 

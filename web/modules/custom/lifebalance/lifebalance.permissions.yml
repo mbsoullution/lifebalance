@@ -7,8 +7,8 @@ administer lifebalance criteria:
   description: 'Перегляд, зміна та архівування критеріїв самооцінки.'
 
 administer lifebalance snapshots:
-  title: 'Адміністрування зрізів'
-  description: 'Не видається жодній ролі. Зріз бачить і видаляє лише власник.'
+  title: 'Перегляд чужих коліс'
+  description: 'Лише для власника сайту. Перегляд оцінок, відповідей і нотаток. Чужий зріз не змінюється і не видаляється.'
   restrict access: true
 
 administer lifebalance entitlements:

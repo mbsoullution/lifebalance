@@ -10,6 +10,9 @@ Drupal 11 проєкт. Перед роботою прочитай:
 Дані:
 - `web/modules/custom/lifebalance/data/criteria.v1.yml` — 160 критеріїв.
 - `docs/content/recommendations.example.yml` — формат бібліотеки рекомендацій (етап 3).
+- `docs/content/landing.uk.md` — текст головної (крок 13).
+- `docs/content/faq.uk.md` — часті запитання; розділи з етапом лишаються прихованими.
+- `docs/content/privacy.uk.md`, `terms.uk.md`, `refunds.uk.md` — правові сторінки. Поля `[...]` заповнює власник, до цього текст не публікується.
 
 Тексти не переписуй у коді.
 

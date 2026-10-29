@@ -16,7 +16,8 @@
         {"tier": "free", "answer": "yes", "in_formula": true}
       ],
       "guide": 100,
-      "answered": 5
+      "answered": 5,
+      "precise": 100
     },
     {
       "name": "mixed",
@@ -29,7 +30,8 @@
         {"tier": "free", "answer": "yes", "in_formula": true}
       ],
       "guide": 70,
-      "answered": 5
+      "answered": 5,
+      "precise": 70
     },
     {
       "name": "na_excluded",
@@ -43,7 +45,8 @@
         {"tier": "free", "answer": "na", "in_formula": true}
       ],
       "guide": 100,
-      "answered": 5
+      "answered": 5,
+      "precise": 100
     },
     {
       "name": "below_minimum",
@@ -55,7 +58,8 @@
         {"tier": "free", "answer": "yes", "in_formula": true}
       ],
       "guide": null,
-      "answered": 4
+      "answered": 4,
+      "precise": null
     },
     {
       "name": "all_na",
@@ -68,7 +72,8 @@
         {"tier": "free", "answer": "na", "in_formula": true}
       ],
       "guide": null,
-      "answered": 0
+      "answered": 0,
+      "precise": null
     },
     {
       "name": "all_no",
@@ -81,7 +86,8 @@
         {"tier": "free", "answer": "no", "in_formula": true}
       ],
       "guide": 0,
-      "answered": 5
+      "answered": 5,
+      "precise": 0
     },
     {
       "name": "five_partial",
@@ -94,7 +100,8 @@
         {"tier": "free", "answer": "partial", "in_formula": true}
       ],
       "guide": 50,
-      "answered": 5
+      "answered": 5,
+      "precise": 50
     },
     {
       "name": "rounding_half_up",
@@ -110,7 +117,8 @@
         {"tier": "free", "answer": "no", "in_formula": true}
       ],
       "guide": 30,
-      "answered": 8
+      "answered": 8,
+      "precise": 25
     },
     {
       "name": "premium_counts_twenty",
@@ -138,7 +146,8 @@
         {"tier": "premium", "answer": "yes", "in_formula": true}
       ],
       "guide": 100,
-      "answered": 20
+      "answered": 20,
+      "precise": 100
     },
     {
       "name": "premium_below_minimum",
@@ -155,7 +164,8 @@
         {"tier": "free", "answer": "yes", "in_formula": true}
       ],
       "guide": null,
-      "answered": 9
+      "answered": 9,
+      "precise": null
     },
     {
       "name": "free_ignores_premium_tier",
@@ -173,7 +183,8 @@
         {"tier": "premium", "answer": "no", "in_formula": true}
       ],
       "guide": 100,
-      "answered": 5
+      "answered": 5,
+      "precise": 100
     },
     {
       "name": "premium_combines_tiers",
@@ -191,7 +202,8 @@
         {"tier": "premium", "answer": "no", "in_formula": true}
       ],
       "guide": 50,
-      "answered": 10
+      "answered": 10,
+      "precise": 50
     },
     {
       "name": "in_formula_excluded",
@@ -209,7 +221,8 @@
         {"tier": "free", "answer": "no", "in_formula": false}
       ],
       "guide": 100,
-      "answered": 5
+      "answered": 5,
+      "precise": 100
     }
   ]
 }

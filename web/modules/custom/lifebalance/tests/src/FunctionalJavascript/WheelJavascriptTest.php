@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
- * The radar and the guide update in the browser, and the draft survives reload.
+ * The radar updates in the browser, and the draft survives reload.
  */
 #[Group('lifebalance')]
 #[RunTestsInSeparateProcesses]
@@ -67,12 +67,13 @@ final class WheelJavascriptTest extends WebDriverTestBase {
     $scores['health'] = 4;
     $this->container->get(DraftStorage::class)->saveScores($owner, $scores, '');
     $this->drupalGet('/wheel');
+    $this->assertSession()->pageTextNotContains('Показати орієнтир');
     $this->assertNotSame('', $this->polygonPoints());
     $this->assertSame(0, $this->snapshotCount($owner));
   }
 
   /**
-   * Answering statements updates the guide and leaves the stored score.
+   * Answering statements saves the draft and leaves the stored score.
    */
   public function testAnswersUpdateTheGuide(): void {
     $owner = $this->drupalCreateUser();
@@ -106,12 +107,18 @@ final class WheelJavascriptTest extends WebDriverTestBase {
         radio.dispatchEvent(new Event('change', { bubbles: true }));
       }
 JS);
-    $this->assertSession()->elementTextContains('css', '[data-lifebalance-guide]', 'Орієнтир: 10');
+    $this->assertSession()->elementNotExists('css', '[data-lifebalance-guide]');
+    $this->assertSession()->elementNotExists('css', '[data-lifebalance-take]');
     $this->assertSession()->elementNotExists('css', 'input[type="range"]');
-    $this->assertSession()->waitForText('Збережено');
+    $saved = $this->assertSession()->waitForElement(
+      'css',
+      '[data-lifebalance-draft="saved"]',
+    );
+    $this->assertNotNull($saved);
+    $this->assertSession()->pageTextNotContains('Збережено');
 
     $this->drupalGet('/wheel/health');
-    $this->assertSession()->pageTextContains('Орієнтир: 10');
+    $this->assertSession()->pageTextNotContains('Орієнтир');
     $this->assertSession()->fieldNotExists('Не оцінено');
     $checked = $this->getSession()->evaluateScript('document.querySelectorAll(\'input[type="radio"]:checked\').length');
     $this->assertSame(5, $checked);

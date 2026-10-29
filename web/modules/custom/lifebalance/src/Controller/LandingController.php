@@ -5,51 +5,45 @@ declare(strict_types=1);
 namespace Drupal\lifebalance\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\lifebalance\Repository\SectorRepository;
 use Drupal\lifebalance\Service\RadarGeometry;
-use Drupal\user\Form\UserLoginForm;
 
 /**
- * Public front page: a sample wheel, a create action, and sign-in.
+ * Public front page: a sample wheel and a create action.
  */
 final class LandingController extends ControllerBase {
 
   /**
-   * Illustrative scores for one plausible person.
-   *
-   * Close relationships and health lead. Work and money are steady.
-   * Learning and spirituality sit closer to the center.
+   * Illustrative scores. Every sector is full, matching the logo.
    *
    * @var array<string, int|null>
    */
   private const SAMPLE = [
-    'health' => 7,
-    'relationships' => 8,
-    'environment' => 5,
-    'purpose' => 6,
-    'finances' => 6,
-    'self_development' => 4,
-    'life_brightness' => 5,
-    'spirituality' => 3,
+    'health' => 10,
+    'relationships' => 10,
+    'environment' => 10,
+    'purpose' => 10,
+    'finances' => 10,
+    'self_development' => 10,
+    'life_brightness' => 10,
+    'spirituality' => 10,
   ];
 
   public function __construct(
-    protected RouteProviderInterface $routeProvider,
     protected SectorRepository $sectors,
     protected RadarGeometry $radarGeometry,
   ) {}
 
   /**
-   * Landing content. A signed-in person gets a link to the wheel.
+   * Landing content. Sign-in lives in the header and on the login page.
    *
    * @return array<string, mixed>
    *   A render array.
    */
   public function page(): array {
-    $build = [
+    return [
       '#cache' => [
         'contexts' => ['user'],
         'max-age' => 0,
@@ -57,50 +51,18 @@ final class LandingController extends ControllerBase {
       '#attached' => [
         'library' => ['lifebalance/landing'],
       ],
-    ];
-    $build['story'] = $this->story();
-    $build['actions'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['lifebalance-actions']],
-      'create' => [
-        '#type' => 'link',
-        '#title' => $this->t('Створити власне колесо'),
-        '#url' => Url::fromRoute('lifebalance.wheel'),
-        '#attributes' => ['class' => ['lifebalance-create']],
+      'story' => $this->story(),
+      'actions' => [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['lifebalance-actions']],
+        'create' => [
+          '#type' => 'link',
+          '#title' => $this->t('Створити власне колесо'),
+          '#url' => Url::fromRoute('lifebalance.wheel'),
+          '#attributes' => ['class' => ['lifebalance-create']],
+        ],
       ],
     ];
-    if ($this->currentUser()->isAuthenticated()) {
-      return $build;
-    }
-    $build['actions']['links'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['lifebalance-links']],
-    ];
-    if ($this->routeProvider->getRoutesByNames(['social_auth.network.redirect']) !== []) {
-      $build['actions']['links']['google'] = $this->providerLink('google', $this->t('Увійти через Google'));
-      $build['actions']['links']['facebook'] = $this->providerLink('facebook', $this->t('Увійти через Facebook'));
-    }
-    $build['actions']['links']['password'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Увійти з паролем'),
-      '#url' => Url::fromRoute('<front>', [], ['fragment' => 'login']),
-    ];
-    $form = $this->formBuilder()->getForm(UserLoginForm::class);
-    unset($form['name']['#attributes']['autofocus']);
-    $form['name']['#title'] = $this->t("Ім'я або пошта");
-    $form['pass']['#title'] = $this->t('Пароль');
-    $form['actions']['submit']['#value'] = $this->t('Увійти');
-    $build['login'] = [
-      '#type' => 'container',
-      '#attributes' => ['id' => 'login', 'class' => ['lifebalance-login']],
-      'title' => [
-        '#type' => 'html_tag',
-        '#tag' => 'h2',
-        '#value' => $this->t('Вхід'),
-      ],
-      'form' => $form,
-    ];
-    return $build;
   }
 
   /**
@@ -322,25 +284,6 @@ final class LandingController extends ControllerBase {
       ];
     }
     return $chart;
-  }
-
-  /**
-   * A link to one Social Auth provider redirect.
-   *
-   * @param string $network
-   *   Provider short name, such as google.
-   * @param \Drupal\Core\StringTranslation\TranslatableMarkup $title
-   *   Link text.
-   *
-   * @return array<string, mixed>
-   *   A link render element.
-   */
-  private function providerLink(string $network, TranslatableMarkup $title): array {
-    return [
-      '#type' => 'link',
-      '#title' => $title,
-      '#url' => Url::fromRoute('social_auth.network.redirect', ['network' => $network]),
-    ];
   }
 
 }

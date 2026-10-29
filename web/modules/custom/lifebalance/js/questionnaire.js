@@ -14,31 +14,14 @@ import { calculateGuide } from './guide.js';
       let request = 0;
 
       const refresh = () => {
-        const text = guideText(settings, form);
-        const guide = form.querySelector('[data-lifebalance-guide]');
-        if (guide) {
-          guide.textContent = text;
-        }
         const parsed = figures(settings, form);
         const progress = form.querySelector('[data-lifebalance-progress]');
         if (progress) {
           progress.textContent = `${parsed.progress}/${parsed.total}`;
         }
-        const difference = form.querySelector('[data-lifebalance-difference]');
-        if (difference) {
-          const score = currentScore(settings);
-          const show = parsed.display !== null && score !== null && score !== parsed.display;
-          difference.hidden = !show;
-        }
-        const take = form.querySelector('[data-lifebalance-take]');
-        if (take instanceof HTMLInputElement) {
-          if (parsed.display === null) {
-            take.hidden = true;
-          }
-          else {
-            take.hidden = false;
-            take.value = `Взяти орієнтир (${parsed.display})`;
-          }
+        const score = form.querySelector('[data-lifebalance-score-value]');
+        if (score) {
+          score.textContent = formatTenths(parsed.precise);
         }
       };
 
@@ -50,7 +33,8 @@ import { calculateGuide } from './guide.js';
             if (current !== request || !status) {
               return;
             }
-            status.textContent = ok ? 'Збережено' : 'Чернетку не збережено';
+            status.textContent = ok ? '' : 'Чернетку не збережено';
+            status.dataset.lifebalanceDraft = ok ? 'saved' : 'error';
           });
         }, 1000);
       };
@@ -71,19 +55,6 @@ import { calculateGuide } from './guide.js';
     },
   };
 })(Drupal, drupalSettings, once);
-
-/**
- * @param {Settings} settings
- * @param {ParentNode} form
- * @returns {string}
- */
-function guideText(settings, form) {
-  const parsed = figures(settings, form);
-  if (parsed.display !== null) {
-    return `Орієнтир: ${parsed.display}`;
-  }
-  return '';
-}
 
 /**
  * @param {Settings} settings
@@ -117,10 +88,22 @@ function figures(settings, form) {
   const result = calculateGuide(modeFor(settings, selected), inputs);
   return {
     display: result.guide === null ? null : Math.floor(result.guide / 10),
+    precise: result.precise,
     progress,
     total,
     ...counts,
   };
+}
+
+/**
+ * @param {number|null} tenths
+ * @returns {string}
+ */
+function formatTenths(tenths) {
+  if (tenths === null) {
+    return '—';
+  }
+  return `${Math.floor(tenths / 10)},${tenths % 10}`;
 }
 
 /**
