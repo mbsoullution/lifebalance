@@ -19,12 +19,14 @@ Drupal 11 проєкт. Перед роботою прочитай:
 Команди (DDEV):
 
 ```
-ddev composer install
+ddev composer dev
+ddev composer build
+ddev composer lint
+ddev composer test
 ddev drush deploy
 ddev drush lifebalance:import-criteria
-ddev exec vendor/bin/phpcs
-ddev exec vendor/bin/phpstan analyse
-ddev exec vendor/bin/phpunit -c phpunit.xml
 ```
+
+`dev` ставить залежності й збирає тему. `build` те саме без dev-пакетів, цією командою користується деплой. `drush deploy` лишається окремо: йому потрібна база.
 
 Якщо задача суперечить правилам або неоднозначна, зупинись і спитай.

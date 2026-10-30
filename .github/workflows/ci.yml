@@ -23,11 +23,8 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --no-progress
 
-      - name: phpcs
-        run: vendor/bin/phpcs
-
-      - name: phpstan
-        run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+      - name: phpcs and phpstan
+        run: composer lint
 
       - name: phpunit
-        run: vendor/bin/phpunit -c phpunit.xml
+        run: composer test

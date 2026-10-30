@@ -7,7 +7,7 @@ Production ставиться без dev-залежностей. Каталог 
 ## Встановлення
 
 ```bash
-composer install --no-dev --optimize-autoloader
+composer build
 ```
 
 `drupal/devel` стоїть у `require-dev`, тому в цьому наборі його немає. `drupal/config_split` лишається. Split `dev` у `config/sync` вимкнений (`status: false`). У ньому `dblog`, `devel` і `views_ui`. На production ці модулі не вмикаються. `views` увімкнений: ним користується лише адмінсписок рекомендацій.

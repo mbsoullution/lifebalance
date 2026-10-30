@@ -34,6 +34,25 @@
     "conflict": {
         "drupal/drupal": "*"
     },
+    "scripts": {
+        "dev": [
+            "@composer install --no-interaction --no-progress",
+            "@build-theme"
+        ],
+        "build": [
+            "@composer install --no-dev --optimize-autoloader --no-interaction --no-progress",
+            "@build-theme"
+        ],
+        "build-theme": [
+            "npm ci --prefix web/themes/custom/lifebalance_theme",
+            "npm run build --prefix web/themes/custom/lifebalance_theme"
+        ],
+        "lint": [
+            "vendor/bin/phpcs",
+            "vendor/bin/phpstan analyse --no-progress --memory-limit=1G"
+        ],
+        "test": "vendor/bin/phpunit -c phpunit.xml"
+    },
     "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {

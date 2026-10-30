@@ -8,13 +8,19 @@ The workflow does not deploy on push. The default run is a dry run. Nothing in t
 
 ## What is deployed
 
-GitHub Actions checks out `main`, installs PHP 8.3, and runs:
+GitHub Actions checks out `main`, installs PHP 8.3 and Node 22, and runs `composer build`.
+
+That command installs production PHP dependencies and rebuilds the theme. It produces `vendor/`, Drupal core, contributed projects, and the scaffold files under `web/` (`index.php`, `.htaccess`). Dev packages such as `drupal/devel` are not installed. `node_modules` stays off the server.
+
+The same scripts are the local entry points:
 
 ```bash
-composer install --no-dev --optimize-autoloader --no-interaction
+ddev start
+ddev composer dev
+ddev drush deploy
 ```
 
-That build produces `vendor/`, Drupal core, contributed projects, and the scaffold files under `web/` (`index.php`, `.htaccess`). Dev packages such as `drupal/devel` are not installed. The theme's compiled CSS and JS are already in Git, so the pipeline does not run npm.
+`composer dev` installs PHP dependencies, including development tools, and runs the theme build. `composer lint` and `composer test` run the same checks as CI. On the server, after the files are published, `drush deploy` imports configuration. It is separate because it needs the production database.
 
 `drush deploy` on the server then imports `config/sync`, runs database updates, rebuilds cache, and runs the project deploy hooks. Those hooks import the criteria catalog and the recommendation catalog. They do not delete snapshots, accounts, or uploaded files.
 

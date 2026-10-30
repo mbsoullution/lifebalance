@@ -76,10 +76,15 @@ jobs:
           tools: composer:v2
           extensions: mbstring, xml, curl, zip, gd, intl
 
-      - name: Validate and install
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate and build
         run: |
           composer validate --no-check-publish --no-interaction
-          composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+          composer build
 
       - name: Assemble the release
         run: |
