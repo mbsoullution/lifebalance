@@ -53,8 +53,8 @@ umask 077
 SSH_DIR=${RUNNER_TEMP:-/tmp}/lifebalance-ssh
 mkdir -p "$SSH_DIR"
 chmod 700 "$SSH_DIR"
-printf '%s\n' "$SSH_PRIVATE_KEY" > "$SSH_DIR/id"
-printf '%s\n' "$SSH_KNOWN_HOSTS" > "$SSH_DIR/known_hosts"
+printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > "$SSH_DIR/id"
+printf '%s\n' "$SSH_KNOWN_HOSTS" | tr -d '\r' > "$SSH_DIR/known_hosts"
 chmod 600 "$SSH_DIR/id" "$SSH_DIR/known_hosts"
 if ! grep -q . "$SSH_DIR/known_hosts"; then
   echo "SSH_KNOWN_HOSTS is empty."
@@ -64,24 +64,50 @@ if ! grep -q 'PRIVATE KEY' "$SSH_DIR/id"; then
   echo "SSH_PRIVATE_KEY does not look like a private key."
   exit 1
 fi
+if ! ssh-keygen -y -P "" -f "$SSH_DIR/id" >/dev/null 2>&1; then
+  echo "SSH_PRIVATE_KEY is encrypted, truncated, or not a usable private key."
+  echo "Put the matching private key in the secret, with an empty passphrase."
+  exit 1
+fi
+echo "Deploy key fingerprint: $(ssh-keygen -lf "$SSH_DIR/id")"
 
-SSH_BASE=(
-  ssh
-  -i "$SSH_DIR/id"
-  -o IdentitiesOnly=yes
-  -o StrictHostKeyChecking=yes
-  -o UserKnownHostsFile="$SSH_DIR/known_hosts"
-  -o ConnectTimeout=20
-  -o ServerAliveInterval=15
-  -o ServerAliveCountMax=4
-  -p "$SSH_PORT"
-)
+# One identity, no agent, no password. Password prompts would read the
+# remote script from stdin and the host counts those as failed logins.
+cat > "$SSH_DIR/ssh" <<EOF
+#!/bin/sh
+exec ssh \\
+  -F /dev/null \\
+  -i '$SSH_DIR/id' \\
+  -o IdentityFile='$SSH_DIR/id' \\
+  -o IdentitiesOnly=yes \\
+  -o IdentityAgent=none \\
+  -o PreferredAuthentications=publickey \\
+  -o PubkeyAuthentication=yes \\
+  -o PasswordAuthentication=no \\
+  -o KbdInteractiveAuthentication=no \\
+  -o NumberOfPasswordPrompts=0 \\
+  -o BatchMode=yes \\
+  -o StrictHostKeyChecking=yes \\
+  -o UserKnownHostsFile='$SSH_DIR/known_hosts' \\
+  -o GlobalKnownHostsFile=/dev/null \\
+  -o ConnectTimeout=20 \\
+  -o ServerAliveInterval=15 \\
+  -o ServerAliveCountMax=4 \\
+  -p '$SSH_PORT' \\
+  "\$@"
+EOF
+chmod 700 "$SSH_DIR/ssh"
 
 remote() {
   local action=$1
   local exports
   exports=$(printf 'DEPLOY_ROOT=%q PHP_BIN=%q RELEASE_ID=%q' "$DEPLOY_ROOT" "$PHP_BIN" "$RELEASE_ID")
-  "${SSH_BASE[@]}" "$SSH_USER@$SSH_HOST" "$exports bash -s -- $action" < "$ROOT/scripts/deploy/remote.sh"
+  if ! "$SSH_DIR/ssh" "$SSH_USER@$SSH_HOST" "$exports bash -s -- $action" < "$ROOT/scripts/deploy/remote.sh"; then
+    echo "SSH authentication failed."
+    echo "Install the matching public key in ~/.ssh/authorized_keys on the server."
+    echo "The private key secret must be that same key and must not have a passphrase."
+    exit 1
+  fi
 }
 
 resolve_source() {
@@ -104,7 +130,7 @@ copy_release() {
   fi
   rsync "${flags[@]}" \
     --exclude-from="$ROOT/scripts/deploy/rsync-excludes.txt" \
-    -e "ssh -i ${SSH_DIR}/id -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=${SSH_DIR}/known_hosts -o ConnectTimeout=20 -p ${SSH_PORT}" \
+    -e "$SSH_DIR/ssh" \
     "$SOURCE_DIR/" \
     "$SSH_USER@$SSH_HOST:$DEPLOY_ROOT/releases/$RELEASE_ID/"
 }
