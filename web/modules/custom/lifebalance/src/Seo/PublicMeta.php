@@ -48,7 +48,7 @@ final class PublicMeta {
   ];
 
   public function __construct(
-    private readonly MetatagManager $metatagManager,
+    private readonly ?MetatagManager $metatagManager,
     private readonly LanguageManagerInterface $languageManager,
     private readonly RouteMatchInterface $routeMatch,
     private readonly ConfigFactoryInterface $configFactory,
@@ -72,6 +72,9 @@ final class PublicMeta {
    *   A render array with #attached meta tags.
    */
   public function elements(string $route): array {
+    if ($this->metatagManager === NULL) {
+      return [];
+    }
     $copy = $this->copy($route);
     return $this->metatagManager->generateElements([
       'title' => $copy['title'],

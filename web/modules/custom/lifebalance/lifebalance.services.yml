@@ -20,7 +20,7 @@ services:
   Drupal\lifebalance\Seo\PublicMeta:
     autowire: true
     arguments:
-      $metatagManager: '@metatag.manager'
+      $metatagManager: '@?metatag.manager'
   Drupal\lifebalance\Seo\VisitStats:
     autowire: true
   Drupal\lifebalance\Service\VisitorCountry:

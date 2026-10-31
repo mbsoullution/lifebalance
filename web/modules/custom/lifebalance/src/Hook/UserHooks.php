@@ -29,7 +29,7 @@ final class UserHooks {
     private readonly EntitlementLog $entitlementLog,
     private readonly Connection $database,
     private readonly LoggerChannelFactoryInterface $loggerFactory,
-    private readonly FileUsageInterface $fileUsage,
+    private readonly ?FileUsageInterface $fileUsage = NULL,
   ) {}
 
   /**
@@ -75,6 +75,9 @@ final class UserHooks {
   private function deleteAvatar(int $uid): void {
     $profile = $this->userData->get('lifebalance', $uid, 'profile');
     if (!is_array($profile)) {
+      return;
+    }
+    if ($this->fileUsage === NULL) {
       return;
     }
     $fid = $profile['avatar'] ?? NULL;
