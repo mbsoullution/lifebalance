@@ -8,6 +8,19 @@ jobs:
   quality:
     name: phpcs, phpstan, phpunit
     runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: drupal
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -18,7 +31,7 @@ jobs:
           php-version: '8.3'
           coverage: none
           tools: composer:v2
-          extensions: mbstring, xml, curl, zip, gd, intl
+          extensions: mbstring, xml, curl, zip, gd, intl, pdo_mysql
 
       - name: Install dependencies
         run: composer install --no-interaction --no-progress
@@ -27,4 +40,27 @@ jobs:
         run: composer lint
 
       - name: phpunit
-        run: composer test
+        env:
+          # phpunit.xml points at DDEV. These values win because they are
+          # already set when PHPUnit starts.
+          SIMPLETEST_DB: mysql://root:root@127.0.0.1:3306/drupal
+          SIMPLETEST_BASE_URL: http://127.0.0.1:8888
+          BROWSERTEST_OUTPUT_DIRECTORY: ${{ github.workspace }}/web/sites/simpletest/browser_output
+          BROWSERTEST_OUTPUT_BASE_URL: http://127.0.0.1:8888
+        run: |
+          mkdir -p web/sites/simpletest/browser_output
+          php -S 127.0.0.1:8888 -t web web/.ht.router.php >/tmp/php-server.log 2>&1 &
+          ready=0
+          for _ in $(seq 1 30); do
+            if php -r 'exit(@fsockopen("127.0.0.1", 8888) ? 0 : 1);'; then
+              ready=1
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then
+            echo "The test web server did not start."
+            cat /tmp/php-server.log
+            exit 1
+          fi
+          composer test
