@@ -31,6 +31,10 @@ jobs:
           php-version: '8.3'
           coverage: none
           tools: composer:v2
+          # Production ini caps memory and leaves the timezone unset. Browser
+          # tests render full Drupal pages in a second PHP process.
+          ini-file: development
+          ini-values: memory_limit=-1, max_execution_time=0, date.timezone=UTC, display_errors=On, zend.assertions=1
           extensions: mbstring, xml, curl, zip, gd, intl, pdo_mysql
 
       - name: Install dependencies
@@ -48,8 +52,8 @@ jobs:
           BROWSERTEST_OUTPUT_DIRECTORY: ${{ github.workspace }}/web/sites/simpletest/browser_output
           BROWSERTEST_OUTPUT_BASE_URL: http://127.0.0.1:8888
         run: |
-          mkdir -p web/sites/simpletest/browser_output
-          php -S 127.0.0.1:8888 -t web web/.ht.router.php >/tmp/php-server.log 2>&1 &
+          mkdir -p web/sites/simpletest/browser_output /tmp
+          php -d memory_limit=-1 -d max_execution_time=0 -d date.timezone=UTC -d display_errors=1 -S 127.0.0.1:8888 -t web web/.ht.router.php >/tmp/php-server.log 2>&1 &
           ready=0
           for _ in $(seq 1 30); do
             if php -r 'exit(@fsockopen("127.0.0.1", 8888) ? 0 : 1);'; then
@@ -63,4 +67,17 @@ jobs:
             cat /tmp/php-server.log
             exit 1
           fi
+          set +e
           composer test
+          status=$?
+          set -e
+          if [ "$status" -ne 0 ]; then
+            echo "----- php server log -----"
+            tail -n 80 /tmp/php-server.log || true
+            echo "----- latest browser output -----"
+            find web/sites/simpletest/browser_output -type f -name '*.html' -printf '%T@ %p\n' 2>/dev/null | sort -n | tail -n 2 | cut -d' ' -f2- | while read -r file; do
+              echo "== $file =="
+              php -r '$html = file_get_contents($argv[1]); $text = trim(preg_replace("/\s+/", " ", strip_tags($html))); echo substr($text, 0, 2500), "\n";' "$file" || true
+            done
+            exit "$status"
+          fi
