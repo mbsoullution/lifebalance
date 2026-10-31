@@ -3,6 +3,7 @@ lifebalance.sitemap:
   defaults:
     _controller: '\Drupal\lifebalance\Controller\SitemapController::build'
   requirements:
+    # Public sitemap. It lists only public pages and no personal data.
     _access: 'TRUE'
 
 lifebalance.landing:
