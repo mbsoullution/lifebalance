@@ -1,0 +1,10 @@
+# Preview host only. Local and any future public domain stay indexable.
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTP_HOST} ^(www\.)?mbprotest\.site$ [NC]
+  RewriteRule ^robots\.txt$ robots-deny.txt [L]
+</IfModule>
+<IfModule mod_headers.c>
+  <If "%{HTTP_HOST} =~ m#^(www\.)?mbprotest\.site$#i">
+    Header always set X-Robots-Tag "noindex, nofollow, noarchive"
+  </If>
+</IfModule>

@@ -53,3 +53,4 @@
 # SSH keys for deployment. Never commit these.
 /deploy_keys/
 *.deploy_key
+.htpasswd

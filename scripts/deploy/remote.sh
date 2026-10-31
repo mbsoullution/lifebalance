@@ -91,6 +91,7 @@ report_tree() {
   local item
   for item in \
     "$SHARED/settings.local.php" \
+    "$SHARED/.htpasswd" \
     "$SHARED/files" \
     "$SHARED/private" \
     "$SHARED/layout-reviewed"
@@ -163,6 +164,60 @@ prepare_release() {
   echo "Created $release"
 }
 
+require_preview_password() {
+  local passwd="$SHARED/.htpasswd"
+  if [[ ! -f "$passwd" || -L "$passwd" ]]; then
+    echo "Missing preview password file: shared/.htpasswd"
+    exit 1
+  fi
+  local size blank
+  size=$(wc -c < "$passwd")
+  if [[ "$size" -lt 20 || "$size" -gt 4096 ]]; then
+    echo "shared/.htpasswd has an unexpected size."
+    exit 1
+  fi
+  blank=$(grep -cve '^[[:space:]]*$' "$passwd" || true)
+  if [[ "$blank" != "1" ]]; then
+    echo "shared/.htpasswd must contain one username:hash line."
+    exit 1
+  fi
+  local line
+  line=$(tr -d '\r' < "$passwd")
+  if [[ ! "$line" =~ ^[A-Za-z0-9._-]{1,64}:\$2[aby]\$.+ ]]; then
+    echo "shared/.htpasswd must be a bcrypt line: username:\$2y\$..."
+    exit 1
+  fi
+}
+
+append_preview_gate() {
+  local release=$1
+  local htaccess="$release/web/.htaccess"
+  local passwd="$SHARED/.htpasswd"
+  if [[ ! -f "$htaccess" ]]; then
+    echo "Release has no web/.htaccess."
+    exit 1
+  fi
+  if grep -q 'LifeBalance preview gate' "$htaccess"; then
+    echo "Preview gate is already present in this release."
+    return
+  fi
+  cat >> "$htaccess" <<EOF
+
+# LifeBalance preview gate. Publish adds this block; the password stays in shared/.
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive"
+</IfModule>
+CGIPassAuth On
+<IfModule mod_auth_basic.c>
+  AuthType Basic
+  AuthName "LifeBalance"
+  AuthUserFile "$passwd"
+  Require valid-user
+</IfModule>
+EOF
+  echo "Preview gate added to the release."
+}
+
 link_shared() {
   local release=$1
   local site="$release/web/sites/default"
@@ -194,6 +249,7 @@ publish() {
     echo "Release is incomplete. index.php or Drush is missing."
     exit 1
   fi
+  require_preview_password
   if ! grep -q '"name": "lifebalance/lifebalance"' "$release/composer.json"; then
     echo "Release composer.json is not this project."
     exit 1
@@ -219,6 +275,7 @@ publish() {
   trap cleanup EXIT
 
   link_shared "$release"
+  append_preview_gate "$release"
   if [[ -L "$DEPLOY_ROOT/current" ]]; then
     current_target=$(readlink "$DEPLOY_ROOT/current")
     old_id=${current_target##*/}

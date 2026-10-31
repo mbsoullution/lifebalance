@@ -13,6 +13,10 @@ services:
       $appRoot: '%app.root%'
   Drupal\lifebalance\Service\Clock:
     autowire: true
+  Drupal\lifebalance\Seo\PreviewLock:
+    autowire: true
+    arguments:
+      $appRoot: '%app.root%'
   Drupal\lifebalance\Seo\PublicMeta:
     autowire: true
     arguments:
@@ -46,6 +50,10 @@ services:
     autowire: true
   Drupal\lifebalance\Controller\DraftController:
     autowire: true
+  Drupal\lifebalance\EventSubscriber\PreviewGateSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
   Drupal\lifebalance\EventSubscriber\PrivateCacheSubscriber:
     autowire: true
     tags:

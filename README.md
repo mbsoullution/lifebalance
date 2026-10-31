@@ -88,6 +88,8 @@ ssh-keyscan -p PORT HOST
 
 Paste the resulting lines into the secret. The workflow sets `StrictHostKeyChecking=yes` and does not scan keys itself.
 
+`SSH_PRIVATE_KEY` must be the private half of the same key, including the BEGIN and END lines, with an empty passphrase. The workflow offers only that key. If the server replies `Too many authentication failures` or `Permission denied (publickey)`, the public key is missing from `~/.ssh/authorized_keys` or the secret is a different key. The job prints the key fingerprint and does not print the key.
+
 ## One-time server setup
 
 Do this by SSH before the first real deploy. Do not use **Установка CMS**. Do not upload the DDEV database.
@@ -127,6 +129,15 @@ $settings['trusted_host_patterns'] = [
 `www.mbprotest.site` is the only trusted host. Redirect the apex hostname to it in the panel. Keep OAuth secrets, `MAILER_DSN`, and `MONOBANK_TOKEN` in this same server file or in panel PHP variables. They do not belong in Git or `config/sync`.
 
 5. `chmod 600` the local settings file.
+6. Create the browser password before the first real deploy. This login is separate from Drupal accounts. The site stays closed to visitors and to search engines until this file exists. Choose the password yourself and do not commit the file:
+
+```bash
+php -r 'echo "preview:" . password_hash(trim(fgets(STDIN)), PASSWORD_BCRYPT), "\n";' \
+  > "$HOME/mbprotest.site/www/shared/.htpasswd"
+chmod 600 "$HOME/mbprotest.site/www/shared/.htpasswd"
+```
+
+Type the password and press Enter. The file must be one line, `preview:` plus a bcrypt hash (`$2y$`). Publish refuses to switch `current` without it, then adds HTTP basic auth to that release. `www.mbprotest.site` also sends `noindex` and a `robots.txt` that disallows everything. Local DDEV has no password file, so it stays open and indexable.
 
 ## Run the pipeline
 

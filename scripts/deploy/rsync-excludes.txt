@@ -17,6 +17,7 @@ tests/
 .env
 .env.*
 *.deploy_key
+.htpasswd
 *.sql
 *.sql.enc
 *.gz
