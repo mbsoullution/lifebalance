@@ -238,7 +238,8 @@ link_shared() {
 
 publish() {
   local id=${RELEASE_ID:-}
-  local release
+  # These stay global. The EXIT trap runs after this function returns, and
+  # local variables are already gone by then.
   release=$(release_dir "$id")
   require_shared_layout
   if [[ ! -d "$release" ]]; then
@@ -255,15 +256,19 @@ publish() {
     exit 1
   fi
 
-  local lock="$SHARED/deploy.lock"
+  lock="$SHARED/deploy.lock"
   if ! mkdir "$lock"; then
     echo "A deploy lock already exists at $lock"
     exit 1
   fi
 
-  local current_target="" old_id="" maint_on=0 switched=0
+  current_target=""
+  old_id=""
+  maint_on=0
+  switched=0
   cleanup() {
     local status=$?
+    trap - EXIT
     if [[ "$switched" -eq 1 ]]; then
       "$PHP_BIN" "$release/vendor/bin/drush" --root="$release/web" maint:set 0 || true
     elif [[ "$maint_on" -eq 1 && -n "$current_target" ]]; then
