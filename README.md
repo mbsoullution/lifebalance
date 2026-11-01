@@ -134,10 +134,10 @@ $settings['trusted_host_patterns'] = [
 ```bash
 php -r 'echo "preview:" . password_hash(trim(fgets(STDIN)), PASSWORD_BCRYPT), "\n";' \
   > "$HOME/mbprotest.site/www/shared/.htpasswd"
-chmod 600 "$HOME/mbprotest.site/www/shared/.htpasswd"
+chmod 644 "$HOME/mbprotest.site/www/shared/.htpasswd"
 ```
 
-Type the password and press Enter. The file must be one line, `preview:` plus a bcrypt hash (`$2y$`). Publish refuses to switch `current` without it, then adds HTTP basic auth to that release. `www.mbprotest.site` also sends `noindex` and a `robots.txt` that disallows everything. Local DDEV has no password file, so it stays open and indexable.
+Type the password and press Enter. The file must be one line, `preview:` plus a bcrypt hash (`$2y$`). Apache reads this file itself, so mode 644 is required. `settings.local.php` stays mode 600. Publish refuses to switch `current` without it, then adds HTTP basic auth to that release. `www.mbprotest.site` also sends `noindex` and a `robots.txt` that disallows everything. Local DDEV has no password file, so it stays open and indexable.
 
 ## Run the pipeline
 

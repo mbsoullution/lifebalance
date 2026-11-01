@@ -187,6 +187,9 @@ require_preview_password() {
     echo "shared/.htpasswd must be a bcrypt line: username:\$2y\$..."
     exit 1
   fi
+  # Apache opens this file before PHP starts. Mode 600 is invisible to it
+  # and the preview login then ends as HTTP 500.
+  chmod 644 "$passwd"
 }
 
 append_preview_gate() {
