@@ -106,6 +106,8 @@ jobs:
           path: release-src/
           retention-days: 5
           if-no-files-found: error
+          # .htaccess starts with a dot. The default upload skips those files.
+          include-hidden-files: true
 
   remote:
     name: Contact production

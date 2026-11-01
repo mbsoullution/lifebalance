@@ -102,24 +102,34 @@ remote() {
   local action=$1
   local exports
   exports=$(printf 'DEPLOY_ROOT=%q PHP_BIN=%q RELEASE_ID=%q' "$DEPLOY_ROOT" "$PHP_BIN" "$RELEASE_ID")
-  if ! "$SSH_DIR/ssh" "$SSH_USER@$SSH_HOST" "$exports bash -s -- $action" < "$ROOT/scripts/deploy/remote.sh"; then
+  local status=0
+  "$SSH_DIR/ssh" "$SSH_USER@$SSH_HOST" "$exports bash -s -- $action" < "$ROOT/scripts/deploy/remote.sh" || status=$?
+  if [[ "$status" -eq 0 ]]; then
+    return 0
+  fi
+  # OpenSSH uses 255 for a connection or login failure. The remote script's
+  # own exit code means the server was reached and refused the action.
+  if [[ "$status" -eq 255 ]]; then
     echo "SSH authentication failed."
     echo "Install the matching public key in ~/.ssh/authorized_keys on the server."
     echo "The private key secret must be that same key and must not have a passphrase."
-    exit 1
   fi
+  exit "$status"
 }
 
 resolve_source() {
   if [[ -f "$SOURCE_DIR/web/index.php" ]]; then
-    return 0
-  fi
-  if [[ -f "$SOURCE_DIR/release-src/web/index.php" ]]; then
+    :
+  elif [[ -f "$SOURCE_DIR/release-src/web/index.php" ]]; then
     SOURCE_DIR="$SOURCE_DIR/release-src"
-    return 0
+  else
+    echo "Release source is missing: $SOURCE_DIR"
+    exit 1
   fi
-  echo "Release source is missing: $SOURCE_DIR"
-  exit 1
+  if [[ ! -f "$SOURCE_DIR/web/.htaccess" ]]; then
+    echo "Release source has no web/.htaccess."
+    exit 1
+  fi
 }
 
 copy_release() {
