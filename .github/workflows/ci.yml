@@ -53,7 +53,14 @@ jobs:
           BROWSERTEST_OUTPUT_BASE_URL: http://127.0.0.1:8888
         run: |
           mkdir -p web/sites/simpletest/browser_output /tmp
-          php -d memory_limit=-1 -d max_execution_time=0 -d date.timezone=UTC -d display_errors=1 -S 127.0.0.1:8888 -t web web/.ht.router.php >/tmp/php-server.log 2>&1 &
+          # With -t, PHP opens the router from the document root. The relative
+          # path web/.ht.router.php then fatals on every request.
+          root="$(pwd)"
+          if [ ! -f "$root/web/.ht.router.php" ]; then
+            cp "$root/web/core/assets/scaffold/files/ht.router.php" "$root/web/.ht.router.php"
+          fi
+          test -f "$root/web/.ht.router.php"
+          php -d memory_limit=-1 -d max_execution_time=0 -d date.timezone=UTC -d display_errors=1 -S 127.0.0.1:8888 -t "$root/web" "$root/web/.ht.router.php" >/tmp/php-server.log 2>&1 &
           ready=0
           for _ in $(seq 1 30); do
             if php -r 'exit(@fsockopen("127.0.0.1", 8888) ? 0 : 1);'; then
@@ -64,6 +71,12 @@ jobs:
           done
           if [ "$ready" -ne 1 ]; then
             echo "The test web server did not start."
+            cat /tmp/php-server.log
+            exit 1
+          fi
+          php -r '$ctx = stream_context_create(["http" => ["timeout" => 10]]); file_get_contents("http://127.0.0.1:8888/robots.txt", false, $ctx);' >/dev/null 2>&1 || true
+          if grep -q "Failed opening required" /tmp/php-server.log; then
+            echo "The router script could not be loaded."
             cat /tmp/php-server.log
             exit 1
           fi
